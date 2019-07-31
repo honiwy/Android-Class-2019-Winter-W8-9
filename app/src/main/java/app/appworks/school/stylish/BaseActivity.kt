@@ -18,12 +18,6 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     /**
-     * To change status bar to transparent.
-     * @notice this method have to be used before setContentView.
-     */
-
-
-    /**
      * Set up status bar to transparent
      * @notice this method have to be used before setContentView.
      */
