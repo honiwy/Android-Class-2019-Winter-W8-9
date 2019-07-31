@@ -53,7 +53,7 @@
                 android:fontFamily="@font/noto_sans"
                 android:textColor="@color/gray_999999"
                 android:textSize="13sp"
-                android:text='@{viewModel.user.email.equals("wayne.swchen@gmail.com") ? "AKA 小安老師" : @string/profile_default_information}'
+                android:text='@{viewModel.user.email.equals("wayne.swchen@gmail.com") ? @string/aka : @string/profile_default_information}'
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_drawer_name"

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Stylish</string>
 
@@ -97,6 +98,7 @@
     <string name="profile">個人</string>
     <string name="payment">結帳</string>
     <string name="stock_">庫存：</string>
+    <string name="aka">AKA 小安老師</string>
 
     <!-- Check Out Key -->
     <string name="tp_app_id">12348</string>
