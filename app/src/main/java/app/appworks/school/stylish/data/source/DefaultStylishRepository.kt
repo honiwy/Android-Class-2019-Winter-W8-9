@@ -15,8 +15,8 @@ class DefaultStylishRepository(private val stylishRemoteDataSource: StylishDataS
                                private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : StylishRepository {
 
-    override suspend fun getHotsList(): Result<List<HotsDataItem>> {
-        return stylishRemoteDataSource.getHotsList()
+    override suspend fun getMarketingHots(): Result<List<HomeItem>> {
+        return stylishRemoteDataSource.getMarketingHots()
     }
 
     override suspend fun getProductList(type: String, paging: String?): Result<ProductListProperty> {

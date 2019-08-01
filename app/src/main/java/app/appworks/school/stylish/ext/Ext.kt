@@ -3,6 +3,7 @@ package app.appworks.school.stylish.ext
 import android.graphics.Rect
 import android.view.TouchDelegate
 import android.view.View
+import app.appworks.school.stylish.StylishApplication
 import app.appworks.school.stylish.data.OrderProduct
 import app.appworks.school.stylish.data.Product
 

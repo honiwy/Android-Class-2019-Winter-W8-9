@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.appworks.school.stylish.MainActivity
 import app.appworks.school.stylish.databinding.ItemDetailCircleBinding
 import app.appworks.school.stylish.util.Logger
-import kotlinx.android.synthetic.main.item_hots_title.*
+import kotlinx.android.synthetic.main.item_home_title.*
 
 /**
  * Created by Wayne Chen in Jul. 2019.

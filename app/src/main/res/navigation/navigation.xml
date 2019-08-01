@@ -2,13 +2,13 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/navigation"
-            app:startDestination="@+id/hotsFragment">
+            app:startDestination="@+id/homeFragment">
 
     <fragment
-            android:id="@+id/hotsFragment"
-            android:name="app.appworks.school.stylish.hots.HotsFragment"
-            android:label="HotsFragment"
-            tools:layout="@layout/fragment_hots">
+            android:id="@+id/homeFragment"
+            android:name="app.appworks.school.stylish.home.HomeFragment"
+            android:label="HomeFragment"
+            tools:layout="@layout/fragment_home">
     </fragment>
 
     <fragment
@@ -97,7 +97,7 @@
     <action android:id="@+id/navigate_to_cart_fragment" app:destination="@id/cartFragment"
             app:popUpTo="@id/navigation"
             app:popUpToInclusive="true" />
-    <action android:id="@+id/navigate_to_hots_fragment" app:destination="@id/hotsFragment"
+    <action android:id="@+id/navigate_to_home_fragment" app:destination="@id/homeFragment"
             app:popUpTo="@id/navigation"
             app:popUpToInclusive="true" />
     <action android:id="@+id/navigate_to_checkout_success_fragment" app:destination="@id/checkoutSuccessFragment"

@@ -22,7 +22,7 @@ class CartAdapter(val viewModel: CartViewModel) : ListAdapter<Product, CartAdapt
 
             binding.product = product
             binding.viewModel = viewModel
-            // This is important, because it forces the hotsList binding to execute immediately,
+            // This is important, because it forces the data binding to execute immediately,
             // which allows the RecyclerView to make the correct view size measurements
             binding.executePendingBindings()
         }

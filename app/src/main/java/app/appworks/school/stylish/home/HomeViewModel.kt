@@ -1,16 +1,16 @@
-package app.appworks.school.stylish.hots
+package app.appworks.school.stylish.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import app.appworks.school.stylish.MainActivity
-import app.appworks.school.stylish.data.HotsDataItem
+import app.appworks.school.stylish.R
+import app.appworks.school.stylish.data.HomeItem
 import app.appworks.school.stylish.data.Product
 import app.appworks.school.stylish.data.Result
 import app.appworks.school.stylish.data.source.StylishRepository
 import app.appworks.school.stylish.network.LoadApiStatus
-import app.appworks.school.stylish.network.StylishApi
 import app.appworks.school.stylish.util.Logger
+import app.appworks.school.stylish.util.Util.getString
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -19,14 +19,14 @@ import kotlinx.coroutines.launch
 /**
  * Created by Wayne Chen in Jul. 2019.
  *
- * The [ViewModel] that is attached to the [HotsFragment].
+ * The [ViewModel] that is attached to the [HomeFragment].
  */
-class HotsViewModel(private val stylishRepository: StylishRepository) : ViewModel() {
+class HomeViewModel(private val stylishRepository: StylishRepository) : ViewModel() {
 
-    private val _dataItems = MutableLiveData<List<HotsDataItem>>()
+    private val _homeItems = MutableLiveData<List<HomeItem>>()
 
-    val dataItems: LiveData<List<HotsDataItem>>
-        get() = _dataItems
+    val homeItems: LiveData<List<HomeItem>>
+        get() = _homeItems
 
     // status: The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<LoadApiStatus>()
@@ -62,31 +62,36 @@ class HotsViewModel(private val stylishRepository: StylishRepository) : ViewMode
     }
 
     /**
-     * Call getHotsProperties() on init so we can display status immediately.
+     * Call getMarketingHotsResult() on init so we can display status immediately.
      */
     init {
         Logger.i("------------------------------------")
         Logger.i("[${this::class.simpleName}]${this}")
         Logger.i("------------------------------------")
 
-        getHotsProperties()
+        getMarketingHotsResult()
     }
 
     /**
-     * track [StylishRepository.getHotsList]: -> [DefaultStylishRepository] : [StylishRepository] -> [StylishRemoteDataSource] : [StylishDataSource]
+     * track [StylishRepository.getMarketingHots]: -> [DefaultStylishRepository] : [StylishRepository] -> [StylishRemoteDataSource] : [StylishDataSource]
      */
-    private fun getHotsProperties() {
+    private fun getMarketingHotsResult() {
 
         coroutineScope.launch {
 
             _status.value = LoadApiStatus.LOADING
             // It will return Result object after Deferred flow
-            val result = stylishRepository.getHotsList()
+            val result = stylishRepository.getMarketingHots()
 
-            _dataItems.value = when (result) {
+            _homeItems.value = when (result) {
                 is Result.Success -> {
                     _status.value = LoadApiStatus.DONE
                     result.data
+                }
+                is Result.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                    null
                 }
                 is Result.Error -> {
                     _error.value = result.exception.toString()
@@ -94,6 +99,7 @@ class HotsViewModel(private val stylishRepository: StylishRepository) : ViewMode
                     null
                 }
                 else -> {
+                    _error.value = getString(R.string.you_know_nothing)
                     _status.value = LoadApiStatus.ERROR
                     null
                 }

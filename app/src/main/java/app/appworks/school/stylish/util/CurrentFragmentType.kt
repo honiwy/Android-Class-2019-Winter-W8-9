@@ -4,7 +4,7 @@ import app.appworks.school.stylish.R
 import app.appworks.school.stylish.StylishApplication
 
 enum class CurrentFragmentType(val value: String) {
-    HOTS(""),
+    HOME(""),
     CATALOG(StylishApplication.instance.getString(R.string.catalog)),
     CART(StylishApplication.instance.getString(R.string.cart)),
     PROFILE(StylishApplication.instance.getString(R.string.profile)),

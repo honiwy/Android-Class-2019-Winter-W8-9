@@ -6,13 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.appworks.school.stylish.data.Color
-import app.appworks.school.stylish.data.HotsDataItem
-import app.appworks.school.stylish.data.Product
 import app.appworks.school.stylish.databinding.ItemDetailColorBinding
-import app.appworks.school.stylish.databinding.ItemHotsCollageBinding
-import app.appworks.school.stylish.databinding.ItemHotsFullBinding
-import app.appworks.school.stylish.databinding.ItemHotsTitleBinding
-import app.appworks.school.stylish.util.Logger
 
 /**
  * Created by Wayne Chen in Jul. 2019.

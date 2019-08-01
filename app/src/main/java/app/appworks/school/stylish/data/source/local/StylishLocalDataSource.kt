@@ -2,7 +2,6 @@ package app.appworks.school.stylish.data.source.local
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import app.appworks.school.stylish.StylishApplication
 import app.appworks.school.stylish.data.*
 import app.appworks.school.stylish.data.source.StylishDataSource
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +14,7 @@ import kotlinx.coroutines.withContext
  */
 class StylishLocalDataSource(val context: Context) : StylishDataSource {
 
-    override suspend fun getHotsList(): Result<List<HotsDataItem>> {
+    override suspend fun getMarketingHots(): Result<List<HomeItem>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

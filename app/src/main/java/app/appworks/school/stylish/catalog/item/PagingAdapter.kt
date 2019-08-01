@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.appworks.school.stylish.data.Product
 import app.appworks.school.stylish.databinding.ItemCatalogGridBinding
-import app.appworks.school.stylish.databinding.ItemHotsFullBinding
 
 /**
  * Created by Wayne Chen in Jul. 2019.
@@ -24,7 +23,7 @@ class PagingAdapter(private val onClickListener: OnClickListener ) :
 
         fun bind(product: Product) {
             binding.product = product
-            // This is important, because it forces the hotsList binding to execute immediately,
+            // This is important, because it forces the data binding to execute immediately,
             // which allows the RecyclerView to make the correct view size measurements
             binding.executePendingBindings()
         }

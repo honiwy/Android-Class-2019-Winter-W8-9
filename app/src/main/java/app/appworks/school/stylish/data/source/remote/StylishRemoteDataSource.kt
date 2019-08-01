@@ -1,10 +1,13 @@
 package app.appworks.school.stylish.data.source.remote
 
 import androidx.lifecycle.LiveData
+import app.appworks.school.stylish.R
 import app.appworks.school.stylish.data.*
 import app.appworks.school.stylish.data.source.StylishDataSource
 import app.appworks.school.stylish.network.StylishApi
 import app.appworks.school.stylish.util.Logger
+import app.appworks.school.stylish.util.Util.getString
+import app.appworks.school.stylish.util.Util.isInternetConnected
 
 /**
  * Created by Wayne Chen in Jul. 2019.
@@ -13,16 +16,24 @@ import app.appworks.school.stylish.util.Logger
  */
 object StylishRemoteDataSource : StylishDataSource {
 
-    override suspend fun getHotsList(): Result<List<HotsDataItem>> {
+    override suspend fun getMarketingHots(): Result<List<HomeItem>> {
+
+        if (!isInternetConnected()) {
+            return Result.Fail(getString(R.string.internet_not_connected))
+        }
         // Get the Deferred object for our Retrofit request
-        val getPropertiesDeferred = StylishApi.retrofitService.getMarketingHots()
+        val getResultDeferred = StylishApi.retrofitService.getMarketingHots()
         return try {
             // this will run on a thread managed by Retrofit
-            val listResult = getPropertiesDeferred.await()
-            Result.Success(listResult.getDataItems())
+            val listResult = getResultDeferred.await()
+
+            listResult.error?.let {
+                return Result.Fail(it)
+            }
+            Result.Success(listResult.toHomeItems())
 
         } catch (e: Exception) {
-            Logger.e("e=${e.message}")
+            Logger.w("[${this::class.simpleName}] exception=${e.message}")
             Result.Error(e)
         }
     }

@@ -10,7 +10,7 @@ import app.appworks.school.stylish.data.*
  */
 interface StylishRepository {
 
-    suspend fun getHotsList(): Result<List<HotsDataItem>>
+    suspend fun getMarketingHots(): Result<List<HomeItem>>
 
     suspend fun getProductList(type: String, paging: String? = null): Result<ProductListProperty>
 

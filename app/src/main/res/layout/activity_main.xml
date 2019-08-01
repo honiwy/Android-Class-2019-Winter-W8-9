@@ -41,7 +41,7 @@
                         android:letterSpacing="0.15"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.HOTS ? View.GONE : View.VISIBLE}"
+                        android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.HOME ? View.GONE : View.VISIBLE}"
                         android:text="@{viewModel.currentFragmentType.value}"
                         android:layout_gravity="center"
                         tools:visibility="visible"
@@ -53,7 +53,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@drawable/logo_stylish_s"
-                        android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.HOTS ? View.VISIBLE : View.GONE}"
+                        android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.HOME ? View.VISIBLE : View.GONE}"
                         tools:visibility="gone"/>
 
             </androidx.appcompat.widget.Toolbar>

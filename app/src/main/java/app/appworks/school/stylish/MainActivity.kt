@@ -45,7 +45,7 @@ class MainActivity : BaseActivity() {
         when (item.itemId) {
             R.id.navigation_home -> {
 
-                findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToHotsFragment())
+                findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToHomeFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_catalog -> {
@@ -156,7 +156,7 @@ class MainActivity : BaseActivity() {
     private fun setupNavController() {
         findNavController(R.id.myNavHostFragment).addOnDestinationChangedListener { navController: NavController, _: NavDestination, _: Bundle? ->
             viewModel.currentFragmentType.value = when (navController.currentDestination?.id) {
-                R.id.hotsFragment -> CurrentFragmentType.HOTS
+                R.id.homeFragment -> CurrentFragmentType.HOME
                 R.id.catalogFragment -> CurrentFragmentType.CATALOG
                 R.id.cartFragment -> CurrentFragmentType.CART
                 R.id.profileFragment -> CurrentFragmentType.PROFILE

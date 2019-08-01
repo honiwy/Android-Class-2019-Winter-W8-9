@@ -53,13 +53,13 @@ private val retrofit = Retrofit.Builder()
  */
 interface StylishApiService {
     /**
-     * Returns a Coroutine [Deferred] [HotsProperty] which can be fetched with await() if in a Coroutine scope.
+     * Returns a Coroutine [Deferred] [HotsResult] which can be fetched with await() if in a Coroutine scope.
      * The @GET annotation indicates that the "marketing/hots" endpoint will be requested with the GET HTTP method
      */
     @GET("marketing/hots")
     fun getMarketingHots():
     // The Coroutine Call Adapter allows us to return a Deferred, a Job with a result
-            Deferred<HotsProperty>
+            Deferred<HotsResult>
     /**
      * Returns a Coroutine [Deferred] [ProductListProperty] which can be fetched with await() if in a Coroutine scope.
      * The @GET annotation indicates that the "products/{catalogType}" endpoint will be requested with the GET

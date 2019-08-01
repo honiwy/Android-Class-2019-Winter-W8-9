@@ -15,9 +15,9 @@ sealed class Result<out R> {
 
     override fun toString(): String {
         return when (this) {
-            is Success<*> -> "Success[hotsList=$data]"
+            is Success<*> -> "Success[result=$data]"
             is Fail -> "Fail[error=$error]"
-            is Error -> "Error[exception=$exception]"
+            is Error -> "Error[exception=${exception.message}]"
             Loading -> "Loading"
         }
     }

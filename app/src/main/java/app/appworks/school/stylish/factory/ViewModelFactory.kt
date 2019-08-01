@@ -3,12 +3,11 @@ package app.appworks.school.stylish.factory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import app.appworks.school.stylish.MainViewModel
-import app.appworks.school.stylish.add2cart.Add2cartViewModel
 import app.appworks.school.stylish.cart.CartViewModel
 import app.appworks.school.stylish.catalog.item.CatalogItemViewModel
 import app.appworks.school.stylish.checkout.CheckoutSuccessViewModel
 import app.appworks.school.stylish.data.source.StylishRepository
-import app.appworks.school.stylish.hots.HotsViewModel
+import app.appworks.school.stylish.home.HomeViewModel
 import app.appworks.school.stylish.login.LoginViewModel
 import app.appworks.school.stylish.payment.PaymentViewModel
 
@@ -28,8 +27,8 @@ class ViewModelFactory constructor(
                 isAssignableFrom(MainViewModel::class.java) ->
                     MainViewModel(stylishRepository)
 
-                isAssignableFrom(HotsViewModel::class.java) ->
-                    HotsViewModel(stylishRepository)
+                isAssignableFrom(HomeViewModel::class.java) ->
+                    HomeViewModel(stylishRepository)
 
                 isAssignableFrom(CatalogItemViewModel::class.java) ->
                     CatalogItemViewModel(stylishRepository)

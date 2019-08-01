@@ -1,4 +1,4 @@
-package app.appworks.school.stylish.hots
+package app.appworks.school.stylish.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,26 +9,26 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import app.appworks.school.stylish.NavigationDirections
-import app.appworks.school.stylish.databinding.FragmentHotsBinding
+import app.appworks.school.stylish.databinding.FragmentHomeBinding
 import app.appworks.school.stylish.ext.getVmFactory
 
 /**
  * Created by Wayne Chen in Jul. 2019.
  */
-class HotsFragment : Fragment() {
+class HomeFragment : Fragment() {
 
     /**
-     * Lazily initialize our [HotsViewModel].
+     * Lazily initialize our [HomeViewModel].
      */
-    private val viewModel by viewModels<HotsViewModel> { getVmFactory() }
+    private val viewModel by viewModels<HomeViewModel> { getVmFactory() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 //        init()
-        val binding = FragmentHotsBinding.inflate(inflater, container, false)
+        val binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.recyclerHots.adapter = HotsAdapter(HotsAdapter.OnClickListener {
+        binding.recyclerHome.adapter = HomeAdapter(HomeAdapter.OnClickListener {
             viewModel.navigateToDetail(it)
         })
 
@@ -45,7 +45,7 @@ class HotsFragment : Fragment() {
 //    private fun init() {
 //        activity?.let {
 //            ViewModelProviders.of(it).get(MainViewModel::class.java).apply {
-//                currentFragmentType.value = CurrentFragmentType.HOTS
+//                currentFragmentType.value = CurrentFragmentType.HOME
 //            }
 //        }
 //    }
