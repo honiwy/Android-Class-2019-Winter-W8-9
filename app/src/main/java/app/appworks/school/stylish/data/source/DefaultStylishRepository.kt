@@ -19,7 +19,7 @@ class DefaultStylishRepository(private val stylishRemoteDataSource: StylishDataS
         return stylishRemoteDataSource.getMarketingHots()
     }
 
-    override suspend fun getProductList(type: String, paging: String?): Result<ProductListProperty> {
+    override suspend fun getProductList(type: String, paging: String?): Result<ProductListResult> {
         return stylishRemoteDataSource.getProductList(type = type, paging = paging)
     }
 
@@ -27,13 +27,13 @@ class DefaultStylishRepository(private val stylishRemoteDataSource: StylishDataS
         return stylishRemoteDataSource.getUserProfile(token)
     }
 
-    override suspend fun userSignIn(fbToken: String): Result<UserSignInProperty> {
+    override suspend fun userSignIn(fbToken: String): Result<UserSignInResult> {
         return stylishRemoteDataSource.userSignIn(fbToken)
     }
 
-    override suspend fun postOrderCheckout(
-        token: String, orderCheckoutDetail: OrderCheckoutDetail): Result<OrderCheckoutProperty> {
-        return stylishRemoteDataSource.postOrderCheckout(token, orderCheckoutDetail)
+    override suspend fun checkoutOrder(
+        token: String, orderDetail: OrderDetail): Result<CheckoutOrderResult> {
+        return stylishRemoteDataSource.checkoutOrder(token, orderDetail)
     }
 
     override fun getProductsInCart(): LiveData<List<Product>> {

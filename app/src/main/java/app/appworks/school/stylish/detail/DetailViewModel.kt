@@ -12,10 +12,10 @@ import app.appworks.school.stylish.R
 import app.appworks.school.stylish.StylishApplication
 import app.appworks.school.stylish.data.Product
 import app.appworks.school.stylish.data.source.StylishRepository
-import app.appworks.school.stylish.network.LoadApiStatus
 import app.appworks.school.stylish.util.Logger
-import kotlinx.coroutines.*
-import okhttp3.Dispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 
 /**
  * Created by Wayne Chen in Jul. 2019.

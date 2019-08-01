@@ -71,7 +71,7 @@
                     android:maxLines="2"
                     android:textColor="@color/gray_999999"
                     android:textSize="13sp"
-                    android:text='@{viewModel.user.email.equals("wayne.swchen@gmail.com") ? @string/aka : @string/profile_default_information}'
+                    android:text='@{viewModel.user.email.equals("wayne.swchen@gmail.com") ? @string/aka : viewModel.error != null ? viewModel.error : @string/profile_default_information}'
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"

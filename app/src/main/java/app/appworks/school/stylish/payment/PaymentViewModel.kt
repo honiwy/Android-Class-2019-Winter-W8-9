@@ -8,10 +8,11 @@ import app.appworks.school.stylish.R
 import app.appworks.school.stylish.StylishApplication
 import app.appworks.school.stylish.data.*
 import app.appworks.school.stylish.data.source.StylishRepository
+import app.appworks.school.stylish.ext.toOrderProductList
 import app.appworks.school.stylish.login.UserManager
 import app.appworks.school.stylish.network.LoadApiStatus
 import app.appworks.school.stylish.util.Logger
-import app.appworks.school.stylish.ext.toOrderProductList
+import app.appworks.school.stylish.util.Util.getString
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -86,9 +87,9 @@ class PaymentViewModel(private val stylishRepository: StylishRepository) : ViewM
     var tpdErrorMessage: String = ""
 
     // Handle when checkout is successful
-    private val _checkoutSuccess = MutableLiveData<OrderCheckoutProperty>()
+    private val _checkoutSuccess = MutableLiveData<CheckoutOrderResult>()
 
-    val checkoutSuccess: LiveData<OrderCheckoutProperty>
+    val checkoutSuccess: LiveData<CheckoutOrderResult>
         get() = _checkoutSuccess
 
     // Handle navigation to checkout success page
@@ -167,7 +168,7 @@ class PaymentViewModel(private val stylishRepository: StylishRepository) : ViewM
                 UserManager.userToken?.let {
                     postOrderCheckout(
                         it,
-                        OrderCheckoutDetail(
+                        OrderDetail(
                             prime,
                             Order(
                                 "delivery",
@@ -198,17 +199,18 @@ class PaymentViewModel(private val stylishRepository: StylishRepository) : ViewM
     }
 
     /**
-     * track [StylishRepository.postOrderCheckout]: -> [DefaultStylishRepository] : [StylishRepository] -> [StylishRemoteDataSource] : [StylishDataSource]
+     * track [StylishRepository.checkoutOrder]: -> [DefaultStylishRepository] : [StylishRepository] -> [StylishRemoteDataSource] : [StylishDataSource]
      * @param token: Stylish token
-     * @param orderCheckoutDetail: The order details will be taken on the body of http request
+     * @param orderDetail: The order details will be taken on the body of http request
      */
-    private fun postOrderCheckout(token: String, orderCheckoutDetail: OrderCheckoutDetail) {
+    private fun postOrderCheckout(token: String, orderDetail: OrderDetail) {
 
         coroutineScope.launch {
 
             _status.value = LoadApiStatus.LOADING
             // It will return Result object after Deferred flow
-            val result = stylishRepository.postOrderCheckout(token, orderCheckoutDetail)
+            val result = stylishRepository.checkoutOrder(token, orderDetail)
+
             _checkoutSuccess.value = when (result) {
                 is Result.Success -> {
                     stylishRepository.clearProductInCart()
@@ -227,6 +229,7 @@ class PaymentViewModel(private val stylishRepository: StylishRepository) : ViewM
                     null
                 }
                 else -> {
+                    _error.value = getString(R.string.you_know_nothing)
                     _status.value = LoadApiStatus.ERROR
                     null
                 }

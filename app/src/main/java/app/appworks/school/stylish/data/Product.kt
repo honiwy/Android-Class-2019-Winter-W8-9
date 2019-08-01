@@ -1,7 +1,10 @@
 package app.appworks.school.stylish.data
 
 import android.os.Parcelable
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.TypeConverters
 import app.appworks.school.stylish.data.source.local.StylishConverters
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize

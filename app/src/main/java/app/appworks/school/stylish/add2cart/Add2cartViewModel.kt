@@ -3,7 +3,10 @@ package app.appworks.school.stylish.add2cart
 import android.graphics.Rect
 import android.view.View
 import androidx.databinding.InverseMethod
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import app.appworks.school.stylish.R
 import app.appworks.school.stylish.StylishApplication

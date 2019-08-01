@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
  * Created by Wayne Chen in Jul. 2019.
  */
 @Parcelize
-data class OrderCheckoutDetail(
+data class OrderDetail(
     val prime: String,
     val order: Order
 ) : Parcelable

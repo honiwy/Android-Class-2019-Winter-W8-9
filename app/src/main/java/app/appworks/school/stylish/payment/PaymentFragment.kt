@@ -11,12 +11,12 @@ import androidx.navigation.fragment.findNavController
 import app.appworks.school.stylish.NavigationDirections
 import app.appworks.school.stylish.R
 import app.appworks.school.stylish.databinding.FragmentPaymentBinding
+import app.appworks.school.stylish.ext.getVmFactory
+import app.appworks.school.stylish.ext.showToast
 import app.appworks.school.stylish.payment.PaymentViewModel.Companion.CHECKOUT_FAIL
 import app.appworks.school.stylish.payment.PaymentViewModel.Companion.CREDIT_CART_FORMAT_INCORRECT
 import app.appworks.school.stylish.payment.PaymentViewModel.Companion.CREDIT_CART_PRIME_FAIL
 import app.appworks.school.stylish.payment.PaymentViewModel.Companion.NOT_SUPPORT_CASH_ON_DELIVERY
-import app.appworks.school.stylish.ext.getVmFactory
-import app.appworks.school.stylish.ext.showToast
 
 /**
  * Created by Wayne Chen in Jul. 2019.

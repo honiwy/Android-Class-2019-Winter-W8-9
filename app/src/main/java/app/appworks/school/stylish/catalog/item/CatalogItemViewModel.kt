@@ -9,16 +9,14 @@ import androidx.paging.toLiveData
 import app.appworks.school.stylish.R
 import app.appworks.school.stylish.StylishApplication
 import app.appworks.school.stylish.catalog.CatalogTypeFilter
-import app.appworks.school.stylish.data.Product
-import app.appworks.school.stylish.data.Result
-import app.appworks.school.stylish.data.source.StylishRepository
 import app.appworks.school.stylish.component.GridSpacingItemDecoration
+import app.appworks.school.stylish.data.Product
+import app.appworks.school.stylish.data.source.StylishRepository
 import app.appworks.school.stylish.network.LoadApiStatus
 import app.appworks.school.stylish.util.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 
 /**
  * Created by Wayne Chen in Jul. 2019.
@@ -41,7 +39,14 @@ class CatalogItemViewModel(private val stylishRepository: StylishRepository) : V
     // Handle load api status
     val status: LiveData<LoadApiStatus> by lazy {
         Transformations.switchMap(sourceFactory.sourceLiveData) {
-            it.initialLoad
+            it.statusInitialLoad
+        }
+    }
+
+    // Handle load api error
+    val error: LiveData<String> by lazy {
+        Transformations.switchMap(sourceFactory.sourceLiveData) {
+            it.errorInitialLoad
         }
     }
 

@@ -3,11 +3,14 @@ package app.appworks.school.stylish.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import app.appworks.school.stylish.R
 import app.appworks.school.stylish.data.Result
 import app.appworks.school.stylish.data.User
 import app.appworks.school.stylish.data.source.StylishRepository
 import app.appworks.school.stylish.network.LoadApiStatus
 import app.appworks.school.stylish.util.Logger
+import app.appworks.school.stylish.util.Util
+import app.appworks.school.stylish.util.Util.getString
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -96,12 +99,20 @@ class LoginViewModel(private val stylishRepository: StylishRepository) : ViewMod
             when (val result = stylishRepository.userSignIn(fbToken)) {
                 is Result.Success -> {
                     _status.value = LoadApiStatus.DONE
-                    UserManager.userToken = result.data.userSignIn.accessToken
-                    _user.value = result.data.userSignIn.user
+                    UserManager.userToken = result.data.userSignIn?.accessToken
+                    _user.value = result.data.userSignIn?.user
                     _navigateToLoginSuccess.value = user.value
+                }
+                is Result.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
                 }
                 is Result.Error -> {
                     _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    _error.value = Util.getString(R.string.you_know_nothing)
                     _status.value = LoadApiStatus.ERROR
                 }
             }
@@ -112,6 +123,8 @@ class LoginViewModel(private val stylishRepository: StylishRepository) : ViewMod
      * Login Stylish by Facebook: Step 1. Register FB Login Callback
      */
     fun login() {
+        _status.value = LoadApiStatus.LOADING
+
         fbCallbackManager = CallbackManager.Factory.create()
         LoginManager.getInstance().registerCallback(fbCallbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(loginResult: LoginResult) {
@@ -119,11 +132,19 @@ class LoginViewModel(private val stylishRepository: StylishRepository) : ViewMod
                 loginStylish(loginResult.accessToken.token)
             }
 
-            override fun onCancel() {}
+            override fun onCancel() { _status.value = LoadApiStatus.ERROR }
 
             override fun onError(exception: FacebookException) {
-                Logger.d("exception=${exception.message}")
-                _error.value = exception.message
+                Logger.w("[${this::class.simpleName}] exception=${exception.message}")
+
+                exception.message?.let {
+                    _error.value = if (it.contains("ERR_INTERNET_DISCONNECTED")) {
+                         getString(R.string.internet_not_connected)
+                    } else {
+                        it
+                    }
+                }
+                _status.value = LoadApiStatus.ERROR
             }
         })
 

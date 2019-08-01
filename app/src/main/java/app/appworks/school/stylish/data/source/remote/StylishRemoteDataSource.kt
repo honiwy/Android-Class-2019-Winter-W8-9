@@ -38,58 +38,96 @@ object StylishRemoteDataSource : StylishDataSource {
         }
     }
 
-    override suspend fun getProductList(type: String, paging: String?): Result<ProductListProperty> {
-        val getPropertiesDeferred = StylishApi.retrofitService.getProductList(type = type, paging = paging)
-        return try {
+    override suspend fun getProductList(type: String, paging: String?): Result<ProductListResult> {
 
-            val listResult = getPropertiesDeferred.await()
+        if (!isInternetConnected()) {
+            return Result.Fail(getString(R.string.internet_not_connected))
+        }
+        // Get the Deferred object for our Retrofit request
+        val getResultDeferred = StylishApi.retrofitService.getProductList(type = type, paging = paging)
+
+        return try {
+            // this will run on a thread managed by Retrofit
+            val listResult = getResultDeferred.await()
+
+            listResult.error?.let {
+                return Result.Fail(it)
+            }
             Result.Success(listResult)
 
         } catch (e: Exception) {
-
+            Logger.w("[${this::class.simpleName}] exception=${e.message}")
             Result.Error(e)
         }
     }
 
     override suspend fun getUserProfile(token: String): Result<User> {
-        val getPropertiesDeferred = StylishApi.retrofitService.getUserProfile(token)
-        return try {
 
-            val listResult = getPropertiesDeferred.await()
-            Result.Success(listResult.user)
+        if (!isInternetConnected()) {
+            return Result.Fail(getString(R.string.internet_not_connected))
+        }
+        // Get the Deferred object for our Retrofit request
+        val getResultDeferred = StylishApi.retrofitService.getUserProfile(token)
+
+        return try {
+            // this will run on a thread managed by Retrofit
+            val listResult = getResultDeferred.await()
+
+            listResult.error?.let {
+                return Result.Fail(it)
+            }
+            listResult.user?.let {
+                return Result.Success(it)
+            }
+            Result.Fail(getString(R.string.you_know_nothing))
 
         } catch (e: Exception) {
+            Logger.w("[${this::class.simpleName}] exception=${e.message}")
             Result.Error(e)
         }
     }
 
-    override suspend fun userSignIn(fbToken: String): Result<UserSignInProperty> {
-        val getPropertiesDeferred = StylishApi.retrofitService.userSignIn(fbToken = fbToken)
-        return try {
+    override suspend fun userSignIn(fbToken: String): Result<UserSignInResult> {
 
-            val listResult = getPropertiesDeferred.await()
+        if (!isInternetConnected()) {
+            return Result.Fail(getString(R.string.internet_not_connected))
+        }
+        // Get the Deferred object for our Retrofit request
+        val getResultDeferred = StylishApi.retrofitService.userSignIn(fbToken = fbToken)
+        return try {
+            // this will run on a thread managed by Retrofit
+            val listResult = getResultDeferred.await()
+
+            listResult.error?.let {
+                return Result.Fail(it)
+            }
             Result.Success(listResult)
 
         } catch (e: Exception) {
-
+            Logger.w("[${this::class.simpleName}] exception=${e.message}")
             Result.Error(e)
         }
     }
 
-    override suspend fun postOrderCheckout(
-        token: String, orderCheckoutDetail: OrderCheckoutDetail): Result<OrderCheckoutProperty> {
-        val getPropertiesDeferred
-                = StylishApi.retrofitService.postOrderCheckout(token, orderCheckoutDetail)
+    override suspend fun checkoutOrder(
+        token: String, orderDetail: OrderDetail): Result<CheckoutOrderResult> {
+
+        if (!isInternetConnected()) {
+            return Result.Fail(getString(R.string.internet_not_connected))
+        }
+        // Get the Deferred object for our Retrofit request
+        val getPropertiesDeferred = StylishApi.retrofitService.checkoutOrder(token, orderDetail)
         return try {
-
+            // this will run on a thread managed by Retrofit
             val listResult = getPropertiesDeferred.await()
-            when {
-                listResult.data != null -> Result.Success(listResult)
-                listResult.error != null -> Result.Fail(listResult.error)
-                else -> Result.Fail("LRU19")
-            }
-        } catch (e: Exception) {
 
+            listResult.error?.let {
+                return Result.Fail(it)
+            }
+            Result.Success(listResult)
+
+        } catch (e: Exception) {
+            Logger.w("[${this::class.simpleName}] exception=${e.message}")
             Result.Error(e)
         }
     }

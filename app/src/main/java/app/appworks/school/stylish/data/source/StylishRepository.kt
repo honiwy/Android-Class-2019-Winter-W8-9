@@ -12,13 +12,13 @@ interface StylishRepository {
 
     suspend fun getMarketingHots(): Result<List<HomeItem>>
 
-    suspend fun getProductList(type: String, paging: String? = null): Result<ProductListProperty>
+    suspend fun getProductList(type: String, paging: String? = null): Result<ProductListResult>
 
     suspend fun getUserProfile(token: String): Result<User>
 
-    suspend fun userSignIn(fbToken: String): Result<UserSignInProperty>
+    suspend fun userSignIn(fbToken: String): Result<UserSignInResult>
 
-    suspend fun postOrderCheckout(token: String, orderCheckoutDetail: OrderCheckoutDetail): Result<OrderCheckoutProperty>
+    suspend fun checkoutOrder(token: String, orderDetail: OrderDetail): Result<CheckoutOrderResult>
 
     fun getProductsInCart(): LiveData<List<Product>>
 

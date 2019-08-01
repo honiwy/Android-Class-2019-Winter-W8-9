@@ -2,11 +2,11 @@ package app.appworks.school.stylish.util
 
 import android.content.Context
 import androidx.annotation.VisibleForTesting
+import app.appworks.school.stylish.data.source.DefaultStylishRepository
 import app.appworks.school.stylish.data.source.StylishDataSource
 import app.appworks.school.stylish.data.source.StylishRepository
 import app.appworks.school.stylish.data.source.local.StylishLocalDataSource
 import app.appworks.school.stylish.data.source.remote.StylishRemoteDataSource
-import app.appworks.school.stylish.data.source.DefaultStylishRepository
 
 /**
  * A Service Locator for the [StylishRepository].

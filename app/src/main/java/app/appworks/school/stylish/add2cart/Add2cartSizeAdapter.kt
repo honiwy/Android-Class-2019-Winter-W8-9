@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.appworks.school.stylish.data.Variant
-import app.appworks.school.stylish.databinding.*
+import app.appworks.school.stylish.databinding.ItemAdd2cartSizeBinding
 
 /**
  * Created by Wayne Chen in Jul. 2019.

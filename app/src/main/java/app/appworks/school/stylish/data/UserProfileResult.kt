@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
  * Created by Wayne Chen in Jul. 2019.
  */
 @Parcelize
-data class ProductListProperty(
-    @Json(name = "data") val products: List<Product>,
-    val paging: String? = null
+data class UserProfileResult(
+    val error: String? = null,
+    @Json(name = "data") val user: User? = null
 ) : Parcelable

@@ -15,6 +15,8 @@ import app.appworks.school.stylish.add2cart.Add2cartSizeAdapter
 import app.appworks.school.stylish.add2cart.Add2cartViewModel
 import app.appworks.school.stylish.cart.CartAdapter
 import app.appworks.school.stylish.catalog.item.CatalogItemAdapter
+import app.appworks.school.stylish.component.ColorSquare
+import app.appworks.school.stylish.component.SelectedSquare
 import app.appworks.school.stylish.data.Color
 import app.appworks.school.stylish.data.HomeItem
 import app.appworks.school.stylish.data.Product
@@ -25,8 +27,6 @@ import app.appworks.school.stylish.detail.DetailGalleryAdapter
 import app.appworks.school.stylish.home.HomeAdapter
 import app.appworks.school.stylish.network.LoadApiStatus
 import app.appworks.school.stylish.payment.PaymentAdapter
-import app.appworks.school.stylish.component.ColorSquare
-import app.appworks.school.stylish.component.SelectedSquare
 import com.bumptech.glide.request.RequestOptions
 
 /**

@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.appworks.school.stylish.data.HomeItem
 import app.appworks.school.stylish.data.Product
-import app.appworks.school.stylish.databinding.*
+import app.appworks.school.stylish.databinding.ItemHomeCollageBinding
+import app.appworks.school.stylish.databinding.ItemHomeFullBinding
+import app.appworks.school.stylish.databinding.ItemHomeTitleBinding
 
 /**
  * Created by Wayne Chen in Jul. 2019.

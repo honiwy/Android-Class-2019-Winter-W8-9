@@ -18,7 +18,7 @@ class StylishLocalDataSource(val context: Context) : StylishDataSource {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun getProductList(type: String, paging: String?): Result<ProductListProperty> {
+    override suspend fun getProductList(type: String, paging: String?): Result<ProductListResult> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -26,12 +26,12 @@ class StylishLocalDataSource(val context: Context) : StylishDataSource {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun userSignIn(fbToken: String): Result<UserSignInProperty> {
+    override suspend fun userSignIn(fbToken: String): Result<UserSignInResult> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun postOrderCheckout(
-        token: String, orderCheckoutDetail: OrderCheckoutDetail): Result<OrderCheckoutProperty> {
+    override suspend fun checkoutOrder(
+        token: String, orderDetail: OrderDetail): Result<CheckoutOrderResult> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

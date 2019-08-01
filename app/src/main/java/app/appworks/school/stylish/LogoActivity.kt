@@ -3,12 +3,7 @@ package app.appworks.school.stylish
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
-import android.view.animation.RotateAnimation
-import android.view.animation.ScaleAnimation
-import android.view.animation.TranslateAnimation
+import android.view.animation.*
 import androidx.databinding.DataBindingUtil
 import app.appworks.school.stylish.databinding.ActivityLogoBinding
 

@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.appworks.school.stylish.data.Color
-import app.appworks.school.stylish.databinding.*
-import app.appworks.school.stylish.util.Logger
+import app.appworks.school.stylish.databinding.ItemAdd2cartColorBinding
 
 /**
  * Created by Wayne Chen in Jul. 2019.

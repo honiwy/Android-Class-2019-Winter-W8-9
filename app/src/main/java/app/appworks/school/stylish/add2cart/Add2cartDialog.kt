@@ -9,15 +9,15 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.*
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import app.appworks.school.stylish.*
+import app.appworks.school.stylish.NavigationDirections
 import app.appworks.school.stylish.R
 import app.appworks.school.stylish.databinding.DialogAdd2cartBinding
 import app.appworks.school.stylish.dialog.MessageDialog
-import app.appworks.school.stylish.util.Logger
 import app.appworks.school.stylish.ext.getVmFactory
 import app.appworks.school.stylish.ext.setTouchDelegate
+import app.appworks.school.stylish.util.Logger
 
 /**
  * Created by Wayne Chen in Jul. 2019.

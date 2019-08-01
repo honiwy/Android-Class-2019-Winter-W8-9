@@ -3,13 +3,15 @@ package app.appworks.school.stylish.profile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import app.appworks.school.stylish.R
+import app.appworks.school.stylish.component.ProfileAvatarOutlineProvider
 import app.appworks.school.stylish.data.Result
 import app.appworks.school.stylish.data.User
 import app.appworks.school.stylish.data.source.StylishRepository
 import app.appworks.school.stylish.login.UserManager
 import app.appworks.school.stylish.network.LoadApiStatus
 import app.appworks.school.stylish.util.Logger
-import app.appworks.school.stylish.component.ProfileAvatarOutlineProvider
+import app.appworks.school.stylish.util.Util
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -89,19 +91,26 @@ class ProfileViewModel(private val stylishRepository: StylishRepository, private
             val result = stylishRepository.getUserProfile(token)
 
             _user.value = when (result) {
+
                 is Result.Success -> {
                     _status.value = LoadApiStatus.DONE
                     result.data
                 }
-                is Result.Error -> {
-                    _error.value = result.exception.toString()
+                is Result.Fail -> {
+                    _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
-                    if (result.exception.toString().contains("Required value 'user' missing", true)) {
-                        UserManager.userToken = null
+                    if (result.error.contains("Invalid Access Token", true)) {
+                        UserManager.clear()
                     }
                     null
                 }
+                is Result.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
                 else -> {
+                    _error.value = Util.getString(R.string.you_know_nothing)
                     _status.value = LoadApiStatus.ERROR
                     null
                 }

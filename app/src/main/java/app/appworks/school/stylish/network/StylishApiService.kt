@@ -49,36 +49,36 @@ private val retrofit = Retrofit.Builder()
 
 /**
  * A public interface that exposes the [getMarketingHots], [getProductList], [getUserProfile],
- * [userSignIn], [postOrderCheckout] methods
+ * [userSignIn], [checkoutOrder] methods
  */
 interface StylishApiService {
     /**
-     * Returns a Coroutine [Deferred] [HotsResult] which can be fetched with await() if in a Coroutine scope.
+     * Returns a Coroutine [Deferred] [MarketingHotsResult] which can be fetched with await() if in a Coroutine scope.
      * The @GET annotation indicates that the "marketing/hots" endpoint will be requested with the GET HTTP method
      */
     @GET("marketing/hots")
     fun getMarketingHots():
     // The Coroutine Call Adapter allows us to return a Deferred, a Job with a result
-            Deferred<HotsResult>
+            Deferred<MarketingHotsResult>
     /**
-     * Returns a Coroutine [Deferred] [ProductListProperty] which can be fetched with await() if in a Coroutine scope.
+     * Returns a Coroutine [Deferred] [ProductListResult] which can be fetched with await() if in a Coroutine scope.
      * The @GET annotation indicates that the "products/{catalogType}" endpoint will be requested with the GET
      * HTTP method (catalogType: men, women, accessories)
      * The @Query annotation indicates that it will be added "?paging={pagingKey}" after endpoint
      */
     @GET("products/{catalogType}")
     fun getProductList(@Path("catalogType") type: String, @Query("paging") paging: String? = null):
-            Deferred<ProductListProperty>
+            Deferred<ProductListResult>
     /**
-     * Returns a Coroutine [Deferred] [UserProperty] which can be fetched with await() if in a Coroutine scope.
+     * Returns a Coroutine [Deferred] [UserProfileResult] which can be fetched with await() if in a Coroutine scope.
      * The @GET annotation indicates that the "user/profile" endpoint will be requested with the GET HTTP method
      * The @Header annotation indicates that it will be added "Authorization" header
      */
     @GET("user/profile")
     fun getUserProfile(@Header("Authorization") token: String):
-            Deferred<UserProperty>
+            Deferred<UserProfileResult>
     /**
-     * Returns a Coroutine [Deferred] [UserSignInProperty] which can be fetched with await() if in a Coroutine scope.
+     * Returns a Coroutine [Deferred] [UserSignInResult] which can be fetched with await() if in a Coroutine scope.
      * The @POST annotation indicates that the "user/signin" endpoint will be requested with the POST HTTP method
      * The @Field annotation indicates that it will be added "provider", "access_token" key-pairs to the body of
      * the POST HTTP method, and it have to use @FormUrlEncoded to support @Field
@@ -88,16 +88,16 @@ interface StylishApiService {
     fun userSignIn(
         @Field("provider") provider: String = "facebook",
         @Field("access_token") fbToken: String):
-            Deferred<UserSignInProperty>
+            Deferred<UserSignInResult>
     /**
-     * Returns a Coroutine [Deferred] [OrderCheckoutProperty] which can be fetched with await() if in a Coroutine scope.
+     * Returns a Coroutine [Deferred] [CheckoutOrderResult] which can be fetched with await() if in a Coroutine scope.
      * The @POST annotation indicates that the "user/signin" endpoint will be requested with the POST HTTP method
      * The @Header annotation indicates that it will be added "Authorization" header
-     * The @Body annotation indicates that it will be added [OrderCheckoutDetail] to the body of the POST HTTP method
+     * The @Body annotation indicates that it will be added [OrderDetail] to the body of the POST HTTP method
      */
     @POST("order/checkout")
-    fun postOrderCheckout(@Header("Authorization") token: String, @Body orderCheckoutDetail: OrderCheckoutDetail):
-            Deferred<OrderCheckoutProperty>
+    fun checkoutOrder(@Header("Authorization") token: String, @Body orderDetail: OrderDetail):
+            Deferred<CheckoutOrderResult>
 }
 
 /**
