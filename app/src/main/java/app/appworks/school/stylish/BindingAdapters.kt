@@ -27,6 +27,7 @@ import app.appworks.school.stylish.detail.DetailGalleryAdapter
 import app.appworks.school.stylish.home.HomeAdapter
 import app.appworks.school.stylish.network.LoadApiStatus
 import app.appworks.school.stylish.payment.PaymentAdapter
+import app.appworks.school.stylish.util.Util.getColor
 import com.bumptech.glide.request.RequestOptions
 
 /**
@@ -162,19 +163,17 @@ fun bindAdd2cartEditorStatus(editText: EditText, amount: Long, stock: Int) {
                 isClickable = false
                 isFocusable = false
                 isFocusableInTouchMode = false
-                backgroundTintList = ColorStateList.valueOf(
-                    StylishApplication.instance.getColor(R.color.gray_999999))
-                setTextColor(StylishApplication.instance.getColor(R.color.gray_999999))
+                backgroundTintList = ColorStateList.valueOf(getColor(R.color.gray_999999))
+                setTextColor(getColor(R.color.gray_999999))
             }
             else -> {
                 isClickable = true
                 isFocusable = true
                 isFocusableInTouchMode = true
-                backgroundTintList = ColorStateList.valueOf(
-                    StylishApplication.instance.getColor(R.color.black_3f3a3a))
+                backgroundTintList = ColorStateList.valueOf(getColor(R.color.black_3f3a3a))
                 when {
-                    amount > stock -> setTextColor(StylishApplication.instance.getColor(R.color.red_d0021b))
-                    else -> setTextColor(StylishApplication.instance.getColor(R.color.black_3f3a3a))
+                    amount > stock -> setTextColor(getColor(R.color.red_d0021b))
+                    else -> setTextColor(getColor(R.color.black_3f3a3a))
                 }
             }
         }
@@ -197,13 +196,13 @@ fun bindEditorControllerStatus(imageButton: ImageButton, enabled: Boolean) {
         })
         isClickable = enabled
         backgroundTintList = ColorStateList.valueOf(
-            StylishApplication.instance.getColor(
+            getColor(
                 when (enabled) {
                     true -> R.color.black_3f3a3a
                     false -> R.color.gray_999999
                 }))
         foregroundTintList = ColorStateList.valueOf(
-            StylishApplication.instance.getColor(
+            getColor(
                 when (enabled) {
                     true -> R.color.black_3f3a3a
                     false -> R.color.gray_999999
@@ -235,7 +234,7 @@ fun bindDetailCircleStatus(imageView: ImageView, isSelected: Boolean = false) {
     imageView.background = ShapeDrawable(object : Shape() {
         override fun draw(canvas: Canvas, paint: Paint) {
 
-            paint.color = StylishApplication.instance.getColor(R.color.white)
+            paint.color = getColor(R.color.white)
             paint.isAntiAlias = true
 
             when (isSelected) {

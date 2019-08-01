@@ -12,6 +12,7 @@ import app.appworks.school.stylish.ext.toOrderProductList
 import app.appworks.school.stylish.login.UserManager
 import app.appworks.school.stylish.network.LoadApiStatus
 import app.appworks.school.stylish.util.Logger
+import app.appworks.school.stylish.util.Util.getColor
 import app.appworks.school.stylish.util.Util.getString
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -42,9 +43,9 @@ class PaymentViewModel(private val stylishRepository: StylishRepository) : ViewM
 
     private val shippingTime: String
         get() = when (selectedTimeRadio.value) {
-            R.id.radio_shipping_morning -> StylishApplication.instance.getString(R.string.morning)
-            R.id.radio_shipping_afternoon -> StylishApplication.instance.getString(R.string.afternoon)
-            R.id.radio_shipping_anytime -> StylishApplication.instance.getString(R.string.anytime)
+            R.id.radio_shipping_morning -> getString(R.string.morning)
+            R.id.radio_shipping_afternoon -> getString(R.string.afternoon)
+            R.id.radio_shipping_anytime -> getString(R.string.anytime)
             else -> ""
         }
 
@@ -268,24 +269,24 @@ class PaymentViewModel(private val stylishRepository: StylishRepository) : ViewM
 
         TPDSetup.initInstance(
             StylishApplication.instance,
-            StylishApplication.instance.getString(R.string.tp_app_id).toInt(),
-            StylishApplication.instance.getString(R.string.tp_app_key),
+            getString(R.string.tp_app_id).toInt(),
+            getString(R.string.tp_app_key),
             TPDServerType.Sandbox)
 
-        tpdErrorMessage = StylishApplication.instance.getString(R.string.tpd_general_error)
+        tpdErrorMessage = getString(R.string.tpd_general_error)
         isCanGetPrime = false
 
-        tpdForm.setTextErrorColor(StylishApplication.instance.getColor(R.color.red_d0021b))
+        tpdForm.setTextErrorColor(getColor(R.color.red_d0021b))
         tpdForm.setOnFormUpdateListener { tpdStatus ->
             when {
                 tpdStatus.cardNumberStatus == TPDStatus.STATUS_ERROR ->
-                    tpdErrorMessage = StylishApplication.instance.getString(R.string.tpd_card_number_error)
+                    tpdErrorMessage = getString(R.string.tpd_card_number_error)
                 tpdStatus.expirationDateStatus == TPDStatus.STATUS_ERROR ->
-                    tpdErrorMessage = StylishApplication.instance.getString(R.string.tpd_expiration_date_error)
+                    tpdErrorMessage = getString(R.string.tpd_expiration_date_error)
                 tpdStatus.ccvStatus == TPDStatus.STATUS_ERROR ->
-                    tpdErrorMessage = StylishApplication.instance.getString(R.string.tpd_ccv_error)
+                    tpdErrorMessage = getString(R.string.tpd_ccv_error)
                 !tpdStatus.isCanGetPrime ->
-                    tpdErrorMessage = StylishApplication.instance.getString(R.string.tpd_general_error)
+                    tpdErrorMessage = getString(R.string.tpd_general_error)
             }
             isCanGetPrime = tpdStatus.isCanGetPrime
         }

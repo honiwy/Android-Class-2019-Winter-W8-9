@@ -48,11 +48,11 @@ class MessageDialog : AppCompatDialogFragment() {
         when (messageType) {
             MessageType.LOGIN_SUCCESS -> {
                 iconRes = StylishApplication.instance.getDrawable(R.drawable.ic_success)
-                message = StylishApplication.instance.getString(R.string.login_success)
+                message = getString(R.string.login_success)
             }
             MessageType.ADDED_SUCCESS -> {
                 iconRes = StylishApplication.instance.getDrawable(R.drawable.ic_success)
-                message = StylishApplication.instance.getString(R.string.addto_success)
+                message = getString(R.string.addto_success)
             }
             MessageType.MESSAGE -> {
                 iconRes = StylishApplication.instance.getDrawable(R.drawable.ic_launcher_foreground)

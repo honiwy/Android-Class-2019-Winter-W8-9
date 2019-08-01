@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import app.appworks.school.stylish.R
 import app.appworks.school.stylish.StylishApplication
 import app.appworks.school.stylish.data.User
+import app.appworks.school.stylish.util.Util.getString
 
 /**
  * Created by Wayne Chen in Jul. 2019.
@@ -73,7 +74,7 @@ object UserManager {
             if (challengeCount == CHALLENGE_LIMIT) {
                 userToken = null
                 Toast.makeText(StylishApplication.instance,
-                    StylishApplication.instance.getString(R.string.profile_default_information),
+                    getString(R.string.profile_default_information),
                     Toast.LENGTH_SHORT).show()
             } else {
                 challengeCount++
