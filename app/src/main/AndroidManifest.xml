@@ -17,7 +17,7 @@
         <activity
                 android:name=".MainActivity"
                 android:label="@string/app_name"
-                android:screenOrientation="portrait"
+                android:screenOrientation="sensorPortrait"
                 android:windowSoftInputMode="stateHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -28,7 +28,6 @@
 
         <activity android:name=".LogoActivity"
                   android:theme="@style/LogoTheme"
-                  android:screenOrientation="portrait"
                   android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
 
