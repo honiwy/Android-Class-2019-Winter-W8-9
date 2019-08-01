@@ -9,7 +9,6 @@ import android.view.animation.AnimationSet
 import android.view.animation.RotateAnimation
 import android.view.animation.ScaleAnimation
 import android.view.animation.TranslateAnimation
-import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import app.appworks.school.stylish.databinding.ActivityLogoBinding
 
@@ -19,7 +18,8 @@ import app.appworks.school.stylish.databinding.ActivityLogoBinding
 class LogoActivity : BaseActivity() {
 
     private lateinit var binding: ActivityLogoBinding
-    private val totalDuration = 3000
+    private val duration = 1000L
+    private val await = 1500L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,15 +28,14 @@ class LogoActivity : BaseActivity() {
 
         Handler().postDelayed({
 
-            setLogoAnimation()
-
+            startLogoAnimation4Particle()
             Handler().postDelayed({
+                binding.particleLogo.visibility = View.VISIBLE
+                binding.particleLogo.startAnimation()
+                binding.particleLogo.setOnClickListener(this::leave)
 
-                finish()
-
-            }, (totalDuration / 3 * 2).toLong())
-
-        }, (totalDuration / 3).toLong())
+            }, duration)
+        }, await)
     }
 
     public override fun onPause() {
@@ -44,38 +43,43 @@ class LogoActivity : BaseActivity() {
         overridePendingTransition(0, 0)
     }
 
-    override fun onBackPressed() {}
+    private fun startLogoAnimation4Particle() {
 
-    private fun setLogoAnimation() {
-        val duration = totalDuration / 3 * 2
+        val scaleAnimation = ScaleAnimation(
+            1f, 0f,
+            1f, 0f,
+            Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f
+        ).apply {
+            duration = this@LogoActivity.duration
+            fillAfter = true
+        }
 
-        val rotateAnimation = RotateAnimation(0f, 1800f,
-                Animation.RELATIVE_TO_SELF, 0.5f,
-                Animation.RELATIVE_TO_SELF, 0.5f)
-        rotateAnimation.duration = duration.toLong()
-        rotateAnimation.fillAfter = true
+        val rotateAnimation = RotateAnimation(
+            0f, 1800f,
+            Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f
+        ).apply {
+            duration = this@LogoActivity.duration
+            fillAfter = true
+        }
 
-        val translateAnimation = TranslateAnimation(0f, 0f,
-                0f, resources.getDimensionPixelSize(R.dimen.duration_logo_translate).toFloat())
-        translateAnimation.duration = duration.toLong()
-        translateAnimation.fillAfter = true
+        binding.imageLogo.startAnimation(AnimationSet(false).apply {
+            addAnimation(rotateAnimation)
+            addAnimation(scaleAnimation)
+            fillAfter = true
+        })
 
-        val alphaAnimation = AlphaAnimation(1f, 0f)
-        alphaAnimation.duration = duration.toLong()
-        alphaAnimation.fillAfter = true
+        val alphaAnimation = AlphaAnimation(1f, 0f).apply {
+            duration = this@LogoActivity.duration
+            fillAfter = true
+        }
 
-        val scaleAnimation = ScaleAnimation(1f, 0.5f, 1f, 0.5f,
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
-        scaleAnimation.duration = duration.toLong()
-        scaleAnimation.fillAfter = true
+        binding.backgroundLogo.startAnimation(AnimationSet(false).apply {
+            addAnimation(alphaAnimation)
+            fillAfter = true
+        })
+    }
 
-        val animationSet = AnimationSet(false)
-        animationSet.addAnimation(rotateAnimation)
-        animationSet.addAnimation(translateAnimation)
-        animationSet.addAnimation(alphaAnimation)
-        animationSet.addAnimation(scaleAnimation)
-        animationSet.fillAfter = true
-
-        binding.imageLogo.startAnimation(animationSet)
+    fun leave(view: View) {
+        finish()
     }
 }

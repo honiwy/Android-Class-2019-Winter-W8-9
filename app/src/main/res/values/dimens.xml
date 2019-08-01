@@ -76,4 +76,5 @@
     <dimen name="width_logo">254dp</dimen>
     <dimen name="height_logo">39dp</dimen>
     <dimen name="duration_logo_translate">-575dp</dimen>
+    <dimen name="size_particle_logo">30dp</dimen>
 </resources>

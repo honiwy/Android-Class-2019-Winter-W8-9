@@ -89,4 +89,8 @@
         <item name="colorControlActivated">@color/black_3f3a3a</item>
     </style>
 
+    <style name="LogoTheme" parent="AppTheme">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 </resources>
