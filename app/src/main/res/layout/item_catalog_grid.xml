@@ -4,12 +4,16 @@
 
     <data>
         <variable name="product" type="app.appworks.school.stylish.data.Product"/>
+        <variable name="itemPosition" type="Integer"/>
+        <variable name="itemCount" type="Integer"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_catalog_grid"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:itemPosition="@{itemPosition}"
+            app:itemCount="@{itemCount}">
 
         <ImageView
                 android:id="@+id/image_catalog_main"

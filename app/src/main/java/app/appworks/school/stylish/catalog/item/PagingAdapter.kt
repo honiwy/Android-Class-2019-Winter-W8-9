@@ -21,8 +21,10 @@ class PagingAdapter(private val onClickListener: OnClickListener ) :
 
     class ProductViewHolder(private var binding: ItemCatalogGridBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(product: Product) {
+        fun bind(product: Product, itemCount: Int) {
             binding.product = product
+            binding.itemPosition = adapterPosition
+            binding.itemCount = itemCount
             // This is important, because it forces the data binding to execute immediately,
             // which allows the RecyclerView to make the correct view size measurements
             binding.executePendingBindings()
@@ -60,7 +62,7 @@ class PagingAdapter(private val onClickListener: OnClickListener ) :
             holder.itemView.setOnClickListener {
                 onClickListener.onClick(product)
             }
-            holder.bind(product)
+            holder.bind(product, itemCount)
         }
     }
 

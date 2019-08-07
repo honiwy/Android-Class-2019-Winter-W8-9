@@ -7,6 +7,7 @@ import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.Shape
 import android.view.View
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -226,9 +227,6 @@ fun bindEditorStatus(textView: TextView, amount: Long, stock: Int) {
     }
 }
 
-/**
- *
- */
 @BindingAdapter("circleStatus")
 fun bindDetailCircleStatus(imageView: ImageView, isSelected: Boolean = false) {
     imageView.background = ShapeDrawable(object : Shape() {
@@ -253,6 +251,47 @@ fun bindDetailCircleStatus(imageView: ImageView, isSelected: Boolean = false) {
                     .getDimensionPixelSize(R.dimen.radius_detail_circle).toFloat(), paint)
         }
     })
+}
+
+@BindingAdapter("itemPosition", "itemCount")
+fun setupPaddingForGridItems(layout: ConstraintLayout, position: Int, count: Int) {
+
+    val outsideHorizontal = StylishApplication.instance.resources.getDimensionPixelSize(R.dimen.space_outside_horizontal_catalog_item)
+    val insideHorizontal = StylishApplication.instance.resources.getDimensionPixelSize(R.dimen.space_inside_horizontal_catalog_item)
+    val outsideVertical = StylishApplication.instance.resources.getDimensionPixelSize(R.dimen.space_outside_vertical_catalog_item)
+    val insideVertical = StylishApplication.instance.resources.getDimensionPixelSize(R.dimen.space_inside_vertical_catalog_item)
+
+    val layoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
+
+    when {
+        position == 0 -> { // first item and confirm whether only 1 row
+            layoutParams.setMargins(outsideHorizontal, outsideVertical, insideHorizontal, if (count > 2) insideVertical else outsideVertical)
+        }
+        position == 1 -> { // second item and confirm whether only 1 row
+            layoutParams.setMargins(insideHorizontal, outsideVertical, outsideHorizontal, if (count > 2) insideVertical else outsideVertical)
+        }
+        count % 2 == 0 && position == count - 1 -> { // count more than 2 and item count is even
+            layoutParams.setMargins(insideHorizontal, insideVertical, outsideHorizontal, outsideVertical)
+        }
+        (count % 2 == 1 && position == count - 1) || (count % 2 == 0 && position == count - 2) -> {
+            layoutParams.setMargins(outsideHorizontal, insideVertical, insideHorizontal, outsideVertical)
+        }
+        position % 2 == 0 -> { // even
+            when (position) {
+                count - 1 -> layoutParams.setMargins(insideHorizontal, insideVertical, outsideHorizontal, outsideVertical) // last 1
+                count - 2 -> layoutParams.setMargins(outsideHorizontal, insideVertical, insideHorizontal, outsideVertical) // last 2
+                else -> layoutParams.setMargins(outsideHorizontal, insideVertical, insideHorizontal, insideVertical)
+            }
+        }
+        position % 2 == 1 -> { // odd
+            when (position) {
+                count - 1 -> layoutParams.setMargins(outsideHorizontal, insideVertical, insideHorizontal, outsideVertical) // last 1
+                else -> layoutParams.setMargins(insideHorizontal, insideVertical, outsideHorizontal, insideVertical)
+            }
+        }
+    }
+
+    layout.layoutParams = layoutParams
 }
 
 // General
