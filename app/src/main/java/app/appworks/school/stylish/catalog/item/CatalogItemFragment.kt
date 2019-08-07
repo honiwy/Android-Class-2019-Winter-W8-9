@@ -12,28 +12,25 @@ import app.appworks.school.stylish.NavigationDirections
 import app.appworks.school.stylish.catalog.CatalogTypeFilter
 import app.appworks.school.stylish.databinding.FragmentCatalogItemBinding
 import app.appworks.school.stylish.ext.getVmFactory
+import app.appworks.school.stylish.network.LoadApiStatus
 
 /**
  * Created by Wayne Chen in Jul. 2019.
  */
-class CatalogItemFragment : Fragment() {
+class CatalogItemFragment(private val catalogType: CatalogTypeFilter) : Fragment() {
 
     /**
      * Lazily initialize our [CatalogItemViewModel].
      */
-    private val viewModel by viewModels<CatalogItemViewModel> { getVmFactory() }
-
-    var catalogType: CatalogTypeFilter = CatalogTypeFilter.ACCESSORIES
+    private val viewModel by viewModels<CatalogItemViewModel> { getVmFactory(catalogType) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val binding = FragmentCatalogItemBinding.inflate(inflater, container, false)
 
-        binding.lifecycleOwner = this@CatalogItemFragment
-        viewModel.let {
-            it.catalogType = catalogType
-            binding.viewModel = it
-        }
+        binding.lifecycleOwner = this
+
+        binding.viewModel = viewModel
 
         binding.recyclerCatalogItem.adapter = PagingAdapter(PagingAdapter.OnClickListener {
             viewModel.navigateToDetail(it)
@@ -48,6 +45,17 @@ class CatalogItemFragment : Fragment() {
 
         viewModel.pagingDataProducts.observe(this@CatalogItemFragment, Observer {
             (binding.recyclerCatalogItem.adapter as PagingAdapter).submitList(it)
+        })
+
+        binding.layoutSwipeRefreshCatalogItem.setOnRefreshListener {
+            viewModel.refresh()
+        }
+
+        viewModel.status.observe(this, Observer {
+            it?.let {
+                if (it != LoadApiStatus.LOADING)
+                    binding.layoutSwipeRefreshCatalogItem.isRefreshing = false
+            }
         })
 
         return binding.root

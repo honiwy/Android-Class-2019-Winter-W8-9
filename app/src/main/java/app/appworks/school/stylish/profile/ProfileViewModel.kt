@@ -12,6 +12,7 @@ import app.appworks.school.stylish.login.UserManager
 import app.appworks.school.stylish.network.LoadApiStatus
 import app.appworks.school.stylish.util.Logger
 import app.appworks.school.stylish.util.Util
+import app.appworks.school.stylish.util.Util.getString
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -93,6 +94,7 @@ class ProfileViewModel(private val stylishRepository: StylishRepository, private
             _user.value = when (result) {
 
                 is Result.Success -> {
+                    _error.value = null
                     _status.value = LoadApiStatus.DONE
                     result.data
                 }
@@ -110,7 +112,7 @@ class ProfileViewModel(private val stylishRepository: StylishRepository, private
                     null
                 }
                 else -> {
-                    _error.value = Util.getString(R.string.you_know_nothing)
+                    _error.value = getString(R.string.you_know_nothing)
                     _status.value = LoadApiStatus.ERROR
                     null
                 }

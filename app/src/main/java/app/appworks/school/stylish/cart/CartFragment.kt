@@ -28,6 +28,11 @@ class CartFragment : Fragment() {
         binding.viewModel = viewModel
         binding.recyclerCart.adapter = CartAdapter(viewModel)
 
+        binding.layoutSwipeRefreshCart.setOnRefreshListener {
+            binding.recyclerCart.adapter?.notifyDataSetChanged()
+            binding.layoutSwipeRefreshCart.isRefreshing = false
+        }
+
         viewModel.navigateToPayment.observe(this, Observer {
             it?.let {
                 findNavController().navigate(CartFragmentDirections.navigateToPaymentFragment())

@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import app.appworks.school.stylish.MainViewModel
 import app.appworks.school.stylish.cart.CartViewModel
-import app.appworks.school.stylish.catalog.item.CatalogItemViewModel
 import app.appworks.school.stylish.checkout.CheckoutSuccessViewModel
 import app.appworks.school.stylish.data.source.StylishRepository
 import app.appworks.school.stylish.home.HomeViewModel
@@ -29,9 +28,6 @@ class ViewModelFactory constructor(
 
                 isAssignableFrom(HomeViewModel::class.java) ->
                     HomeViewModel(stylishRepository)
-
-                isAssignableFrom(CatalogItemViewModel::class.java) ->
-                    CatalogItemViewModel(stylishRepository)
 
                 isAssignableFrom(CartViewModel::class.java) ->
                     CartViewModel(stylishRepository)

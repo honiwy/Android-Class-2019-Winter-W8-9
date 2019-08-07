@@ -32,6 +32,16 @@ class HomeFragment : Fragment() {
             viewModel.navigateToDetail(it)
         })
 
+        binding.layoutSwipeRefreshHome.setOnRefreshListener {
+            viewModel.refresh()
+        }
+
+        viewModel.refreshStatus.observe(this, Observer {
+            it?.let {
+                binding.layoutSwipeRefreshHome.isRefreshing = it
+            }
+        })
+
         viewModel.navigateToDetail.observe(this, Observer {
             it?.let {
                 findNavController().navigate(NavigationDirections.navigateToDetailFragment(it))

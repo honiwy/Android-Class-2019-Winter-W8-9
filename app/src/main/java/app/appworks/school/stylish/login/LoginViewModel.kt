@@ -9,7 +9,6 @@ import app.appworks.school.stylish.data.User
 import app.appworks.school.stylish.data.source.StylishRepository
 import app.appworks.school.stylish.network.LoadApiStatus
 import app.appworks.school.stylish.util.Logger
-import app.appworks.school.stylish.util.Util
 import app.appworks.school.stylish.util.Util.getString
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -98,6 +97,7 @@ class LoginViewModel(private val stylishRepository: StylishRepository) : ViewMod
             // It will return Result object after Deferred flow
             when (val result = stylishRepository.userSignIn(fbToken)) {
                 is Result.Success -> {
+                    _error.value = null
                     _status.value = LoadApiStatus.DONE
                     UserManager.userToken = result.data.userSignIn?.accessToken
                     _user.value = result.data.userSignIn?.user
@@ -112,7 +112,7 @@ class LoginViewModel(private val stylishRepository: StylishRepository) : ViewMod
                     _status.value = LoadApiStatus.ERROR
                 }
                 else -> {
-                    _error.value = Util.getString(R.string.you_know_nothing)
+                    _error.value = getString(R.string.you_know_nothing)
                     _status.value = LoadApiStatus.ERROR
                 }
             }

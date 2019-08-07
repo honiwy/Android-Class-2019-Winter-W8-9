@@ -23,31 +23,23 @@ import kotlinx.coroutines.Job
  *
  * The [ViewModel] that is attached to the [CatalogItemFragment].
  */
-class CatalogItemViewModel(private val stylishRepository: StylishRepository) : ViewModel() {
+class CatalogItemViewModel(
+    private val stylishRepository: StylishRepository,
+    catalogType: CatalogTypeFilter // Handle the type for each catalog item
+) : ViewModel() {
 
-    // Handle the type for each catalog item
-    var catalogType: CatalogTypeFilter = CatalogTypeFilter.ACCESSORIES
+    private val sourceFactory = PagingDataSourceFactory(catalogType)
 
-    private val sourceFactory by lazy {
-        PagingDataSourceFactory(catalogType)
-    }
-
-    val pagingDataProducts: LiveData<PagedList<Product>> by lazy {
-        sourceFactory.toLiveData(6, null)
-    }
+    val pagingDataProducts: LiveData<PagedList<Product>> = sourceFactory.toLiveData(6, null)
 
     // Handle load api status
-    val status: LiveData<LoadApiStatus> by lazy {
-        Transformations.switchMap(sourceFactory.sourceLiveData) {
-            it.statusInitialLoad
-        }
+    val status: LiveData<LoadApiStatus> = Transformations.switchMap(sourceFactory.sourceLiveData) {
+        it.statusInitialLoad
     }
 
     // Handle load api error
-    val error: LiveData<String> by lazy {
-        Transformations.switchMap(sourceFactory.sourceLiveData) {
-            it.errorInitialLoad
-        }
+    val error: LiveData<String> = Transformations.switchMap(sourceFactory.sourceLiveData) {
+        it.errorInitialLoad
     }
 
     // Handle navigation to detail
@@ -80,6 +72,12 @@ class CatalogItemViewModel(private val stylishRepository: StylishRepository) : V
         Logger.i("------------------------------------")
         Logger.i("[${this::class.simpleName}]${this}")
         Logger.i("------------------------------------")
+    }
+
+    fun refresh() {
+        if (status.value != LoadApiStatus.LOADING) {
+            sourceFactory.sourceLiveData.value?.invalidate()
+        }
     }
 
     fun navigateToDetail(product: Product) {

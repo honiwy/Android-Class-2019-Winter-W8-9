@@ -10,9 +10,7 @@ import app.appworks.school.stylish.catalog.item.CatalogItemFragment
  */
 class CatalogAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     override fun getItem(position: Int): Fragment {
-        return CatalogItemFragment().apply {
-            catalogType = CatalogTypeFilter.values()[position]
-        }
+        return CatalogItemFragment(CatalogTypeFilter.values()[position])
     }
 
     override fun getCount() = CatalogTypeFilter.values().size

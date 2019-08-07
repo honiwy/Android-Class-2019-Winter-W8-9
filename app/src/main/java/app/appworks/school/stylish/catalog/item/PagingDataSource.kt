@@ -50,6 +50,7 @@ class PagingDataSource(val type: CatalogTypeFilter) : PageKeyedDataSource<String
                 .getProductList(type = type.value)
             when (result) {
                 is Result.Success -> {
+                    _errorInitialLoad.value = null
                     _statusInitialLoad.value = LoadApiStatus.DONE
 //                    Logger.d("[${type.value}] loadInitial.result=${result.data.products}") // open it if you want to observe status
 //                    Logger.d("[${type.value}] loadInitial.paging=${result.data.paging}") // open it if you want to observe status

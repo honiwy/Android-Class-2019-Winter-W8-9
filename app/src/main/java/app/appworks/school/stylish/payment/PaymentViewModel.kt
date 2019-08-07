@@ -215,6 +215,7 @@ class PaymentViewModel(private val stylishRepository: StylishRepository) : ViewM
             _checkoutSuccess.value = when (result) {
                 is Result.Success -> {
                     stylishRepository.clearProductInCart()
+                    _error.value = null
                     _status.value = LoadApiStatus.DONE
                     result.data
                 }

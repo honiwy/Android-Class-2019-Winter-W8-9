@@ -13,18 +13,24 @@
             android:background="@color/white"
             tools:context=".cart.CartFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_cart"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/layout_swipe_refresh_cart"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:products="@{viewModel.products}"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/layout_cart_bottom">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_cart"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:products="@{viewModel.products}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <TextView
                 android:id="@+id/text_cart_no_products"

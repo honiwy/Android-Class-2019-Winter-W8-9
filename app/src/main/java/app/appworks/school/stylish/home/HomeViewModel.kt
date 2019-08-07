@@ -40,6 +40,12 @@ class HomeViewModel(private val stylishRepository: StylishRepository) : ViewMode
     val error: LiveData<String>
         get() = _error
 
+    // status for the loading icon of swl
+    private val _refreshStatus = MutableLiveData<Boolean>()
+
+    val refreshStatus: LiveData<Boolean>
+        get() = _refreshStatus
+
     // Handle navigation to detail
     private val _navigateToDetail = MutableLiveData<Product>()
 
@@ -69,41 +75,49 @@ class HomeViewModel(private val stylishRepository: StylishRepository) : ViewMode
         Logger.i("[${this::class.simpleName}]${this}")
         Logger.i("------------------------------------")
 
-        getMarketingHotsResult()
+        getMarketingHotsResult(true)
     }
 
     /**
      * track [StylishRepository.getMarketingHots]: -> [DefaultStylishRepository] : [StylishRepository] -> [StylishRemoteDataSource] : [StylishDataSource]
      */
-    private fun getMarketingHotsResult() {
+    private fun getMarketingHotsResult(isInitial: Boolean = false) {
 
         coroutineScope.launch {
 
-            _status.value = LoadApiStatus.LOADING
+            if (isInitial) _status.value = LoadApiStatus.LOADING
             // It will return Result object after Deferred flow
             val result = stylishRepository.getMarketingHots()
 
             _homeItems.value = when (result) {
                 is Result.Success -> {
-                    _status.value = LoadApiStatus.DONE
+                    _error.value = null
+                    if (isInitial) _status.value = LoadApiStatus.DONE
                     result.data
                 }
                 is Result.Fail -> {
                     _error.value = result.error
-                    _status.value = LoadApiStatus.ERROR
+                    if (isInitial) _status.value = LoadApiStatus.ERROR
                     null
                 }
                 is Result.Error -> {
                     _error.value = result.exception.toString()
-                    _status.value = LoadApiStatus.ERROR
+                    if (isInitial) _status.value = LoadApiStatus.ERROR
                     null
                 }
                 else -> {
                     _error.value = getString(R.string.you_know_nothing)
-                    _status.value = LoadApiStatus.ERROR
+                    if (isInitial) _status.value = LoadApiStatus.ERROR
                     null
                 }
             }
+            _refreshStatus.value = false
+        }
+    }
+
+    fun refresh() {
+        if (status.value != LoadApiStatus.LOADING) {
+            getMarketingHotsResult()
         }
     }
 

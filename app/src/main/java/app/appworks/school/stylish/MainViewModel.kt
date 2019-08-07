@@ -14,7 +14,7 @@ import app.appworks.school.stylish.network.LoadApiStatus
 import app.appworks.school.stylish.util.CurrentFragmentType
 import app.appworks.school.stylish.util.DrawerToggleType
 import app.appworks.school.stylish.util.Logger
-import app.appworks.school.stylish.util.Util
+import app.appworks.school.stylish.util.Util.getString
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -165,6 +165,7 @@ class MainViewModel(private val stylishRepository: StylishRepository) : ViewMode
             _user.value = when (result) {
 
                 is Result.Success -> {
+                    _error.value = null
                     _status.value = LoadApiStatus.DONE
                     result.data
                 }
@@ -182,7 +183,7 @@ class MainViewModel(private val stylishRepository: StylishRepository) : ViewMode
                     null
                 }
                 else -> {
-                    _error.value = Util.getString(R.string.you_know_nothing)
+                    _error.value = getString(R.string.you_know_nothing)
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
