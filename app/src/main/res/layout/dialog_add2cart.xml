@@ -3,9 +3,7 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="java.util.List"/>
         <import type="android.view.View"/>
-        <import type="android.graphics.drawable.Drawable"/>
         <variable name="viewModel" type="app.appworks.school.stylish.add2cart.Add2cartViewModel"/>
     </data>
 

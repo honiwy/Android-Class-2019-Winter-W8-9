@@ -23,7 +23,7 @@ class CatalogItemFragment : Fragment() {
      */
     private val viewModel by viewModels<CatalogItemViewModel> { getVmFactory() }
 
-    lateinit var catalogType: CatalogTypeFilter
+    var catalogType: CatalogTypeFilter = CatalogTypeFilter.ACCESSORIES
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 

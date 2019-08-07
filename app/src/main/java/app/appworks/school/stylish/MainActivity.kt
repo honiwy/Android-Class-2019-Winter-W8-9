@@ -1,11 +1,15 @@
 package app.appworks.school.stylish
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -26,6 +30,7 @@ import app.appworks.school.stylish.util.Logger
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.launch
 
 /**
  * Created by Wayne Chen in Jul. 2019.
@@ -130,6 +135,7 @@ class MainActivity : BaseActivity() {
             }
         })
 
+        setupToolbar()
         setupBottomNav()
         setupDrawer()
         setupNavController()
@@ -169,6 +175,42 @@ class MainActivity : BaseActivity() {
     }
 
     /**
+     * Set up the layout of [Toolbar], according to whether it has cutout
+     */
+    private fun setupToolbar() {
+
+        binding.toolbar.setPadding(0, statusBarHeight, 0, 0)
+
+        launch {
+
+            val dpi = resources.displayMetrics.densityDpi.toFloat()
+            val dpiMultiple = dpi / DisplayMetrics.DENSITY_DEFAULT
+
+            val cutoutHeight = getCutoutHeight()
+
+            Logger.i("====== ${Build.MODEL} ======")
+            Logger.i("$dpi dpi (${dpiMultiple}x)")
+            Logger.i("statusBarHeight: ${statusBarHeight}px/${statusBarHeight / dpiMultiple}dp")
+
+            when {
+                cutoutHeight > 0 -> {
+                    Logger.i("cutoutHeight: ${cutoutHeight}px/${cutoutHeight / dpiMultiple}dp")
+
+                    val oriStatusBarHeight = resources.getDimensionPixelSize(R.dimen.height_status_bar_origin)
+
+                    binding.toolbar.setPadding(0, oriStatusBarHeight, 0, 0)
+                    val layoutParams = Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT)
+                    layoutParams.gravity = Gravity.CENTER
+                    layoutParams.topMargin = statusBarHeight - oriStatusBarHeight
+                    binding.imageToolbarLogo.layoutParams = layoutParams
+                    binding.textToolbarTitle.layoutParams = layoutParams
+                }
+            }
+            Logger.i("====== ${Build.MODEL} ======")
+        }
+    }
+
+    /**
      * Set up [androidx.drawerlayout.widget.DrawerLayout] with [androidx.appcompat.widget.Toolbar]
      */
     private fun setupDrawer() {
@@ -177,7 +219,6 @@ class MainActivity : BaseActivity() {
         val navController = this.findNavController(R.id.myNavHostFragment)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.title = null
-        binding.toolbar.setPadding(0, statusBarHeight, 0, 0)
 
         appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
         NavigationUI.setupWithNavController(binding.drawerNavView, navController)

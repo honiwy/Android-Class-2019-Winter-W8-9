@@ -1,8 +1,10 @@
 package app.appworks.school.stylish.ext
 
 import android.graphics.Rect
+import android.util.DisplayMetrics
 import android.view.TouchDelegate
 import android.view.View
+import app.appworks.school.stylish.StylishApplication
 import app.appworks.school.stylish.data.OrderProduct
 import app.appworks.school.stylish.data.Product
 
@@ -44,4 +46,8 @@ fun View.setTouchDelegate() {
         rect.right += 100  // increase right hit area
         parent.touchDelegate = TouchDelegate(rect, this)
     }
+}
+
+fun Number.toDp(): Float {
+    return this.toFloat() / (StylishApplication.instance.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
 }
