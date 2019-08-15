@@ -1,9 +1,6 @@
 package app.appworks.school.stylish.payment
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import app.appworks.school.stylish.R
 import app.appworks.school.stylish.StylishApplication
 import app.appworks.school.stylish.data.*
@@ -67,12 +64,25 @@ class PaymentViewModel(private val stylishRepository: StylishRepository) : ViewM
         totalPrice
     }
 
-    val totalFreight: LiveData<Long> = Transformations.map(totalPrice) {
-        (it * 0.0087).toLong()
+    val totalFreight: LiveData<Long> = Transformations.map(products) {
+        var totalPrice = 0L
+        products.value?.let {
+            for (product in it) {
+                product.amount?.let { amount ->
+                    totalPrice += (product.price.toLong() * amount)
+                }
+            }
+        }
+        (totalPrice * 0.0087).toLong()
     }
 
-    val totalOrderPrice: LiveData<Long> = Transformations.map(totalFreight) {
-        it + (totalPrice.value ?: 0)
+    val totalOrderPrice = MediatorLiveData<Long>().apply {
+        addSource(totalPrice) {
+            it?.let { value = it + (totalFreight.value ?: 0) }
+        }
+        addSource(totalFreight) {
+            it?.let { value = it + (totalPrice.value ?: 0) }
+        }
     }
 
     // Handle the error for checkout
