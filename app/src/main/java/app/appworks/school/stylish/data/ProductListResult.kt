@@ -11,5 +11,5 @@ import kotlinx.android.parcel.Parcelize
 data class ProductListResult(
     val error: String? = null,
     @Json(name = "data") val products: List<Product>? = null,
-    val paging: String? = null
+    @Json(name = "next_paging") val paging: String? = null
 ) : Parcelable
