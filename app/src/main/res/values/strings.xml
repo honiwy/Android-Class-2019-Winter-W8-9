@@ -21,6 +21,7 @@
     <!-- Profile -->
     <string name="profile_default_name">Loading…</string>
     <string name="profile_default_information">Do you wanna build a snowman?</string>
+    <string name="profile_mystic_information">Into the Unknown~</string>
     <string name="profile_order_title">我的訂單</string>
     <string name="profile_see_all">查看全部</string>
     <string name="awaiting_payment">待付款</string>

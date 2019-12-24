@@ -74,7 +74,7 @@ object UserManager {
             if (challengeCount == CHALLENGE_LIMIT) {
                 userToken = null
                 Toast.makeText(StylishApplication.instance,
-                    getString(R.string.profile_default_information),
+                    getString(R.string.profile_mystic_information),
                     Toast.LENGTH_SHORT).show()
             } else {
                 challengeCount++
