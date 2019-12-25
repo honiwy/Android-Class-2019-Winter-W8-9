@@ -46,12 +46,15 @@ class PaymentAdapter(val viewModel: PaymentViewModel) : RecyclerView.Adapter<Rec
      */
     class FormViewHolder(var binding: ItemPaymentFormBinding): RecyclerView.ViewHolder(binding.root), LifecycleOwner {
 
+        init {
+            binding.spinnerPaymentMethods.adapter = PaymentSpinnerAdapter(
+                StylishApplication.instance.resources.getStringArray(R.array.payment_method_list))
+        }
+
         fun bind() {
 
             binding.lifecycleOwner = this
             binding.viewModel?.setupTpd(binding.formPaymentTpd)
-            binding.spinnerPaymentMethods.adapter = PaymentSpinnerAdapter(
-                StylishApplication.instance.resources.getStringArray(R.array.payment_method_list))
             binding.executePendingBindings()
         }
 
@@ -66,7 +69,7 @@ class PaymentAdapter(val viewModel: PaymentViewModel) : RecyclerView.Adapter<Rec
         }
 
         fun onDetach() {
-            lifecycleRegistry.currentState = Lifecycle.State.DESTROYED
+            lifecycleRegistry.currentState = Lifecycle.State.CREATED
         }
 
         override fun getLifecycle(): Lifecycle {
