@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable name="product" type="app.appworks.school.stylish.data.ProductCollected"/>
+        <variable name="viewModel" type="app.appworks.school.stylish.collect.CollectViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_collect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image_collect_main"
+            android:layout_width="82dp"
+            android:layout_height="110dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/ic_placeholder"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{product.mainImage}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_placeholder" />
+
+        <TextView
+            android:id="@+id/text_collect_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/noto_sans"
+            android:letterSpacing="0.15"
+            android:maxLines="2"
+            android:text="@{product.title}"
+            android:textColor="@color/black_3f3a3a"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/image_collect_main"
+            app:layout_constraintStart_toEndOf="@+id/image_collect_main"
+            app:layout_constraintTop_toTopOf="@+id/image_collect_main"
+            tools:text="Uniqlo 特級超輕羽絨外套" />
+
+
+        <ImageButton
+            android:id="@+id/button_collect_remove"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/ic_login_close"
+            android:backgroundTint="@color/gray_cccccc"
+            android:onClick="@{() -> viewModel.removeProduct(product)}"
+            app:layout_constraintBottom_toBottomOf="@+id/image_collect_main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/text_collect_title"
+            app:layout_constraintTop_toTopOf="@+id/image_collect_main" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

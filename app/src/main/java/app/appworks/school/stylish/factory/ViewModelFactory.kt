@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import app.appworks.school.stylish.MainViewModel
 import app.appworks.school.stylish.cart.CartViewModel
 import app.appworks.school.stylish.checkout.CheckoutSuccessViewModel
+import app.appworks.school.stylish.collect.CollectViewModel
 import app.appworks.school.stylish.data.source.StylishRepository
 import app.appworks.school.stylish.home.HomeViewModel
 import app.appworks.school.stylish.login.LoginViewModel
@@ -34,6 +35,9 @@ class ViewModelFactory constructor(
 
                 isAssignableFrom(PaymentViewModel::class.java) ->
                     PaymentViewModel(stylishRepository)
+
+                isAssignableFrom(CollectViewModel::class.java) ->
+                    CollectViewModel(stylishRepository)
 
                 isAssignableFrom(LoginViewModel::class.java) ->
                     LoginViewModel(stylishRepository)

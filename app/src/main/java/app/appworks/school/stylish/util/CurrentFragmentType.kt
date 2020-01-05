@@ -9,6 +9,7 @@ enum class CurrentFragmentType(val value: String) {
     CART(getString(R.string.cart)),
     PROFILE(getString(R.string.profile)),
     PAYMENT(getString(R.string.payment)),
+    COLLECT(getString(R.string.collect)),
     DETAIL(""),
     CHECKOUT_SUCCESS(getString(R.string.checkout_success_title))
 }

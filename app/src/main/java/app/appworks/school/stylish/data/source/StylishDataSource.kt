@@ -20,17 +20,27 @@ interface StylishDataSource {
 
     suspend fun checkoutOrder(token: String, orderDetail: OrderDetail): Result<CheckoutOrderResult>
 
-    fun getProductsInCart(): LiveData<List<Product>>
+    fun getProductsCart(): LiveData<List<Product>>
 
-    suspend fun isProductInCart(id: Long, colorCode: String, size: String): Boolean
+    fun getProductsCollected(): LiveData<List<ProductCollected>>
 
-    suspend fun insertProductInCart(product: Product)
+    suspend fun isProductCart(id: Long, colorCode: String, size: String): Boolean
 
-    suspend fun updateProductInCart(product: Product)
+    suspend fun isProductCollected(id: Long): Boolean
 
-    suspend fun removeProductInCart(id: Long, colorCode: String, size: String)
+    suspend fun insertProductCart(product: Product)
 
-    suspend fun clearProductInCart()
+    suspend fun insertProductCollect(productCollected: ProductCollected)
+
+    suspend fun updateProductCart(product: Product)
+
+    suspend fun removeProductCart(id: Long, colorCode: String, size: String)
+
+    suspend fun removeProductCollect(id: Long)
+
+    suspend fun clearProductCart()
+
+    suspend fun clearProductCollect()
 
     suspend fun getUserInformation(key: String?): String
 }

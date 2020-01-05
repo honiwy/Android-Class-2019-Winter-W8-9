@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.lifecycle.ViewModelProviders
 import app.appworks.school.stylish.MainViewModel
 import app.appworks.school.stylish.databinding.FragmentProfileBinding
@@ -39,6 +40,14 @@ class ProfileFragment : Fragment() {
                 }
             })
         }
+
+        viewModel.navigateToCollection.observe(this, Observer {
+            it?.let {
+                findNavController().navigate(ProfileFragmentDirections.navigateToCollectFragment())
+                viewModel.onCollectionNavigated()
+            }
+        })
+
 
         return binding.root
     }

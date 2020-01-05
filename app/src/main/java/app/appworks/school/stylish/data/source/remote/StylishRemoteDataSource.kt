@@ -132,27 +132,47 @@ object StylishRemoteDataSource : StylishDataSource {
         }
     }
 
-    override fun getProductsInCart(): LiveData<List<Product>> {
+    override fun getProductsCart(): LiveData<List<Product>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun isProductInCart(id: Long, colorCode: String, size: String): Boolean {
+    override fun getProductsCollected(): LiveData<List<ProductCollected>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun insertProductInCart(product: Product) {
+    override suspend fun isProductCart(id: Long, colorCode: String, size: String): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun updateProductInCart(product: Product) {
+    override suspend fun isProductCollected(id: Long): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun removeProductInCart(id: Long, colorCode: String, size: String) {
+    override suspend fun insertProductCart(product: Product) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun clearProductInCart() {
+    override suspend fun insertProductCollect(productCollected: ProductCollected) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun updateProductCart(product: Product) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun removeProductCart(id: Long, colorCode: String, size: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun removeProductCollect(id: Long) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun clearProductCart() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun clearProductCollect() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

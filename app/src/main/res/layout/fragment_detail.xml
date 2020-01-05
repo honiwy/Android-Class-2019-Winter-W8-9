@@ -376,6 +376,18 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                <ImageView
+                    android:id="@+id/button_collect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:onClick="@{() -> viewModel.collectProduct()}"
+                    android:tint="@{viewModel.collectProduct?@color/orange_8b572a:@color/black}"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_detail_close"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/button_detail_close"
+                    app:srcCompat="@drawable/valentines_heart" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>

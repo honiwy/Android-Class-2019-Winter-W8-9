@@ -1,6 +1,7 @@
 package app.appworks.school.stylish.detail
 
 import android.graphics.Rect
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,11 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import app.appworks.school.stylish.R
 import app.appworks.school.stylish.StylishApplication
 import app.appworks.school.stylish.data.Product
+import app.appworks.school.stylish.data.ProductCollected
 import app.appworks.school.stylish.data.source.StylishRepository
 import app.appworks.school.stylish.util.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 /**
  * Created by Wayne Chen in Jul. 2019.
@@ -61,6 +64,11 @@ class DetailViewModel(
     val leaveDetail: LiveData<Boolean>
         get() = _leaveDetail
 
+    private val _collectProduct = MutableLiveData<Boolean>()
+
+    val collectProduct: LiveData<Boolean>
+        get() = _collectProduct
+
     // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
 
@@ -93,6 +101,7 @@ class DetailViewModel(
         Logger.i("------------------------------------")
         Logger.i("[${this::class.simpleName}]${this}")
         Logger.i("------------------------------------")
+        _collectProduct.value = false
     }
 
     /**
@@ -118,6 +127,29 @@ class DetailViewModel(
     }
 
     fun leaveDetail() {
+        updateCollect()
+        Log.i("apple","update collected")
         _leaveDetail.value = true
+    }
+
+    fun collectProduct(){
+        _collectProduct.value = !(_collectProduct.value!!)
+        Log.i("apple","collect product? ${_collectProduct.value}")
+    }
+
+    fun updateCollect() {
+        product.value?.let {
+            Log.i("apple","update")
+            coroutineScope.launch {
+                if(_collectProduct.value == true){
+                    Log.i("apple","add")
+                    stylishRepository.insertProductCollected(ProductCollected(it.id,it.title,it.description,it.price,it.texture,
+                        it.wash,it.place,it.note,it.story,it.colors,it.sizes,it.variants,it.mainImage,it.images))
+                } else {
+                    Log.i("apple","remove")
+                    stylishRepository.removeProductCollected(it.id)
+                }
+            }
+        }
     }
 }

@@ -16,12 +16,10 @@ import app.appworks.school.stylish.add2cart.Add2cartSizeAdapter
 import app.appworks.school.stylish.add2cart.Add2cartViewModel
 import app.appworks.school.stylish.cart.CartAdapter
 import app.appworks.school.stylish.catalog.item.CatalogItemAdapter
+import app.appworks.school.stylish.collect.CollectAdapter
 import app.appworks.school.stylish.component.ColorSquare
 import app.appworks.school.stylish.component.SelectedSquare
-import app.appworks.school.stylish.data.Color
-import app.appworks.school.stylish.data.HomeItem
-import app.appworks.school.stylish.data.Product
-import app.appworks.school.stylish.data.Variant
+import app.appworks.school.stylish.data.*
 import app.appworks.school.stylish.detail.DetailCircleAdapter
 import app.appworks.school.stylish.detail.DetailColorAdapter
 import app.appworks.school.stylish.detail.DetailGalleryAdapter
@@ -63,6 +61,25 @@ fun bindRecyclerViewWithProducts(recyclerView: RecyclerView, products: List<Prod
         }
     }
 }
+
+@BindingAdapter("productsCollected")
+fun bindRecyclerViewWithProductsCollected(recyclerView: RecyclerView, products: List<ProductCollected>?) {
+    products?.let {
+        recyclerView.adapter?.apply {
+            when (this) {
+                is CollectAdapter -> {
+                    when (itemCount) {
+                        0 -> submitList(it)
+                        it.size -> notifyDataSetChanged()
+                        else -> submitList(it)
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 
 @BindingAdapter("images")
 fun bindRecyclerViewWithImages(recyclerView: RecyclerView, images: List<String>?) {

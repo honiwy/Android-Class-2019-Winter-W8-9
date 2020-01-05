@@ -199,6 +199,7 @@
                 android:layout_marginTop="24dp"
                 android:drawableTop="@drawable/ic_starred"
                 android:text="@string/starred"
+                android:onClick="@{() -> viewModel.navigateToCollection()}"
                 app:layout_constraintEnd_toStartOf="@+id/button_profile_notification"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"

@@ -35,37 +35,65 @@ class StylishLocalDataSource(val context: Context) : StylishDataSource {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getProductsInCart(): LiveData<List<Product>> {
-        return StylishDatabase.getInstance(context).stylishDatabaseDao.getAllProducts()
+    override fun getProductsCart(): LiveData<List<Product>> {
+        return StylishDatabase.getInstance(context).stylishDatabaseDao.getAllProductsCart()
     }
 
-    override suspend fun isProductInCart(id: Long, colorCode: String, size: String): Boolean {
+    override fun getProductsCollected(): LiveData<List<ProductCollected>> {
+        return StylishDatabase.getInstance(context).stylishDatabaseDao.getAllProductsCollected()
+    }
+
+    override suspend fun isProductCart(id: Long, colorCode: String, size: String): Boolean {
         return withContext(Dispatchers.IO) {
-            StylishDatabase.getInstance(context).stylishDatabaseDao.get(id, colorCode, size) != null
+            StylishDatabase.getInstance(context).stylishDatabaseDao.getCart(id, colorCode, size) != null
         }
     }
 
-    override suspend fun insertProductInCart(product: Product) {
+    override suspend fun isProductCollected(id: Long): Boolean {
+        return withContext(Dispatchers.IO) {
+            StylishDatabase.getInstance(context).stylishDatabaseDao.getCollected(id) != null
+        }
+    }
+
+    override suspend fun insertProductCart(product: Product) {
         withContext(Dispatchers.IO) {
-            StylishDatabase.getInstance(context).stylishDatabaseDao.insert(product)
+            StylishDatabase.getInstance(context).stylishDatabaseDao.insertCart(product)
         }
     }
 
-    override suspend fun updateProductInCart(product: Product) {
+    override suspend fun insertProductCollect(productCollected: ProductCollected) {
+        withContext(Dispatchers.IO) {
+            StylishDatabase.getInstance(context).stylishDatabaseDao.insertCollected(productCollected)
+        }
+    }
+
+    override suspend fun updateProductCart(product: Product) {
         withContext(Dispatchers.IO) {
             StylishDatabase.getInstance(context).stylishDatabaseDao.update(product)
         }
     }
 
-    override suspend fun removeProductInCart(id: Long, colorCode: String, size: String) {
+    override suspend fun removeProductCart(id: Long, colorCode: String, size: String) {
         withContext(Dispatchers.IO) {
-            StylishDatabase.getInstance(context).stylishDatabaseDao.delete(id, colorCode, size)
+            StylishDatabase.getInstance(context).stylishDatabaseDao.deleteCart(id, colorCode, size)
         }
     }
 
-    override suspend fun clearProductInCart() {
+    override suspend fun removeProductCollect(id: Long) {
         withContext(Dispatchers.IO) {
-            StylishDatabase.getInstance(context).stylishDatabaseDao.clear()
+            StylishDatabase.getInstance(context).stylishDatabaseDao.deleteCollected(id)
+        }
+    }
+
+    override suspend fun clearProductCart() {
+        withContext(Dispatchers.IO) {
+            StylishDatabase.getInstance(context).stylishDatabaseDao.clearCart()
+        }
+    }
+
+    override suspend fun clearProductCollect() {
+        withContext(Dispatchers.IO) {
+            StylishDatabase.getInstance(context).stylishDatabaseDao.clearCollected()
         }
     }
 

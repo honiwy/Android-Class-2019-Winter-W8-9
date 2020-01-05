@@ -37,27 +37,47 @@ class DefaultStylishRepository(private val stylishRemoteDataSource: StylishDataS
     }
 
     override fun getProductsInCart(): LiveData<List<Product>> {
-        return stylishLocalDataSource.getProductsInCart()
+        return stylishLocalDataSource.getProductsCart()
+    }
+
+    override fun getProductsCollected(): LiveData<List<ProductCollected>> {
+        return stylishLocalDataSource.getProductsCollected()
     }
 
     override suspend fun isProductInCart(id: Long, colorCode: String, size: String): Boolean {
-        return stylishLocalDataSource.isProductInCart(id, colorCode, size)
+        return stylishLocalDataSource.isProductCart(id, colorCode, size)
+    }
+
+    override suspend fun isProductCollected(id: Long): Boolean {
+        return stylishLocalDataSource.isProductCollected(id)
     }
 
     override suspend fun insertProductInCart(product: Product) {
-        stylishLocalDataSource.insertProductInCart(product)
+        stylishLocalDataSource.insertProductCart(product)
+    }
+
+    override suspend fun insertProductCollected(productCollected: ProductCollected) {
+        stylishLocalDataSource.insertProductCollect(productCollected)
     }
 
     override suspend fun updateProductInCart(product: Product) {
-        stylishLocalDataSource.updateProductInCart(product)
+        stylishLocalDataSource.updateProductCart(product)
     }
 
     override suspend fun removeProductInCart(id: Long, colorCode: String, size: String) {
-        stylishLocalDataSource.removeProductInCart(id, colorCode, size)
+        stylishLocalDataSource.removeProductCart(id, colorCode, size)
+    }
+
+    override suspend fun removeProductCollected(id: Long) {
+        stylishLocalDataSource.removeProductCollect(id)
     }
 
     override suspend fun clearProductInCart() {
-        stylishLocalDataSource.clearProductInCart()
+        stylishLocalDataSource.clearProductCart()
+    }
+
+    override suspend fun clearProductCollected() {
+        stylishLocalDataSource.clearProductCollect()
     }
 
     override suspend fun getUserInformation(key: String?): String {

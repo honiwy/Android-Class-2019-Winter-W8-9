@@ -168,6 +168,7 @@ class MainActivity : BaseActivity() {
                 R.id.profileFragment -> CurrentFragmentType.PROFILE
                 R.id.detailFragment -> CurrentFragmentType.DETAIL
                 R.id.paymentFragment -> CurrentFragmentType.PAYMENT
+                R.id.collectFragment -> CurrentFragmentType.COLLECT
                 R.id.checkoutSuccessFragment -> CurrentFragmentType.CHECKOUT_SUCCESS
                 else -> viewModel.currentFragmentType.value
             }

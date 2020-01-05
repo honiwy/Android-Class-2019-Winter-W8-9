@@ -22,15 +22,25 @@ interface StylishRepository {
 
     fun getProductsInCart(): LiveData<List<Product>>
 
+    fun getProductsCollected(): LiveData<List<ProductCollected>>
+
     suspend fun isProductInCart(id: Long, colorCode: String, size: String): Boolean
 
+    suspend fun isProductCollected(id: Long): Boolean
+
     suspend fun insertProductInCart(product: Product)
+
+    suspend fun insertProductCollected(productCollected: ProductCollected)
 
     suspend fun updateProductInCart(product: Product)
 
     suspend fun removeProductInCart(id: Long, colorCode: String, size: String)
 
+    suspend fun removeProductCollected(id: Long)
+
     suspend fun clearProductInCart()
+
+    suspend fun clearProductCollected()
 
     suspend fun getUserInformation(key: String?): String
 }

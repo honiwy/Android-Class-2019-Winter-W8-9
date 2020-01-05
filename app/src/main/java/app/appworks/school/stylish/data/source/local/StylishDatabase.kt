@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import app.appworks.school.stylish.data.Product
+import app.appworks.school.stylish.data.ProductCollected
 
 /**
  * Created by Wayne Chen in Jul. 2019. From Google's sample code.
@@ -15,13 +16,14 @@ import app.appworks.school.stylish.data.Product
  * This pattern is pretty much the same for any database,
  * so you can reuse it.
  */
-@Database(entities = [Product::class], version = 1, exportSchema = false)
+@Database(entities = [Product::class,ProductCollected::class], version = 1, exportSchema = false)
 abstract class StylishDatabase : RoomDatabase() {
 
     /**
      * Connects the database to the DAO.
      */
     abstract val stylishDatabaseDao: StylishDatabaseDao
+
 
     /**
      * Define a companion object, this allows us to add functions on the StylishDatabase class.

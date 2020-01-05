@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import app.appworks.school.stylish.data.Product
+import app.appworks.school.stylish.data.ProductCollected
 import app.appworks.school.stylish.data.Variant
 
 /**
@@ -17,7 +18,46 @@ import app.appworks.school.stylish.data.Variant
 interface StylishDatabaseDao {
 
     @Insert
-    fun insert(product: Product)
+    fun insertCart(product: Product)
+
+    @Insert
+    fun insertCollected(productCollected: ProductCollected)
+
+    /**
+     * Deletes all values from the table.
+     *
+     * This does not delete the table, only its contents.
+     */
+    @Query("DELETE FROM products_in_cart_table")
+    fun clearCart()
+
+    @Query("DELETE FROM products_in_collected_table")
+    fun clearCollected()
+
+    /**
+     * Selects and returns all rows in the table,
+     *
+     * sorted by product_id in ascending order.
+     */
+    @Query("SELECT * FROM products_in_cart_table ORDER BY product_id ASC")
+    fun getAllProductsCart():
+            LiveData<List<Product>>
+
+    @Query("SELECT * FROM products_in_collected_table ORDER BY product_id ASC")
+    fun getAllProductsCollected():
+            LiveData<List<ProductCollected>>
+
+    /**
+     * Selects and return the [Product] with given id, colorCode and size
+     * @param id: [Product.id]
+     * @param colorCode: [Product.selectedVariant] [Variant.colorCode]
+     * @param size: [Product.selectedVariant] [Variant.size]
+     */
+    @Query("SELECT * from products_in_cart_table WHERE product_id = :id AND product_selected_color_code = :colorCode AND product_selected_size = :size")
+    fun getCart(id: Long, colorCode: String, size: String): Product?
+
+    @Query("SELECT * from products_in_collected_table WHERE product_id = :id")
+    fun getCollected(id: Long): ProductCollected?
 
     /**
      * When updating a row with a value already set in a column,
@@ -35,33 +75,10 @@ interface StylishDatabaseDao {
      * @param size: [Product.selectedVariant] [Variant.size]
      */
     @Query("DELETE from products_in_cart_table WHERE product_id = :id AND product_selected_color_code = :colorCode AND product_selected_size = :size")
-    fun delete(id: Long, colorCode: String, size: String)
+    fun deleteCart(id: Long, colorCode: String, size: String)
 
-    /**
-     * Deletes all values from the table.
-     *
-     * This does not delete the table, only its contents.
-     */
-    @Query("DELETE FROM products_in_cart_table")
-    fun clear()
-
-    /**
-     * Selects and returns all rows in the table,
-     *
-     * sorted by product_id in ascending order.
-     */
-    @Query("SELECT * FROM products_in_cart_table ORDER BY product_id ASC")
-    fun getAllProducts():
-            LiveData<List<Product>>
-
-    /**
-     * Selects and return the [Product] with given id, colorCode and size
-     * @param id: [Product.id]
-     * @param colorCode: [Product.selectedVariant] [Variant.colorCode]
-     * @param size: [Product.selectedVariant] [Variant.size]
-     */
-    @Query("SELECT * from products_in_cart_table WHERE product_id = :id AND product_selected_color_code = :colorCode AND product_selected_size = :size")
-    fun get(id: Long, colorCode: String, size: String): Product?
+    @Query("DELETE from products_in_collected_table WHERE product_id = :id")
+    fun deleteCollected(id: Long)
 
 }
 
