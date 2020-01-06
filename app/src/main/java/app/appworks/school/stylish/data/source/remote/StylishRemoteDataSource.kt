@@ -180,6 +180,27 @@ object StylishRemoteDataSource : StylishDataSource {
         }
     }
 
+    override suspend fun deleteUserCollected(
+        collectedFormat: CollectedFormat): Result<PostResult> {
+
+        if (!isInternetConnected()) {
+            return Result.Fail(getString(R.string.internet_not_connected))
+        }
+        // Get the Deferred object for our Retrofit request
+        var postPropertiesDeferred = StylishApi.retrofitService.deleteUserCollected(collectedFormat)
+        return try {
+            // this will run on a thread managed by Retrofit
+            val listResult = postPropertiesDeferred.await()
+            listResult.message?.let{
+                return Result.Success(listResult)
+            }
+
+        } catch (e: Exception) {
+            Logger.w("[${this::class.simpleName}] exception=${e.message}")
+            Result.Error(e)
+        }
+    }
+
     override fun getProductsCart(): LiveData<List<Product>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

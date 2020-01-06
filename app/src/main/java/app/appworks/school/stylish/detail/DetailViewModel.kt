@@ -132,7 +132,7 @@ class DetailViewModel(
     }
 
     fun leaveDetail() {
-
+        updateServerCollection()
         _leaveDetail.value = true
     }
 
@@ -150,14 +150,28 @@ class DetailViewModel(
                             it.colors, it.sizes,it.variants, it.mainImage, it.images
                         )
                     )
-                    Log.i("apple","update server collection")
-                    stylishRepository.insertUserCollected(CollectedFormat(UserManager.userId!!,product.value!!.id.toInt()))
+//                    Log.i("apple","update server collection")
+//                    stylishRepository.insertUserCollected(CollectedFormat(UserManager.userId!!,product.value!!.id))
                 }
                 else {
                     Log.i("apple", "remove")
                     Toast.makeText(StylishApplication.instance,"取消收藏",Toast.LENGTH_SHORT).show()
                     stylishRepository.removeProductCollected(it.id)
+//                    Log.i("apple","delete server collection")
+//                    stylishRepository.deleteUserCollected(CollectedFormat(UserManager.userId!!,product.value!!.id))
                 }
+            }
+        }
+    }
+    fun updateServerCollection(){
+        coroutineScope.launch {
+            if (_collectProduct.value == true) {
+                Log.i("apple","update server collection")
+                stylishRepository.insertUserCollected(CollectedFormat(UserManager.userId!!,product.value!!.id))
+            }
+            else {
+                Log.i("apple","delete server collection")
+                stylishRepository.deleteUserCollected(CollectedFormat(UserManager.userId!!,product.value!!.id))
             }
         }
     }

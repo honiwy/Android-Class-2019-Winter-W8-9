@@ -109,6 +109,11 @@ interface StylishApiService {
     @POST("userFavorite")
     fun insertUserCollected(@Body collectedFormat: CollectedFormat):
             Deferred<PostResult>
+
+    //@DELETE("userFavorite") 因為有 body 所以不能用
+    @HTTP(method = "DELETE",path = "userFavorite", hasBody = true)
+    fun deleteUserCollected(@Body collectedFormat: CollectedFormat):
+            Deferred<PostResult>
 }
 
 /**
