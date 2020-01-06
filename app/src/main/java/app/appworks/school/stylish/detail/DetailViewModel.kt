@@ -3,6 +3,7 @@ package app.appworks.school.stylish.detail
 import android.graphics.Rect
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -101,7 +102,9 @@ class DetailViewModel(
         Logger.i("------------------------------------")
         Logger.i("[${this::class.simpleName}]${this}")
         Logger.i("------------------------------------")
-        _collectProduct.value = false
+        coroutineScope.launch {
+            _collectProduct.value = stylishRepository.isProductCollected(arguments.id)
+        }
     }
 
     /**
@@ -135,21 +138,31 @@ class DetailViewModel(
     fun collectProduct(){
         _collectProduct.value = !(_collectProduct.value!!)
         Log.i("apple","collect product? ${_collectProduct.value}")
-    }
-
-    fun updateCollect() {
         product.value?.let {
-            Log.i("apple","update")
             coroutineScope.launch {
-                if(_collectProduct.value == true){
-                    Log.i("apple","add")
-                    stylishRepository.insertProductCollected(ProductCollected(it.id,it.title,it.description,it.price,it.texture,
-                        it.wash,it.place,it.note,it.story,it.colors,it.sizes,it.variants,it.mainImage,it.images))
-                } else {
-                    Log.i("apple","remove")
+                if (_collectProduct.value == true) {
+                    Log.i("apple", "add")
+                    Toast.makeText(StylishApplication.instance,"加入收藏",Toast.LENGTH_SHORT).show()
+                    stylishRepository.insertProductCollected(
+                        ProductCollected( it.id, it.title, it.description, it.price,
+                            it.texture, it.wash,it.place,it.note,it.story,
+                            it.colors, it.sizes,it.variants, it.mainImage, it.images
+                        )
+                    )
+                }
+                else {
+                    Log.i("apple", "remove")
+                    Toast.makeText(StylishApplication.instance,"取消收藏",Toast.LENGTH_SHORT).show()
                     stylishRepository.removeProductCollected(it.id)
                 }
             }
         }
+    }
+
+    fun updateCollect() {
+            Log.i("apple","update the remote database")
+            coroutineScope.launch {
+
+            }
     }
 }
