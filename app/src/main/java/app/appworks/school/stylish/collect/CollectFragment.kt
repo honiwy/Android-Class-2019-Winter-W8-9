@@ -8,10 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import app.appworks.school.stylish.cart.CartAdapter
-import app.appworks.school.stylish.cart.CartFragmentDirections
+import app.appworks.school.stylish.NavigationDirections
 import app.appworks.school.stylish.cart.CartViewModel
-import app.appworks.school.stylish.databinding.FragmentCartBinding
 import app.appworks.school.stylish.databinding.FragmentCollectBinding
 import app.appworks.school.stylish.ext.getVmFactory
 
@@ -31,7 +29,16 @@ class CollectFragment : Fragment() {
         val binding = FragmentCollectBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        binding.recyclerCart.adapter = CollectAdapter(viewModel)
+        binding.recyclerCart.adapter = CollectAdapter(viewModel, CollectAdapter.OnClickListener {
+            viewModel.navigateToDetail(it)
+        })
+
+        viewModel.navigateToDetail.observe(this, Observer {
+            it?.let {
+                findNavController().navigate(NavigationDirections.navigateToDetailFragment(it))
+                viewModel.onDetailNavigated()
+            }
+        })
 
         binding.layoutSwipeRefreshCart.setOnRefreshListener {
             binding.recyclerCart.adapter?.notifyDataSetChanged()
