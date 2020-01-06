@@ -35,6 +35,11 @@ class StylishLocalDataSource(val context: Context) : StylishDataSource {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override suspend fun subscribeNews(
+        email: Email): Result<SubscribeResult> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun getProductsCart(): LiveData<List<Product>> {
         return StylishDatabase.getInstance(context).stylishDatabaseDao.getAllProductsCart()
     }

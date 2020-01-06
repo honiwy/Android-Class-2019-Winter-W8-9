@@ -7,6 +7,7 @@ import app.appworks.school.stylish.cart.CartViewModel
 import app.appworks.school.stylish.checkout.CheckoutSuccessViewModel
 import app.appworks.school.stylish.collect.CollectViewModel
 import app.appworks.school.stylish.data.source.StylishRepository
+import app.appworks.school.stylish.dialog.SubscribeViewModel
 import app.appworks.school.stylish.home.HomeViewModel
 import app.appworks.school.stylish.login.LoginViewModel
 import app.appworks.school.stylish.payment.PaymentViewModel
@@ -38,6 +39,9 @@ class ViewModelFactory constructor(
 
                 isAssignableFrom(CollectViewModel::class.java) ->
                     CollectViewModel(stylishRepository)
+
+                isAssignableFrom(SubscribeViewModel::class.java) ->
+                    SubscribeViewModel(stylishRepository)
 
                 isAssignableFrom(LoginViewModel::class.java) ->
                     LoginViewModel(stylishRepository)

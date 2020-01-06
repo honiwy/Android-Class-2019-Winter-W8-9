@@ -1,5 +1,6 @@
 package app.appworks.school.stylish.data.source.remote
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import app.appworks.school.stylish.R
 import app.appworks.school.stylish.data.*
@@ -8,6 +9,7 @@ import app.appworks.school.stylish.network.StylishApi
 import app.appworks.school.stylish.util.Logger
 import app.appworks.school.stylish.util.Util.getString
 import app.appworks.school.stylish.util.Util.isInternetConnected
+import kotlinx.coroutines.launch
 
 /**
  * Created by Wayne Chen in Jul. 2019.
@@ -130,6 +132,27 @@ object StylishRemoteDataSource : StylishDataSource {
             Logger.w("[${this::class.simpleName}] exception=${e.message}")
             Result.Error(e)
         }
+    }
+
+    override suspend fun subscribeNews(
+        email:Email): Result<SubscribeResult> {
+
+        if (!isInternetConnected()) {
+            return Result.Fail(getString(R.string.internet_not_connected))
+        }
+                // Get the Deferred object for our Retrofit request
+                var postPropertiesDeferred = StylishApi.retrofitService.subscribeEmail(email)
+                return try {
+                    // this will run on a thread managed by Retrofit
+                    val listResult = postPropertiesDeferred.await()
+                    listResult.message?.let{
+                        return Result.Success(listResult)
+                    }
+                    
+                } catch (e: Exception) {
+                    Logger.w("[${this::class.simpleName}] exception=${e.message}")
+                    Result.Error(e)
+                }
     }
 
     override fun getProductsCart(): LiveData<List<Product>> {

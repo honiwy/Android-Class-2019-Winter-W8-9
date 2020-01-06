@@ -6,15 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProviders
 import app.appworks.school.stylish.R
+import app.appworks.school.stylish.collect.CollectViewModel
 import app.appworks.school.stylish.databinding.DialogSubsribeBinding
+import app.appworks.school.stylish.ext.getVmFactory
 
 class SubscribeDialog : AppCompatDialogFragment() {
 
-    private val viewModel: SubscribeViewModel by lazy {
-        ViewModelProviders.of(this).get(SubscribeViewModel::class.java)
-    }//要用到的時候再創建才不會浪費記憶體資源
+    private val viewModel by viewModels<SubscribeViewModel> { getVmFactory() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

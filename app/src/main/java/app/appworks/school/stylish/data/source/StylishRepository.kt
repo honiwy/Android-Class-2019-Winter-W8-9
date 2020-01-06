@@ -20,6 +20,8 @@ interface StylishRepository {
 
     suspend fun checkoutOrder(token: String, orderDetail: OrderDetail): Result<CheckoutOrderResult>
 
+    suspend fun subscribeNews(email:Email): Result<SubscribeResult>
+
     fun getProductsInCart(): LiveData<List<Product>>
 
     fun getProductsCollected(): LiveData<List<ProductCollected>>

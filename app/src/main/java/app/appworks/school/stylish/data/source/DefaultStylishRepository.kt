@@ -36,6 +36,11 @@ class DefaultStylishRepository(private val stylishRemoteDataSource: StylishDataS
         return stylishRemoteDataSource.checkoutOrder(token, orderDetail)
     }
 
+    override suspend fun subscribeNews(
+        email:Email): Result<SubscribeResult> {
+        return stylishRemoteDataSource.subscribeNews(email)
+    }
+
     override fun getProductsInCart(): LiveData<List<Product>> {
         return stylishLocalDataSource.getProductsCart()
     }

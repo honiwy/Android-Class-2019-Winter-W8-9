@@ -98,6 +98,10 @@ interface StylishApiService {
     @POST("order/checkout")
     fun checkoutOrder(@Header("Authorization") token: String, @Body orderDetail: OrderDetail):
             Deferred<CheckoutOrderResult>
+
+    @POST("subscribe")
+    fun subscribeEmail(@Body email: Email):
+            Deferred<SubscribeResult>
 }
 
 /**

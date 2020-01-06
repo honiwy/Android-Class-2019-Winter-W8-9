@@ -1,10 +1,12 @@
 package app.appworks.school.stylish
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import app.appworks.school.stylish.component.ProfileAvatarOutlineProvider
+import app.appworks.school.stylish.data.Email
 import app.appworks.school.stylish.data.Product
 import app.appworks.school.stylish.data.Result
 import app.appworks.school.stylish.data.User
@@ -198,4 +200,7 @@ class MainViewModel(private val stylishRepository: StylishRepository) : ViewMode
             }
         }
     }
+
+
+
 }
