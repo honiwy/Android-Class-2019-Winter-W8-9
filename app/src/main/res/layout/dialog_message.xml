@@ -5,6 +5,7 @@
     <data>
         <import type="android.view.View"/>
         <variable name="dialog" type="app.appworks.school.stylish.dialog.MessageDialog"/>
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

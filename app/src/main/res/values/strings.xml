@@ -9,6 +9,11 @@
     <string name="facebook_app_id">368446190389666</string>
     <string name="fb_login_protocol_scheme">fb368446190389666</string>
 
+    <!-- Subscribe Dialog -->
+    <string name="subscribe_title">訂閱電子報</string>
+    <string name="subscribe_hint">***@gmail.com</string>
+    <string name="confirm">確認</string>
+    <string name="cancel">取消</string>
     <!-- Login Dialog -->
     <string name="login_title">請先登入會員</string>
     <string name="login_description">登入會員後即可使用個人功能。</string>

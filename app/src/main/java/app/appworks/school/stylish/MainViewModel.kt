@@ -46,9 +46,17 @@ class MainViewModel(private val stylishRepository: StylishRepository) : ViewMode
     val currentDrawerToggleType: LiveData<DrawerToggleType> = Transformations.map(currentFragmentType) {
         when (it) {
             CurrentFragmentType.PAYMENT -> DrawerToggleType.BACK
+            CurrentFragmentType.COLLECT -> DrawerToggleType.BACK
             else -> DrawerToggleType.NORMAL
         }
     }
+
+
+    private val _navigateToSubscribe = MutableLiveData<Boolean>()
+
+    val navigateToSubscribe: LiveData<Boolean>
+        get() = _navigateToSubscribe
+
 
     // Handle navigation to login success
     private val _navigateToLoginSuccess = MutableLiveData<User>()
