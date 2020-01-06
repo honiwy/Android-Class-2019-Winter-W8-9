@@ -6,8 +6,8 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import app.appworks.school.stylish.data.Product
-import app.appworks.school.stylish.data.ProductCollected
 import app.appworks.school.stylish.data.Variant
+import app.appworks.school.stylish.data.collected.ProductCollected
 
 /**
  * Created by Wayne Chen in Jul. 2019.

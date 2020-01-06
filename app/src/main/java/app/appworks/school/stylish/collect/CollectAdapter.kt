@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.appworks.school.stylish.data.Product
-import app.appworks.school.stylish.data.ProductCollected
+import app.appworks.school.stylish.data.collected.ProductCollected
 import app.appworks.school.stylish.databinding.ItemCollectBinding
 
 class CollectAdapter(val viewModel: CollectViewModel) : ListAdapter<ProductCollected, CollectAdapter.ProductViewHolder>(DiffCallback) {

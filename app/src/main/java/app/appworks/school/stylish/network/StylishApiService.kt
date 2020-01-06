@@ -2,6 +2,9 @@ package app.appworks.school.stylish.network
 
 import app.appworks.school.stylish.BuildConfig
 import app.appworks.school.stylish.data.*
+import app.appworks.school.stylish.data.collected.CollectedFormat
+import app.appworks.school.stylish.data.subscribe.Email
+import app.appworks.school.stylish.data.PostResult
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -101,7 +104,11 @@ interface StylishApiService {
 
     @POST("subscribe")
     fun subscribeEmail(@Body email: Email):
-            Deferred<SubscribeResult>
+            Deferred<PostResult>
+
+    @POST("userFavorite")
+    fun insertUserCollected(@Body collectedFormat: CollectedFormat):
+            Deferred<PostResult>
 }
 
 /**

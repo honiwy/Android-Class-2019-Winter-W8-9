@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import app.appworks.school.stylish.component.ProfileAvatarOutlineProvider
-import app.appworks.school.stylish.data.Email
 import app.appworks.school.stylish.data.Product
 import app.appworks.school.stylish.data.Result
 import app.appworks.school.stylish.data.User
@@ -121,6 +120,9 @@ class MainViewModel(private val stylishRepository: StylishRepository) : ViewMode
     fun setupUser(user: User) {
 
         _user.value = user
+
+        UserManager.userId = user.id
+
         Logger.i("=============")
         Logger.i("| setupUser |")
         Logger.i("user=$user")

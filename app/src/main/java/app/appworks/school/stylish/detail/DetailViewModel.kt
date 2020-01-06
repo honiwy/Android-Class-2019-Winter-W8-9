@@ -13,13 +13,15 @@ import androidx.recyclerview.widget.RecyclerView
 import app.appworks.school.stylish.R
 import app.appworks.school.stylish.StylishApplication
 import app.appworks.school.stylish.data.Product
-import app.appworks.school.stylish.data.ProductCollected
+import app.appworks.school.stylish.data.collected.CollectedFormat
+import app.appworks.school.stylish.data.collected.ProductCollected
 import app.appworks.school.stylish.data.source.StylishRepository
 import app.appworks.school.stylish.util.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import app.appworks.school.stylish.login.UserManager
 
 /**
  * Created by Wayne Chen in Jul. 2019.
@@ -130,8 +132,7 @@ class DetailViewModel(
     }
 
     fun leaveDetail() {
-        updateCollect()
-        Log.i("apple","update collected")
+
         _leaveDetail.value = true
     }
 
@@ -141,7 +142,7 @@ class DetailViewModel(
         product.value?.let {
             coroutineScope.launch {
                 if (_collectProduct.value == true) {
-                    Log.i("apple", "add")
+                    Log.i("apple", "add local collection")
                     Toast.makeText(StylishApplication.instance,"加入收藏",Toast.LENGTH_SHORT).show()
                     stylishRepository.insertProductCollected(
                         ProductCollected( it.id, it.title, it.description, it.price,
@@ -149,6 +150,8 @@ class DetailViewModel(
                             it.colors, it.sizes,it.variants, it.mainImage, it.images
                         )
                     )
+                    Log.i("apple","update server collection")
+                    stylishRepository.insertUserCollected(CollectedFormat(UserManager.userId!!,product.value!!.id.toInt()))
                 }
                 else {
                     Log.i("apple", "remove")
@@ -157,12 +160,5 @@ class DetailViewModel(
                 }
             }
         }
-    }
-
-    fun updateCollect() {
-            Log.i("apple","update the remote database")
-            coroutineScope.launch {
-
-            }
     }
 }

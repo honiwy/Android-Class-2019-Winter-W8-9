@@ -4,7 +4,7 @@
 
     <data>
         <import type="android.view.View"/>
-        <variable name="product" type="app.appworks.school.stylish.data.ProductCollected"/>
+        <variable name="product" type="app.appworks.school.stylish.data.collected.ProductCollected"/>
         <variable name="viewModel" type="app.appworks.school.stylish.collect.CollectViewModel"/>
     </data>
 

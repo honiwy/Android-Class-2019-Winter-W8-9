@@ -1,5 +1,5 @@
 package app.appworks.school.stylish.data
 
-data class SubscribeResult(
+data class PostResult(
     val message: String
 )

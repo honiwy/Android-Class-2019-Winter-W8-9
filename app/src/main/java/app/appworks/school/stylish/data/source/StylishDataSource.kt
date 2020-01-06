@@ -2,6 +2,9 @@ package app.appworks.school.stylish.data.source
 
 import androidx.lifecycle.LiveData
 import app.appworks.school.stylish.data.*
+import app.appworks.school.stylish.data.collected.CollectedFormat
+import app.appworks.school.stylish.data.collected.ProductCollected
+import app.appworks.school.stylish.data.subscribe.Email
 
 /**
  * Created by Wayne Chen in Jul. 2019.
@@ -20,7 +23,9 @@ interface StylishDataSource {
 
     suspend fun checkoutOrder(token: String, orderDetail: OrderDetail): Result<CheckoutOrderResult>
 
-    suspend fun subscribeNews(email:Email): Result<SubscribeResult>
+    suspend fun subscribeNews(email: Email): Result<PostResult>
+
+    suspend fun insertUserCollected(collectedFormat: CollectedFormat): Result<PostResult>
 
     fun getProductsCart(): LiveData<List<Product>>
 

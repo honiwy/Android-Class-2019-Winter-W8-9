@@ -20,6 +20,7 @@ import app.appworks.school.stylish.collect.CollectAdapter
 import app.appworks.school.stylish.component.ColorSquare
 import app.appworks.school.stylish.component.SelectedSquare
 import app.appworks.school.stylish.data.*
+import app.appworks.school.stylish.data.collected.ProductCollected
 import app.appworks.school.stylish.detail.DetailCircleAdapter
 import app.appworks.school.stylish.detail.DetailColorAdapter
 import app.appworks.school.stylish.detail.DetailGalleryAdapter

@@ -4,7 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import app.appworks.school.stylish.R
 import app.appworks.school.stylish.data.*
+import app.appworks.school.stylish.data.collected.CollectedFormat
+import app.appworks.school.stylish.data.collected.ProductCollected
 import app.appworks.school.stylish.data.source.StylishDataSource
+import app.appworks.school.stylish.data.subscribe.Email
 import app.appworks.school.stylish.network.StylishApi
 import app.appworks.school.stylish.util.Logger
 import app.appworks.school.stylish.util.Util.getString
@@ -135,7 +138,8 @@ object StylishRemoteDataSource : StylishDataSource {
     }
 
     override suspend fun subscribeNews(
-        email:Email): Result<SubscribeResult> {
+        email: Email
+    ): Result<PostResult> {
 
         if (!isInternetConnected()) {
             return Result.Fail(getString(R.string.internet_not_connected))
@@ -148,11 +152,32 @@ object StylishRemoteDataSource : StylishDataSource {
                     listResult.message?.let{
                         return Result.Success(listResult)
                     }
-                    
+
                 } catch (e: Exception) {
                     Logger.w("[${this::class.simpleName}] exception=${e.message}")
                     Result.Error(e)
                 }
+    }
+
+    override suspend fun insertUserCollected(
+        collectedFormat: CollectedFormat): Result<PostResult> {
+
+        if (!isInternetConnected()) {
+            return Result.Fail(getString(R.string.internet_not_connected))
+        }
+        // Get the Deferred object for our Retrofit request
+        var postPropertiesDeferred = StylishApi.retrofitService.insertUserCollected(collectedFormat)
+        return try {
+            // this will run on a thread managed by Retrofit
+            val listResult = postPropertiesDeferred.await()
+            listResult.message?.let{
+                return Result.Success(listResult)
+            }
+
+        } catch (e: Exception) {
+            Logger.w("[${this::class.simpleName}] exception=${e.message}")
+            Result.Error(e)
+        }
     }
 
     override fun getProductsCart(): LiveData<List<Product>> {

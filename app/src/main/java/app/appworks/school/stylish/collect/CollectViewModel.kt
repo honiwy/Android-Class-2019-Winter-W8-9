@@ -4,8 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import app.appworks.school.stylish.data.Product
-import app.appworks.school.stylish.data.ProductCollected
+import app.appworks.school.stylish.data.collected.ProductCollected
 import app.appworks.school.stylish.data.source.StylishRepository
 import app.appworks.school.stylish.util.Logger
 import kotlinx.coroutines.CoroutineScope

@@ -3,7 +3,10 @@ package app.appworks.school.stylish.data.source.local
 import android.content.Context
 import androidx.lifecycle.LiveData
 import app.appworks.school.stylish.data.*
+import app.appworks.school.stylish.data.collected.CollectedFormat
+import app.appworks.school.stylish.data.collected.ProductCollected
 import app.appworks.school.stylish.data.source.StylishDataSource
+import app.appworks.school.stylish.data.subscribe.Email
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -36,7 +39,12 @@ class StylishLocalDataSource(val context: Context) : StylishDataSource {
     }
 
     override suspend fun subscribeNews(
-        email: Email): Result<SubscribeResult> {
+        email: Email): Result<PostResult> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun insertUserCollected(
+        collectedFormat: CollectedFormat ): Result<PostResult> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

@@ -1,9 +1,11 @@
-package app.appworks.school.stylish.data
+package app.appworks.school.stylish.data.collected
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.TypeConverters
+import app.appworks.school.stylish.data.Color
+import app.appworks.school.stylish.data.Variant
 import app.appworks.school.stylish.data.source.local.StylishConverters
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
