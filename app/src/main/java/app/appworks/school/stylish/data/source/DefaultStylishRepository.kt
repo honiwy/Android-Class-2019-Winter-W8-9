@@ -54,6 +54,11 @@ class DefaultStylishRepository(private val stylishRemoteDataSource: StylishDataS
         return stylishRemoteDataSource.deleteUserCollected(collectedFormat)
     }
 
+    override suspend fun getEverydayPoint(
+        getPoint: GetPoint): Result<ReceivePoint> {
+        return stylishRemoteDataSource.getEverydayPoint(getPoint)
+    }
+
     override fun getProductsInCart(): LiveData<List<Product>> {
         return stylishLocalDataSource.getProductsCart()
     }

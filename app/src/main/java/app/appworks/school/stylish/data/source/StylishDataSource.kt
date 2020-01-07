@@ -29,6 +29,8 @@ interface StylishDataSource {
 
     suspend fun deleteUserCollected(collectedFormat: CollectedFormat): Result<PostResult>
 
+    suspend fun getEverydayPoint(getPoint: GetPoint):Result<ReceivePoint>
+
     fun getProductsCart(): LiveData<List<Product>>
 
     fun getProductsCollected(): LiveData<List<ProductCollected>>

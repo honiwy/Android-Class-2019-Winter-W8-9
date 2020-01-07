@@ -80,6 +80,12 @@ interface StylishApiService {
     @GET("user/profile")
     fun getUserProfile(@Header("Authorization") token: String):
             Deferred<UserProfileResult>
+
+
+
+
+
+
     /**
      * Returns a Coroutine [Deferred] [UserSignInResult] which can be fetched with await() if in a Coroutine scope.
      * The @POST annotation indicates that the "user/signin" endpoint will be requested with the POST HTTP method
@@ -114,6 +120,12 @@ interface StylishApiService {
     @HTTP(method = "DELETE",path = "userFavorite", hasBody = true)
     fun deleteUserCollected(@Body collectedFormat: CollectedFormat):
             Deferred<PostResult>
+
+
+    @POST("getTodayPoint")
+    fun getPoint( @Body getPoint: GetPoint):
+        Deferred<ReceivePoint>
+
 }
 
 /**

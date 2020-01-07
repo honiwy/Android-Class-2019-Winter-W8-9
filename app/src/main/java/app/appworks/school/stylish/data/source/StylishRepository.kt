@@ -29,6 +29,8 @@ interface StylishRepository {
 
     suspend fun deleteUserCollected(collectedFormat: CollectedFormat): Result<PostResult>
 
+    suspend fun getEverydayPoint(getPoint: GetPoint):Result<ReceivePoint>
+
     fun getProductsInCart(): LiveData<List<Product>>
 
     fun getProductsCollected(): LiveData<List<ProductCollected>>

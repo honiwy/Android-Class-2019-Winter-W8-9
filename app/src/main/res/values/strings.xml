@@ -34,6 +34,7 @@
     <string name="shipped">待簽收</string>
     <string name="awaiting_review">購買紀錄</string>
     <string name="exchange">退換貨</string>
+    <string name="getPoint">每日簽到</string>
     <string name="profile_service_title">更多服務</string>
     <string name="starred">收藏</string>
     <string name="notification">貨到通知</string>
