@@ -22,6 +22,8 @@ interface StylishRepository {
 
     suspend fun subscribeNews(email:Email): Result<SubscribeResult>
 
+    suspend fun getEverydayPoint(getPoint: GetPoint):Result<ReceivePoint>
+
     fun getProductsInCart(): LiveData<List<Product>>
 
     fun getProductsCollected(): LiveData<List<ProductCollected>>

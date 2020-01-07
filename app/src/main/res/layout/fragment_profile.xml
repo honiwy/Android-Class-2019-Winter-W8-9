@@ -6,6 +6,7 @@
         <import type="android.view.View"/>
         <import type="android.text.TextUtils"/>
         <variable name="viewModel" type="app.appworks.school.stylish.profile.ProfileViewModel"/>
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -166,17 +167,18 @@
                 style="@style/ProfileOrderButton"
                 android:drawableTop="@drawable/awaiting_review"
                 android:text="@string/awaiting_review"
-                app:layout_constraintEnd_toStartOf="@+id/button_profile_exchange"
+                app:layout_constraintEnd_toStartOf="@+id/button_profile_getPoint"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/button_profile_shipped"
                 app:layout_constraintTop_toTopOf="@+id/button_profile_shipped"/>
 
         <Button
-                android:id="@+id/button_profile_exchange"
+                android:id="@+id/button_profile_getPoint"
                 style="@style/ProfileOrderButton"
                 android:layout_marginEnd="16dp"
-                android:drawableTop="@drawable/exchange"
-                android:text="@string/exchange"
+                android:drawableTop="@{viewModel.hasAttend? @drawable/stamp_stamped : @drawable/stamp1}"
+                android:text="@string/getPoint"
+                android:onClick="@{() -> viewModel.checkAttend()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/button_profile_awaiting_review"
