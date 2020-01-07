@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable name="product" type="app.appworks.school.stylish.data.Product"/>
+        <variable name="viewModel" type="app.appworks.school.stylish.history.HistoryViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00DB2323">
+
+        <ImageView
+            android:id="@+id/image_history_main"
+            android:layout_width="82dp"
+            android:layout_height="110dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/ic_placeholder"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{product.mainImage}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_placeholder" />
+
+        <TextView
+            android:id="@+id/text_cart_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/noto_sans"
+            android:letterSpacing="0.15"
+            android:maxLines="2"
+            android:text="@{product.title}"
+            android:textColor="@color/black_3f3a3a"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/text_color"
+            app:layout_constraintStart_toEndOf="@+id/image_history_main"
+            app:layout_constraintTop_toTopOf="@+id/image_history_main"
+            tools:text="Uniqlo 特級超輕羽絨外套" />
+
+        <TextView
+            android:id="@+id/text_go_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans"
+            android:letterSpacing="0.15"
+            android:onClick="@{() -> viewModel.navigateToComment(product)}"
+            android:text="@string/wait_comment"
+            android:textColor="@drawable/cart_text_remove_selector"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toStartOf="@+id/image_review"
+            app:layout_constraintTop_toTopOf="@+id/text_cart_title" />
+
+        <View
+            android:id="@+id/view_cart_separation"
+            android:layout_width="1dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="16dp"
+            android:background="@color/gray_cccccc"
+            app:layout_constraintBottom_toBottomOf="@+id/text_color"
+            app:layout_constraintStart_toEndOf="@+id/text_color"
+            app:layout_constraintTop_toTopOf="@+id/text_color" />
+
+        <TextView
+            android:id="@+id/text_cart_size"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/noto_sans"
+            android:gravity="center"
+            android:letterSpacing="0.15"
+            android:text="@{product.selectedVariant.size}"
+            android:textColor="@color/black_3f3a3a"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_color"
+            app:layout_constraintStart_toEndOf="@+id/view_cart_separation"
+            app:layout_constraintTop_toTopOf="@+id/text_color"
+            tools:text="XL" />
+
+        <View
+            android:id="@+id/view_cart_separation2"
+            android:layout_width="1dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="16dp"
+            android:background="@color/gray_cccccc"
+            app:layout_constraintBottom_toBottomOf="@+id/text_color"
+            app:layout_constraintStart_toEndOf="@+id/text_cart_size"
+            app:layout_constraintTop_toTopOf="@+id/text_color" />
+
+        <TextView
+            android:id="@+id/text_payment_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/noto_sans"
+            android:letterSpacing="0.15"
+            android:maxLines="1"
+            android:text="@{String.format(@string/_payment_amount, product.amount)}"
+            android:textColor="@color/black_3f3a3a"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_color"
+            app:layout_constraintStart_toEndOf="@+id/view_cart_separation2"
+            app:layout_constraintTop_toTopOf="@+id/text_color"
+            tools:text="x9527" />
+
+        <ImageView
+            android:id="@+id/text_color"
+            android:layout_width="@dimen/size_cart_color"
+            android:layout_height="@dimen/size_cart_color"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ic_placeholder"
+            android:scaleType="centerCrop"
+            app:colorCode="@{product.selectedVariant.colorCode}"
+            app:layout_constraintStart_toStartOf="@+id/text_cart_title"
+            app:layout_constraintTop_toBottomOf="@+id/text_cart_title"
+            tools:src="@drawable/ic_placeholder"/>
+
+        <ImageView
+            android:id="@+id/image_review"
+            android:layout_width="25dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_go_comment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/text_go_comment"
+            app:srcCompat="@drawable/like" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

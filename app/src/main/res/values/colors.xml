@@ -36,6 +36,7 @@
     <!-- Voyage Respect Series -->
     <color name="purple_voyage">#7830b8</color>
     <color name="blue_voyage">#33a4cc</color>
+    <color name="yellow_voyage">#fdb900</color>
 
     <!-- Original -->
     <color name="colorPrimary">#3F51B5</color>

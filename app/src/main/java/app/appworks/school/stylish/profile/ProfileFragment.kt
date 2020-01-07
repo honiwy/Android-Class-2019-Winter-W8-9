@@ -48,6 +48,13 @@ class ProfileFragment : Fragment() {
             }
         })
 
+        viewModel.navigateToHistory.observe(this, Observer {
+            it?.let {
+                findNavController().navigate(ProfileFragmentDirections.navigateToHistoryFragment())
+                viewModel.onHistoryNavigated()
+            }
+        })
+
 
         return binding.root
     }

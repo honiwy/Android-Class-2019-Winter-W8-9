@@ -48,6 +48,8 @@ class MainViewModel(private val stylishRepository: StylishRepository) : ViewMode
         when (it) {
             CurrentFragmentType.PAYMENT -> DrawerToggleType.BACK
             CurrentFragmentType.COLLECT -> DrawerToggleType.BACK
+            CurrentFragmentType.HISTORY -> DrawerToggleType.BACK
+            CurrentFragmentType.COMMENT -> DrawerToggleType.BACK
             else -> DrawerToggleType.NORMAL
         }
     }

@@ -32,7 +32,7 @@
     <string name="awaiting_payment">待付款</string>
     <string name="awaiting_shipment">待出貨</string>
     <string name="shipped">待簽收</string>
-    <string name="awaiting_review">待評價</string>
+    <string name="awaiting_review">購買紀錄</string>
     <string name="exchange">退換貨</string>
     <string name="profile_service_title">更多服務</string>
     <string name="starred">收藏</string>
@@ -66,6 +66,12 @@
 
     <!-- Collect -->
     <string name="no_collects">目前沒有收藏的商品。</string>
+
+    <!-- History -->
+    <string name="wait_comment">我要評價</string>
+    <string name="commented">已評價</string>
+    <string name="no_history">目前沒有已購買的商品。</string>
+    <string name="comment_hint">我有話要說...</string>
 
     <!-- Payment -->
     <string name="_payment_amount">x%d</string>
@@ -107,6 +113,8 @@
     <string name="profile">個人</string>
     <string name="payment">結帳</string>
     <string name="collect">收藏</string>
+    <string name="history">購買紀錄</string>
+    <string name="comment">分享評價</string>
     <string name="stock_">庫存：</string>
     <string name="aka">AKA 小安老師</string>
     <string name="internet_not_connected">您尚未連接 Internet</string>

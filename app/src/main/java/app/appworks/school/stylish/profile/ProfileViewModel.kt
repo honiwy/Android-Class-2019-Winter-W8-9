@@ -35,7 +35,6 @@ class ProfileViewModel(private val stylishRepository: StylishRepository, private
     val user: LiveData<User>
         get() = _user
 
-    // Handle navigation to payment
     private val _navigateToCollection = MutableLiveData<Boolean>()
 
     val navigateToCollection: LiveData<Boolean>
@@ -47,6 +46,19 @@ class ProfileViewModel(private val stylishRepository: StylishRepository, private
 
     fun onCollectionNavigated() {
         _navigateToCollection.value = null
+    }
+
+    private val _navigateToHistory = MutableLiveData<Boolean>()
+
+    val navigateToHistory: LiveData<Boolean>
+        get() = _navigateToHistory
+
+    fun navigateToHistory() {
+        _navigateToHistory.value = true
+    }
+
+    fun onHistoryNavigated() {
+        _navigateToHistory.value = null
     }
 
     // status: The internal MutableLiveData that stores the status of the most recent request

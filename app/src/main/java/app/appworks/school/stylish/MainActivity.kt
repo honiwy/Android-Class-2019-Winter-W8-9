@@ -128,7 +128,7 @@ class MainActivity : BaseActivity() {
 
                 // navigate to profile after login success
                 when (viewModel.currentFragmentType.value) {
-                    CurrentFragmentType.PAYMENT -> {
+                    CurrentFragmentType.PAYMENT, CurrentFragmentType.DETAIL -> {
                     }
                     else -> viewModel.navigateToProfileByBottomNav(it)
                 }
@@ -196,6 +196,8 @@ class MainActivity : BaseActivity() {
                 R.id.detailFragment -> CurrentFragmentType.DETAIL
                 R.id.paymentFragment -> CurrentFragmentType.PAYMENT
                 R.id.collectFragment -> CurrentFragmentType.COLLECT
+                R.id.historyFragment -> CurrentFragmentType.HISTORY
+                R.id.commentFragment -> CurrentFragmentType.COMMENT
                 R.id.checkoutSuccessFragment -> CurrentFragmentType.CHECKOUT_SUCCESS
                 else -> viewModel.currentFragmentType.value
             }

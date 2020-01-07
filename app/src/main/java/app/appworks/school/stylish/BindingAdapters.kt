@@ -24,6 +24,7 @@ import app.appworks.school.stylish.data.collected.ProductCollected
 import app.appworks.school.stylish.detail.DetailCircleAdapter
 import app.appworks.school.stylish.detail.DetailColorAdapter
 import app.appworks.school.stylish.detail.DetailGalleryAdapter
+import app.appworks.school.stylish.history.HistoryAdapter
 import app.appworks.school.stylish.home.HomeAdapter
 import app.appworks.school.stylish.network.LoadApiStatus
 import app.appworks.school.stylish.payment.PaymentAdapter
@@ -50,6 +51,13 @@ fun bindRecyclerViewWithProducts(recyclerView: RecyclerView, products: List<Prod
         recyclerView.adapter?.apply {
             when (this) {
                 is CatalogItemAdapter -> submitList(it)
+                is HistoryAdapter -> {
+                    when (itemCount) {
+                        0 -> submitList(it)
+                        it.size -> notifyDataSetChanged()
+                        else -> submitList(it)
+                    }
+                }
                 is CartAdapter -> {
                     when (itemCount) {
                         0 -> submitList(it)

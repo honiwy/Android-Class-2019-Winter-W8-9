@@ -4,7 +4,7 @@
 
     <data>
         <import type="android.view.View"/>
-        <variable name="viewModel" type="app.appworks.school.stylish.collect.CollectViewModel"/>
+        <variable name="viewModel" type="app.appworks.school.stylish.history.HistoryViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,8 +26,8 @@
                 android:id="@+id/recycler_cart"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:productsCollected="@{viewModel.products}"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:products="@{viewModel.products}">
 
             </androidx.recyclerview.widget.RecyclerView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text='@{viewModel.products != null ? @string/no_collects : ""}'
+            android:text='@{viewModel.products != null ? @string/no_history : ""}'
             android:textSize="20sp"
             android:textColor="@color/gray_888888"
             android:gravity="center"

@@ -7,8 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import app.appworks.school.stylish.StylishApplication
 import app.appworks.school.stylish.data.Product
+import app.appworks.school.stylish.data.collected.CollectedFormat
 import app.appworks.school.stylish.data.collected.ProductCollected
 import app.appworks.school.stylish.data.source.StylishRepository
+import app.appworks.school.stylish.login.UserManager
 import app.appworks.school.stylish.util.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,12 +48,12 @@ class CollectViewModel(private val stylishRepository: StylishRepository) : ViewM
         coroutineScope.launch {
             stylishRepository.removeProductCollected(productCollected.id)
             Toast.makeText(StylishApplication.instance,"取消收藏", Toast.LENGTH_SHORT).show()
-            stylishRepository.removeProductCollected(productCollected.id)
+            stylishRepository.deleteUserCollected(CollectedFormat(UserManager.userId!!,productCollected.id))
         }
     }
 
     fun navigateToDetail(productCollected: ProductCollected) {
-        val product= Product(productCollected.id,productCollected.title,productCollected.description,productCollected.price,productCollected.texture,productCollected.wash,productCollected.place,
+        val product = Product(productCollected.id,productCollected.title,productCollected.description,productCollected.price,productCollected.texture,productCollected.wash,productCollected.place,
             productCollected.note,productCollected.story,productCollected.colors,productCollected.sizes,productCollected.variants,productCollected.mainImage,productCollected.images)
         _navigateToDetail.value = product
     }

@@ -166,6 +166,7 @@
                 style="@style/ProfileOrderButton"
                 android:drawableTop="@drawable/awaiting_review"
                 android:text="@string/awaiting_review"
+                android:onClick="@{() -> viewModel.navigateToHistory()}"
                 app:layout_constraintEnd_toStartOf="@+id/button_profile_exchange"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/button_profile_shipped"
