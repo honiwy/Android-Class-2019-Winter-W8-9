@@ -9,10 +9,7 @@ import androidx.navigation.fragment.findNavController
 import app.appworks.school.stylish.NavigationDirections
 import app.appworks.school.stylish.R
 import app.appworks.school.stylish.component.ProfileAvatarOutlineProvider
-import app.appworks.school.stylish.data.GetPoint
-import app.appworks.school.stylish.data.ReceivePoint
-import app.appworks.school.stylish.data.Result
-import app.appworks.school.stylish.data.User
+import app.appworks.school.stylish.data.*
 import app.appworks.school.stylish.data.source.StylishRepository
 import app.appworks.school.stylish.data.source.remote.StylishRemoteDataSource.getEverydayPoint
 import app.appworks.school.stylish.dialog.MessageDialog
@@ -47,16 +44,25 @@ class ProfileViewModel(
     val user: LiveData<User>
         get() = _user
 
-    private val _navigateToCollection = MutableLiveData<Boolean>()
 
-    val navigateToCollection: LiveData<Boolean>
-        get() = _navigateToCollection
+//  check TodayPoint than get TotalPoint
 
     val totalPoint = MutableLiveData<ReceivePoint>()
 
     val hasAttend: LiveData<Boolean> = Transformations.map(user) {
         it.gotTodayPoint
     }
+
+    private val _navigateToAttended = MutableLiveData<Boolean>()
+
+    val navigateToAttended: LiveData<Boolean>
+        get() = _navigateToAttended
+
+    private val _navigateToCollection = MutableLiveData<Boolean>()
+
+
+    val navigateToCollection: LiveData<Boolean>
+        get() = _navigateToCollection
 
     fun navigateToCollection() {
         _navigateToCollection.value = true
@@ -92,10 +98,7 @@ class ProfileViewModel(
         get() = _error
 
     // Handle navigation to login success
-    private val _navigateToAttended = MutableLiveData<Boolean>()
 
-    val navigateToAttended: LiveData<Boolean>
-        get() = _navigateToAttended
 
     // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
@@ -122,11 +125,11 @@ class ProfileViewModel(
         Logger.i("[${this::class.simpleName}]${this}")
         Logger.i("------------------------------------")
 
-        if (user.value == null) {
+//        if (user.value == null) {
             UserManager.userToken?.let {
                 getUserProfile(it)
             }
-        }
+//        }
     }
 
     /**
@@ -187,12 +190,20 @@ class ProfileViewModel(
     fun getEverydayPoint() {
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
+
             val getPoint = GetPoint(user.value?.id ?: -1, 1)
             val result = stylishRepository.getEverydayPoint(getPoint)
             totalPoint.value = when (result) {
                 is Result.Success -> {
                     _error.value = null
-                    result.data
+
+                    _user.value?.let {
+                        val newUser = it.copy()
+                        newUser.gotTodayPoint = true
+                        _user.value = newUser
+                    }
+//                    _navigateToAttended.value = true
+                        result.data
                 }
                 else -> {
                     _error.value = getString(R.string.you_know_nothing)
@@ -200,12 +211,7 @@ class ProfileViewModel(
                 }
             }
             _status.value = LoadApiStatus.DONE
-
-
-
-            //val totalPoint = LiveData<>()
-        }
-    }
+    }}
 
 
     /**
