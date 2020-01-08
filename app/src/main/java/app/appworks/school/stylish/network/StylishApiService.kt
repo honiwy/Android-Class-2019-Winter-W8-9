@@ -72,6 +72,11 @@ interface StylishApiService {
     @GET("products/{catalogType}")
     fun getProductList(@Path("catalogType") type: String, @Query("paging") paging: String? = null):
             Deferred<ProductListResult>
+
+    @GET("orderHistory")
+    fun getOrderList(@Query("userId") userId: Int? = null):
+            Deferred<OrderListResult>
+
     /**
      * Returns a Coroutine [Deferred] [UserProfileResult] which can be fetched with await() if in a Coroutine scope.
      * The @GET annotation indicates that the "user/profile" endpoint will be requested with the GET HTTP method
@@ -80,6 +85,8 @@ interface StylishApiService {
     @GET("user/profile")
     fun getUserProfile(@Header("Authorization") token: String):
             Deferred<UserProfileResult>
+
+
     /**
      * Returns a Coroutine [Deferred] [UserSignInResult] which can be fetched with await() if in a Coroutine scope.
      * The @POST annotation indicates that the "user/signin" endpoint will be requested with the POST HTTP method
@@ -102,6 +109,9 @@ interface StylishApiService {
     fun checkoutOrder(@Header("Authorization") token: String, @Body orderDetail: OrderDetail):
             Deferred<CheckoutOrderResult>
 
+
+
+
     @POST("subscribe")
     fun subscribeEmail(@Body email: Email):
             Deferred<PostResult>
@@ -114,6 +124,11 @@ interface StylishApiService {
     @HTTP(method = "DELETE",path = "userFavorite", hasBody = true)
     fun deleteUserCollected(@Body collectedFormat: CollectedFormat):
             Deferred<PostResult>
+
+//
+//    @PUT("addComment")
+//    fun uploadComment(@Body collectedFormat: CollectedFormat):
+//            Deferred<PostResult>
 }
 
 /**

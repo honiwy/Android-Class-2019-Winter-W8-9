@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import app.appworks.school.stylish.R
 import app.appworks.school.stylish.StylishApplication
+import app.appworks.school.stylish.data.OrderResult
 import app.appworks.school.stylish.data.Product
 import app.appworks.school.stylish.data.collected.CollectedFormat
 import app.appworks.school.stylish.data.collected.ProductCollected
@@ -25,15 +26,15 @@ import kotlinx.coroutines.launch
 
 class CommentViewModel(
     private val stylishRepository: StylishRepository,
-    private val arguments: Product
+    private val arguments: OrderResult
 ) : ViewModel() {
 
-    private val _product = MutableLiveData<Product>().apply {
+    private val _orderResult = MutableLiveData<OrderResult>().apply {
         value = arguments
     }
 
-    val product: LiveData<Product>
-        get() = _product
+    val orderResult: LiveData<OrderResult>
+        get() = _orderResult
 
     // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()

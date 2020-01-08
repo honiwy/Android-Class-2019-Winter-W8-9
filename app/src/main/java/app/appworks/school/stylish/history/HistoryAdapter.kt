@@ -5,15 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import app.appworks.school.stylish.data.OrderResult
 import app.appworks.school.stylish.data.Product
 import app.appworks.school.stylish.databinding.ItemCheckoutHistoryBinding
 
-class HistoryAdapter(val viewModel: HistoryViewModel ): ListAdapter<Product, HistoryAdapter.ProductViewHolder>(DiffCallback) {
+class HistoryAdapter(val viewModel: HistoryViewModel ): ListAdapter<OrderResult, HistoryAdapter.ProductViewHolder>(DiffCallback) {
 
 
     class ProductViewHolder(private var binding: ItemCheckoutHistoryBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(product: Product, viewModel: HistoryViewModel) {
+        fun bind(product: OrderResult, viewModel: HistoryViewModel) {
 
             binding.product = product
             binding.viewModel = viewModel
@@ -23,13 +24,13 @@ class HistoryAdapter(val viewModel: HistoryViewModel ): ListAdapter<Product, His
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return (oldItem.id == newItem.id)
+    companion object DiffCallback : DiffUtil.ItemCallback<OrderResult>() {
+        override fun areItemsTheSame(oldItem: OrderResult, newItem: OrderResult): Boolean {
+            return (oldItem.commentId == newItem.commentId)
         }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: OrderResult, newItem: OrderResult): Boolean {
+            return (oldItem.star == newItem.star)&&(oldItem.hasComment == newItem.hasComment)
         }
     }
 

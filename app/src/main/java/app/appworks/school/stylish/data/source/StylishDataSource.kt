@@ -17,6 +17,8 @@ interface StylishDataSource {
 
     suspend fun getProductList(type: String, paging: String? = null): Result<ProductListResult>
 
+    suspend fun getOrderList(userId: Int? = null): Result<OrderListResult>
+
     suspend fun getUserProfile(token: String): Result<User>
 
     suspend fun userSignIn(fbToken: String): Result<UserSignInResult>
@@ -29,7 +31,7 @@ interface StylishDataSource {
 
     suspend fun deleteUserCollected(collectedFormat: CollectedFormat): Result<PostResult>
 
-    fun getProductsCart(): LiveData<List<Product>>
+   fun getProductsInCart(): LiveData<List<Product>>
 
     fun getProductsCollected(): LiveData<List<ProductCollected>>
 

@@ -17,6 +17,8 @@ interface StylishRepository {
 
     suspend fun getProductList(type: String, paging: String? = null): Result<ProductListResult>
 
+    suspend fun getOrderList(userId: Int? = null): Result<OrderListResult>
+
     suspend fun getUserProfile(token: String): Result<User>
 
     suspend fun userSignIn(fbToken: String): Result<UserSignInResult>

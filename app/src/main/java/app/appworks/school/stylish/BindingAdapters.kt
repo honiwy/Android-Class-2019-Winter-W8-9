@@ -51,13 +51,6 @@ fun bindRecyclerViewWithProducts(recyclerView: RecyclerView, products: List<Prod
         recyclerView.adapter?.apply {
             when (this) {
                 is CatalogItemAdapter -> submitList(it)
-                is HistoryAdapter -> {
-                    when (itemCount) {
-                        0 -> submitList(it)
-                        it.size -> notifyDataSetChanged()
-                        else -> submitList(it)
-                    }
-                }
                 is CartAdapter -> {
                     when (itemCount) {
                         0 -> submitList(it)
@@ -66,6 +59,23 @@ fun bindRecyclerViewWithProducts(recyclerView: RecyclerView, products: List<Prod
                     }
                 }
                 is PaymentAdapter -> submitProducts(products)
+            }
+        }
+    }
+}
+
+@BindingAdapter("productsOrdered")
+fun bindRecyclerViewWithOrderedProducts(recyclerView: RecyclerView, products: List<OrderResult>?) {
+    products?.let {
+        recyclerView.adapter?.apply {
+            when (this) {
+                is HistoryAdapter -> {
+                    when (itemCount) {
+                        0 -> submitList(it)
+                        it.size -> notifyDataSetChanged()
+                        else -> submitList(it)
+                    }
+                }
             }
         }
     }

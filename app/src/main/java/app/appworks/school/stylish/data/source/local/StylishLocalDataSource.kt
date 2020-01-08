@@ -25,6 +25,10 @@ class StylishLocalDataSource(val context: Context) : StylishDataSource {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override suspend fun getOrderList(userId: Int?): Result<OrderListResult> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override suspend fun getUserProfile(token: String): Result<User> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -53,11 +57,11 @@ class StylishLocalDataSource(val context: Context) : StylishDataSource {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getProductsCart(): LiveData<List<Product>> {
+    override  fun getProductsInCart(): LiveData<List<Product>> {
         return StylishDatabase.getInstance(context).stylishDatabaseDao.getAllProductsCart()
     }
 
-    override fun getProductsCollected(): LiveData<List<ProductCollected>> {
+    override  fun getProductsCollected(): LiveData<List<ProductCollected>> {
         return StylishDatabase.getInstance(context).stylishDatabaseDao.getAllProductsCollected()
     }
 

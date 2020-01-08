@@ -136,7 +136,7 @@
         tools:layout="@layout/fragment_comment">
         <argument
             android:name="productKey"
-            app:argType="app.appworks.school.stylish.data.Product" />
+            app:argType="app.appworks.school.stylish.data.OrderResult" />
     </fragment>
 
 </navigation>

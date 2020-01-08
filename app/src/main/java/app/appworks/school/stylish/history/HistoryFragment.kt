@@ -34,11 +34,7 @@ class HistoryFragment : Fragment() {
             }
         })
 
-        viewModel.products.observe(this, Observer {
-            it?.let{
-                Log.i("apple","products : $it")
-            }
-        })
+
         binding.layoutSwipeRefreshCart.setOnRefreshListener {
             binding.recyclerCart.adapter?.notifyDataSetChanged()
             binding.layoutSwipeRefreshCart.isRefreshing = false

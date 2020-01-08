@@ -26,6 +26,10 @@ class DefaultStylishRepository(private val stylishRemoteDataSource: StylishDataS
         return stylishRemoteDataSource.getProductList(type = type, paging = paging)
     }
 
+    override suspend fun getOrderList(userId: Int?): Result<OrderListResult> {
+        return stylishRemoteDataSource.getOrderList(userId = userId)
+    }
+
     override suspend fun getUserProfile(token: String): Result<User> {
         return stylishRemoteDataSource.getUserProfile(token)
     }
@@ -54,11 +58,11 @@ class DefaultStylishRepository(private val stylishRemoteDataSource: StylishDataS
         return stylishRemoteDataSource.deleteUserCollected(collectedFormat)
     }
 
-    override fun getProductsInCart(): LiveData<List<Product>> {
-        return stylishLocalDataSource.getProductsCart()
+    override  fun getProductsInCart(): LiveData<List<Product>> {
+        return stylishLocalDataSource.getProductsInCart()
     }
 
-    override fun getProductsCollected(): LiveData<List<ProductCollected>> {
+    override  fun getProductsCollected(): LiveData<List<ProductCollected>> {
         return stylishLocalDataSource.getProductsCollected()
     }
 

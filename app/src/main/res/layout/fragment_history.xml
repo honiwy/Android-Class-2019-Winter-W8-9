@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:products="@{viewModel.products}">
+                app:productsOrdered="@{viewModel.orderResults}">
 
             </androidx.recyclerview.widget.RecyclerView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -38,11 +38,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text='@{viewModel.products != null ? @string/no_history : ""}'
+            android:text='@{viewModel.orderResults != null ? @string/no_history : ""}'
             android:textSize="20sp"
             android:textColor="@color/gray_888888"
             android:gravity="center"
-            android:visibility="@{viewModel.products.size == 0 ? View.VISIBLE : View.GONE}"
+            android:visibility="@{viewModel.orderResults.size == 0 ? View.VISIBLE : View.GONE}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +52,7 @@
             android:theme="@style/ProgressTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{viewModel.products == null ? View.VISIBLE : View.GONE}"
+            android:visibility="@{viewModel.orderResults == null ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

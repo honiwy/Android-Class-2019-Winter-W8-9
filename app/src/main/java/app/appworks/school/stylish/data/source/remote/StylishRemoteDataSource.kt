@@ -66,6 +66,25 @@ object StylishRemoteDataSource : StylishDataSource {
         }
     }
 
+    override suspend fun getOrderList(userId: Int?): Result<OrderListResult> {
+
+        if (!isInternetConnected()) {
+            return Result.Fail(getString(R.string.internet_not_connected))
+        }
+        // Get the Deferred object for our Retrofit request
+        val getResultDeferred = StylishApi.retrofitService.getOrderList(userId = userId)
+
+        return try {
+            // this will run on a thread managed by Retrofit
+            val listResult = getResultDeferred.await()
+            Result.Success(listResult)
+
+        } catch (e: Exception) {
+            Logger.w("[${this::class.simpleName}] exception=${e.message}")
+            Result.Error(e)
+        }
+    }
+
     override suspend fun getUserProfile(token: String): Result<User> {
 
         if (!isInternetConnected()) {
@@ -159,6 +178,8 @@ object StylishRemoteDataSource : StylishDataSource {
                 }
     }
 
+
+
     override suspend fun insertUserCollected(
         collectedFormat: CollectedFormat): Result<PostResult> {
 
@@ -201,7 +222,7 @@ object StylishRemoteDataSource : StylishDataSource {
         }
     }
 
-    override fun getProductsCart(): LiveData<List<Product>> {
+    override  fun getProductsInCart(): LiveData<List<Product>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
