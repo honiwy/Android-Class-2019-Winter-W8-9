@@ -1,7 +1,6 @@
 package app.appworks.school.stylish.history
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +24,9 @@ class HistoryFragment : Fragment() {
         val binding = FragmentHistoryBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        binding.recyclerCart.adapter = HistoryAdapter(viewModel)
+        binding.recyclerCart.adapter = HistoryAdapter(viewModel, HistoryAdapter.OnClickListener {
+            viewModel.navigateToComment(it)
+        })
 
         viewModel.navigateToComment.observe(this, Observer {
             it?.let {

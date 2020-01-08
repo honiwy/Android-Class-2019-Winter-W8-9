@@ -5,21 +5,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import app.appworks.school.stylish.R
-import app.appworks.school.stylish.StylishApplication
 import app.appworks.school.stylish.data.OrderResult
-import app.appworks.school.stylish.data.Product
 import app.appworks.school.stylish.databinding.ItemCheckoutHistoryBinding
 
-class HistoryAdapter(val viewModel: HistoryViewModel ): ListAdapter<OrderResult, HistoryAdapter.ProductViewHolder>(DiffCallback) {
+class HistoryAdapter(val viewModel: HistoryViewModel, private val onClickListener: OnClickListener): ListAdapter<OrderResult, HistoryAdapter.ProductViewHolder>(DiffCallback) {
 
+    class OnClickListener(val clickListener: (orderResult: OrderResult) -> Unit) {
+        fun onClick(orderResult: OrderResult) = clickListener(orderResult)
+    }
 
     class ProductViewHolder(private var binding: ItemCheckoutHistoryBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(product: OrderResult, viewModel: HistoryViewModel) {
+        fun bind(product: OrderResult, viewModel: HistoryViewModel, onClickListener: OnClickListener) {
 
             binding.product = product
             binding.viewModel = viewModel
+            binding.root.setOnClickListener { onClickListener.onClick(product) }
             // This is important, because it forces the data binding to execute immediately,
             // which allows the RecyclerView to make the correct view size measurements
             binding.executePendingBindings()
@@ -32,7 +33,7 @@ class HistoryAdapter(val viewModel: HistoryViewModel ): ListAdapter<OrderResult,
         }
 
         override fun areContentsTheSame(oldItem: OrderResult, newItem: OrderResult): Boolean {
-            return (oldItem.star == newItem.star)&&(oldItem.hasComment == newItem.hasComment)
+            return (oldItem.hasComment == newItem.hasComment)
         }
     }
 
@@ -47,6 +48,6 @@ class HistoryAdapter(val viewModel: HistoryViewModel ): ListAdapter<OrderResult,
      * Replaces the contents of a view (invoked by the layout manager)
      */
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.bind(getItem(position), viewModel)
+        holder.bind(getItem(position), viewModel, onClickListener)
     }
 }

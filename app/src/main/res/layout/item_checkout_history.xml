@@ -59,7 +59,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans"
             android:letterSpacing="0.15"
-            android:onClick="@{() -> viewModel.navigateToComment(product)}"
             android:text="@{product.hasComment==true? @string/commented: @string/wait_comment}"
             android:textColor="@drawable/cart_text_remove_selector"
             android:textSize="15sp"
