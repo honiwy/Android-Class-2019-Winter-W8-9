@@ -2,8 +2,10 @@ package app.appworks.school.stylish.data.source
 
 import androidx.lifecycle.LiveData
 import app.appworks.school.stylish.data.*
-import app.appworks.school.stylish.data.collected.CollectedFormat
+import app.appworks.school.stylish.data.collected.Collect
 import app.appworks.school.stylish.data.collected.ProductCollected
+import app.appworks.school.stylish.data.comment.Comment
+import app.appworks.school.stylish.data.comment.CommentResult
 import app.appworks.school.stylish.data.subscribe.Email
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -49,13 +51,18 @@ class DefaultStylishRepository(private val stylishRemoteDataSource: StylishDataS
     }
 
     override suspend fun insertUserCollected(
-        collectedFormat: CollectedFormat): Result<PostResult> {
+        collectedFormat: Collect): Result<PostResult> {
         return stylishRemoteDataSource.insertUserCollected(collectedFormat)
     }
 
     override suspend fun deleteUserCollected(
-        collectedFormat: CollectedFormat): Result<PostResult> {
+        collectedFormat: Collect): Result<PostResult> {
         return stylishRemoteDataSource.deleteUserCollected(collectedFormat)
+    }
+
+    override suspend fun uploadComment(
+        comment: Comment): Result<CommentResult> {
+        return stylishRemoteDataSource.uploadComment(comment)
     }
 
     override  fun getProductsInCart(): LiveData<List<Product>> {

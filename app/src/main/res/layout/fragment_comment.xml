@@ -4,83 +4,101 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable name="viewModel" type="app.appworks.school.stylish.comment.CommentViewModel"/>
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="0dp"
-            android:layout_height="255dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:scaleType="centerCrop"
-            app:imageUrl="@{viewModel.orderResult.mainImage}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_placeholder" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/text_product_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ellipsize="end"
-            android:fontFamily="@font/noto_sans"
-            android:letterSpacing="0.15"
-            android:text="@{viewModel.orderResult.title}"
-            android:textColor="@color/black_3f3a3a"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
-            tools:text="Uniqlo 特級超輕羽絨外套" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="0dp"
+                android:layout_height="255dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{viewModel.orderResult.mainImage}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_placeholder" />
 
-        <EditText
-            android:id="@+id/comment_edit_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/noto_sans"
-            android:letterSpacing="0.15"
-            android:textColor="@color/black_3f3a3a"
-            android:textSize="18sp"
-            android:background="@color/gray_f0f0f0"
-            android:hint="@string/comment_hint"
-            android:gravity="start|top"
-            android:lines="5"
-            android:maxLength="100"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+            <TextView
+                android:id="@+id/text_product_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/noto_sans"
+                android:letterSpacing="0.15"
+                android:text="@{viewModel.orderResult.title}"
+                android:textColor="@color/black_3f3a3a"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                tools:text="Uniqlo 特級超輕羽絨外套" />
 
-        <RatingBar
-            android:id="@+id/ratingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:progressTint="@color/yellow_voyage"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/text_product_title" />
+            <EditText
+                android:id="@+id/comment_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/noto_sans"
+                android:letterSpacing="0.15"
+                android:textColor="@color/black_3f3a3a"
+                android:textSize="18sp"
+                android:background="@color/gray_f0f0f0"
+                android:hint="@string/comment_hint"
+                android:text="@={viewModel.comment}"
+                android:enabled="@{viewModel.hasCommented? false:true}"
+                android:gravity="start|top"
+                android:lines="6"
+                android:maxLength="100"
+                app:layout_constraintEnd_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
-        <Button
-            android:id="@+id/button_comment"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:fontFamily="@font/noto_sans"
-            android:letterSpacing="0.15"
-            android:textColor="@color/black_3f3a3a"
-            android:textSize="18sp"
-            android:text="@string/wait_comment"
-            app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/ratingBar"
-            app:layout_constraintTop_toTopOf="@+id/ratingBar" />
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:stepSize="1"
+                android:rating="@{viewModel.star}"
+                android:isIndicator="@{viewModel.hasCommented? true: false}"
+                android:progressTint="@color/yellow_voyage"
+                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/text_product_title" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/button_comment"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/noto_sans"
+                android:letterSpacing="0.15"
+                android:textColor="@color/black_3f3a3a"
+                android:textSize="18sp"
+                android:text="@{viewModel.hasCommented? @string/commented :@string/wait_comment}"
+                android:visibility="@{viewModel.hasCommented?  View.INVISIBLE : View.VISIBLE}"
+                android:enabled="@{viewModel.hasCommented? false:true}"
+                android:onClick="@{()->viewModel.uploadComment()}"
+                app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+                app:layout_constraintEnd_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/ratingBar"
+                app:layout_constraintTop_toTopOf="@+id/ratingBar"
+                tools:text="@string/wait_comment" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

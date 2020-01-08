@@ -2,9 +2,11 @@ package app.appworks.school.stylish.network
 
 import app.appworks.school.stylish.BuildConfig
 import app.appworks.school.stylish.data.*
-import app.appworks.school.stylish.data.collected.CollectedFormat
+import app.appworks.school.stylish.data.collected.Collect
 import app.appworks.school.stylish.data.subscribe.Email
 import app.appworks.school.stylish.data.PostResult
+import app.appworks.school.stylish.data.comment.Comment
+import app.appworks.school.stylish.data.comment.CommentResult
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -117,18 +119,17 @@ interface StylishApiService {
             Deferred<PostResult>
 
     @POST("userFavorite")
-    fun insertUserCollected(@Body collectedFormat: CollectedFormat):
+    fun insertUserCollected(@Body collectedFormat: Collect):
             Deferred<PostResult>
 
     //@DELETE("userFavorite") 因為有 body 所以不能用
     @HTTP(method = "DELETE",path = "userFavorite", hasBody = true)
-    fun deleteUserCollected(@Body collectedFormat: CollectedFormat):
+    fun deleteUserCollected(@Body collectedFormat: Collect):
             Deferred<PostResult>
 
-//
-//    @PUT("addComment")
-//    fun uploadComment(@Body collectedFormat: CollectedFormat):
-//            Deferred<PostResult>
+    @PUT("addComment")
+    fun uploadComment(@Body comment: Comment):
+            Deferred<CommentResult>
 }
 
 /**

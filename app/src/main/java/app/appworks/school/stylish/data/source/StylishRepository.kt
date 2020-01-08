@@ -2,8 +2,10 @@ package app.appworks.school.stylish.data.source
 
 import androidx.lifecycle.LiveData
 import app.appworks.school.stylish.data.*
-import app.appworks.school.stylish.data.collected.CollectedFormat
+import app.appworks.school.stylish.data.collected.Collect
 import app.appworks.school.stylish.data.collected.ProductCollected
+import app.appworks.school.stylish.data.comment.Comment
+import app.appworks.school.stylish.data.comment.CommentResult
 import app.appworks.school.stylish.data.subscribe.Email
 
 /**
@@ -27,9 +29,11 @@ interface StylishRepository {
 
     suspend fun subscribeNews(email: Email): Result<PostResult>
 
-    suspend fun insertUserCollected(collectedFormat: CollectedFormat): Result<PostResult>
+    suspend fun insertUserCollected(collectedFormat: Collect): Result<PostResult>
 
-    suspend fun deleteUserCollected(collectedFormat: CollectedFormat): Result<PostResult>
+    suspend fun deleteUserCollected(collectedFormat: Collect): Result<PostResult>
+
+    suspend fun uploadComment(comment: Comment): Result<CommentResult>
 
     fun getProductsInCart(): LiveData<List<Product>>
 

@@ -35,6 +35,13 @@ class HistoryFragment : Fragment() {
         })
 
 
+        viewModel.refreshStatus.observe(this, Observer {
+            it?.let {
+                binding.layoutSwipeRefreshCart.isRefreshing = it
+            }
+        })
+
+
         binding.layoutSwipeRefreshCart.setOnRefreshListener {
             binding.recyclerCart.adapter?.notifyDataSetChanged()
             binding.layoutSwipeRefreshCart.isRefreshing = false

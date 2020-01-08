@@ -15,5 +15,5 @@ data class OrderResult(
     val commentId: Int,
     val star: Int,
     val comment: String,
-    val hasComment: Boolean
+    var hasComment: Boolean
 ) : Parcelable

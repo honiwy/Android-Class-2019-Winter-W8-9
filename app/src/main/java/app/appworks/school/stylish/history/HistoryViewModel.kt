@@ -31,6 +31,12 @@ class HistoryViewModel(private val stylishRepository: StylishRepository) : ViewM
     val navigateToComment: LiveData<OrderResult>
         get() = _navigateToComment
 
+    // status for the loading icon of swl
+    private val _refreshStatus = MutableLiveData<Boolean>()
+
+    val refreshStatus: LiveData<Boolean>
+        get() = _refreshStatus
+
     private var viewModelJob = Job()
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)

@@ -1,18 +1,18 @@
 package app.appworks.school.stylish.data.source.remote
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import app.appworks.school.stylish.R
 import app.appworks.school.stylish.data.*
-import app.appworks.school.stylish.data.collected.CollectedFormat
+import app.appworks.school.stylish.data.collected.Collect
 import app.appworks.school.stylish.data.collected.ProductCollected
+import app.appworks.school.stylish.data.comment.Comment
+import app.appworks.school.stylish.data.comment.CommentResult
 import app.appworks.school.stylish.data.source.StylishDataSource
 import app.appworks.school.stylish.data.subscribe.Email
 import app.appworks.school.stylish.network.StylishApi
 import app.appworks.school.stylish.util.Logger
 import app.appworks.school.stylish.util.Util.getString
 import app.appworks.school.stylish.util.Util.isInternetConnected
-import kotlinx.coroutines.launch
 
 /**
  * Created by Wayne Chen in Jul. 2019.
@@ -181,7 +181,7 @@ object StylishRemoteDataSource : StylishDataSource {
 
 
     override suspend fun insertUserCollected(
-        collectedFormat: CollectedFormat): Result<PostResult> {
+        collectedFormat: Collect): Result<PostResult> {
 
         if (!isInternetConnected()) {
             return Result.Fail(getString(R.string.internet_not_connected))
@@ -202,7 +202,7 @@ object StylishRemoteDataSource : StylishDataSource {
     }
 
     override suspend fun deleteUserCollected(
-        collectedFormat: CollectedFormat): Result<PostResult> {
+        collectedFormat: Collect): Result<PostResult> {
 
         if (!isInternetConnected()) {
             return Result.Fail(getString(R.string.internet_not_connected))
@@ -214,6 +214,30 @@ object StylishRemoteDataSource : StylishDataSource {
             val listResult = postPropertiesDeferred.await()
             listResult.message?.let{
                 return Result.Success(listResult)
+            }
+
+        } catch (e: Exception) {
+            Logger.w("[${this::class.simpleName}] exception=${e.message}")
+            Result.Error(e)
+        }
+    }
+
+    override suspend fun uploadComment(
+        comment: Comment ): Result<CommentResult> {
+
+        if (!isInternetConnected()) {
+            return Result.Fail(getString(R.string.internet_not_connected))
+        }
+        // Get the Deferred object for our Retrofit request
+        var postPropertiesDeferred = StylishApi.retrofitService.uploadComment(comment)
+        return try {
+            // this will run on a thread managed by Retrofit
+            val listResult = postPropertiesDeferred.await()
+            listResult.message?.let{
+                return when(it){
+                    "success"-> Result.Success(listResult)
+                    else-> Result.Fail(it)
+                }
             }
 
         } catch (e: Exception) {

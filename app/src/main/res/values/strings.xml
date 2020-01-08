@@ -71,7 +71,8 @@
     <string name="wait_comment">我要評價</string>
     <string name="commented">已評價</string>
     <string name="no_history">目前沒有已購買的商品。</string>
-    <string name="comment_hint">我有話要說...</string>
+    <string name="comment_hint">我有話要說...(上限100字)</string>
+    <string name="_order_number">訂單編號: %s</string>
 
     <!-- Payment -->
     <string name="_payment_amount">x%d</string>

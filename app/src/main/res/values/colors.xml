@@ -28,6 +28,7 @@
 
     <!-- Blue Series -->
     <color name="blue_facebook">#3b5998</color>
+    <color name="blue_commented">#0894fd</color>
 
     <!-- Bottom Navigation -->
     <color name="bottom_navigation_item_normal">@color/gray_999999</color>

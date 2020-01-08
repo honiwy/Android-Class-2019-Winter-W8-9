@@ -3,8 +3,10 @@ package app.appworks.school.stylish.data.source.local
 import android.content.Context
 import androidx.lifecycle.LiveData
 import app.appworks.school.stylish.data.*
-import app.appworks.school.stylish.data.collected.CollectedFormat
+import app.appworks.school.stylish.data.collected.Collect
 import app.appworks.school.stylish.data.collected.ProductCollected
+import app.appworks.school.stylish.data.comment.Comment
+import app.appworks.school.stylish.data.comment.CommentResult
 import app.appworks.school.stylish.data.source.StylishDataSource
 import app.appworks.school.stylish.data.subscribe.Email
 import kotlinx.coroutines.Dispatchers
@@ -48,12 +50,17 @@ class StylishLocalDataSource(val context: Context) : StylishDataSource {
     }
 
     override suspend fun insertUserCollected(
-        collectedFormat: CollectedFormat ): Result<PostResult> {
+        collectedFormat: Collect ): Result<PostResult> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override suspend fun deleteUserCollected(
-        collectedFormat: CollectedFormat ): Result<PostResult> {
+        collectedFormat: Collect ): Result<PostResult> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun uploadComment(
+        comment: Comment ): Result<CommentResult> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

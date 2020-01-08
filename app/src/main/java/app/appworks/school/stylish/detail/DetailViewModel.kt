@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.appworks.school.stylish.R
 import app.appworks.school.stylish.StylishApplication
 import app.appworks.school.stylish.data.Product
-import app.appworks.school.stylish.data.collected.CollectedFormat
+import app.appworks.school.stylish.data.collected.Collect
 import app.appworks.school.stylish.data.collected.ProductCollected
 import app.appworks.school.stylish.data.source.StylishRepository
 import app.appworks.school.stylish.util.Logger
@@ -160,11 +160,11 @@ class DetailViewModel(
         coroutineScope.launch {
             if (_collectProduct.value == true) {
                 Log.i("apple","update server collection")
-                stylishRepository.insertUserCollected(CollectedFormat(UserManager.userId!!,product.value!!.id))
+                stylishRepository.insertUserCollected(Collect(UserManager.userId!!,product.value!!.id))
             }
             else {
                 Log.i("apple","delete server collection")
-                stylishRepository.deleteUserCollected(CollectedFormat(UserManager.userId!!,product.value!!.id))
+                stylishRepository.deleteUserCollected(Collect(UserManager.userId!!,product.value!!.id))
             }
         }
     }

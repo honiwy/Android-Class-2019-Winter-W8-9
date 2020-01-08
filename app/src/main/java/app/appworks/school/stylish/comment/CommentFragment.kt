@@ -1,6 +1,7 @@
 package app.appworks.school.stylish.comment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,10 @@ class CommentFragment : Fragment() {
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.ratingBar.setOnRatingBarChangeListener { ratingBar, fl, b ->
+            viewModel.star.value = fl.toInt()
+            Log.i("apple","You rank $fl which become ${fl.toInt()}")
+        }
 
         viewModel.leaveComment.observe(this, Observer {
             it?.let {

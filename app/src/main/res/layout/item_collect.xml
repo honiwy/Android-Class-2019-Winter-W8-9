@@ -28,11 +28,12 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_placeholder" />
 
+
         <TextView
             android:id="@+id/text_collect_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="12dp"
             android:ellipsize="end"
             android:fontFamily="@font/noto_sans"
             android:letterSpacing="0.15"
@@ -40,11 +41,10 @@
             android:text="@{product.title}"
             android:textColor="@color/black_3f3a3a"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/image_collect_main"
+            app:layout_constraintBottom_toTopOf="@+id/text_collect_price"
             app:layout_constraintStart_toEndOf="@+id/image_collect_main"
             app:layout_constraintTop_toTopOf="@+id/image_collect_main"
             tools:text="Uniqlo 特級超輕羽絨外套" />
-
 
         <ImageButton
             android:id="@+id/button_collect_remove"
@@ -57,6 +57,22 @@
             app:layout_constraintBottom_toBottomOf="@+id/image_collect_main"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/image_collect_main" />
+
+        <TextView
+            android:id="@+id/text_collect_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/noto_sans"
+            android:letterSpacing="0.15"
+            android:maxLines="1"
+            android:textColor="@color/black_3f3a3a"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/image_collect_main"
+            app:layout_constraintStart_toStartOf="@+id/text_collect_title"
+            app:layout_constraintTop_toBottomOf="@+id/text_collect_title"
+            app:price="@{product.price}"
+            tools:text="NT$9527" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
