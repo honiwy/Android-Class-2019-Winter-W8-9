@@ -2,6 +2,7 @@ package app.appworks.school.stylish.dialog
 
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
@@ -35,6 +36,12 @@ class SubscribeViewModel(private val stylishRepository: StylishRepository) : Vie
 
     val status = MutableLiveData<LoadApiStatus>()
 
+    // Handle leave add2cart
+    private val _leave = MutableLiveData<Boolean>()
+
+    val leave: LiveData<Boolean>
+        get() = _leave
+
     private fun checkEmailAvailable(): Boolean{
         var boo = false
         emailTyped.value?.let{email->
@@ -50,7 +57,16 @@ class SubscribeViewModel(private val stylishRepository: StylishRepository) : Vie
             val result = stylishRepository.subscribeNews(Email(emailTyped.value!!))
             status.value = LoadApiStatus.DONE
             Toast.makeText(StylishApplication.instance,"訂閱成功", Toast.LENGTH_SHORT).show()
+            leave()
         }
+    }
+
+    fun leave() {
+        _leave.value = true
+    }
+
+    fun onLeaveCompleted() {
+        _leave.value = null
     }
 
 }

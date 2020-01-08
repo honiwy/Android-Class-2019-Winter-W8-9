@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import app.appworks.school.stylish.R
 import app.appworks.school.stylish.collect.CollectViewModel
@@ -26,6 +27,13 @@ class SubscribeDialog : AppCompatDialogFragment() {
         binding.lifecycleOwner = this
         binding.dialog = this
         binding.viewModel = viewModel
+
+        viewModel.leave.observe(this, Observer {
+            it?.let {
+                dismiss()
+                viewModel.onLeaveCompleted()
+            }
+        })
 
         return binding.root
     }
