@@ -35,6 +35,8 @@ interface StylishRepository {
 
     suspend fun uploadComment(comment: Comment): Result<CommentResult>
 
+    suspend fun getEverydayPoint(getPoint: GetPoint):Result<ReceivePoint>
+
     fun getProductsInCart(): LiveData<List<Product>>
 
     fun getProductsCollected(): LiveData<List<ProductCollected>>

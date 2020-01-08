@@ -8,9 +8,6 @@ import kotlinx.android.parcel.Parcelize
  * Created by Wayne Chen in Jul. 2019.
  */
 @Parcelize
-data class UserProfileResult(
-    val error: String? = null,
-    @Json(name = "data") val user: User? = null
-
-    ) : Parcelable
-
+data class ReceivePoint(
+    @Json(name="totalPoint") val totalPoint:Int
+) : Parcelable

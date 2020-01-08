@@ -58,6 +58,12 @@ class MessageDialog : AppCompatDialogFragment() {
                 iconRes = StylishApplication.instance.getDrawable(R.drawable.ic_launcher_foreground)
                 message = messageType.value.message
             }
+
+            MessageType.TOTALPOINT -> {
+                iconRes = StylishApplication.instance.getDrawable(R.drawable.stamp1)
+                message = messageType.value.message
+            }
+
             else -> {
 
             }
@@ -68,7 +74,8 @@ class MessageDialog : AppCompatDialogFragment() {
         LOGIN_SUCCESS(Message()),
         LOGIN_FAIL(Message()),
         ADDED_SUCCESS(Message()),
-        MESSAGE(Message())
+        MESSAGE(Message()),
+        TOTALPOINT(Message())
     }
 
     interface IMessage {

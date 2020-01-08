@@ -246,6 +246,27 @@ object StylishRemoteDataSource : StylishDataSource {
         }
     }
 
+    override suspend fun getEverydayPoint(
+        getPoint: GetPoint): Result<ReceivePoint> {
+
+        if (!isInternetConnected()) {
+            return Result.Fail(getString(R.string.internet_not_connected))
+        }
+        // Get the Deferred object for our Retrofit request
+        var postPropertiesDeferred = StylishApi.retrofitService.getPoint(getPoint)
+        return try {
+            // this will run on a thread managed by Retrofit
+            val listResult = postPropertiesDeferred.await()
+            listResult.totalPoint?.let{
+                return Result.Success(listResult)
+            }
+
+        } catch (e: Exception) {
+            Logger.w("[${this::class.simpleName}] exception=${e.message}")
+            Result.Error(e)
+        }
+    }
+
     override  fun getProductsInCart(): LiveData<List<Product>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

@@ -35,7 +35,9 @@ interface StylishDataSource {
 
     suspend fun uploadComment(comment: Comment): Result<CommentResult>
 
-   fun getProductsInCart(): LiveData<List<Product>>
+    suspend fun getEverydayPoint(getPoint: GetPoint):Result<ReceivePoint>
+
+    fun getProductsInCart(): LiveData<List<Product>>
 
     fun getProductsCollected(): LiveData<List<ProductCollected>>
 
