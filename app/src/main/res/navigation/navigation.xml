@@ -70,7 +70,11 @@
     <fragment android:id="@+id/checkoutSuccessFragment"
               android:name="app.appworks.school.stylish.checkout.CheckoutSuccessFragment"
               android:label="CheckoutSuccessFragment"
-              tools:layout="@layout/fragment_checkout_success"/>
+              tools:layout="@layout/fragment_checkout_success">
+        <action
+            android:id="@+id/navigate_to_historyFragment"
+            app:destination="@id/historyFragment" />
+    </fragment>
 
     <dialog
             android:id="@+id/loginDialog"

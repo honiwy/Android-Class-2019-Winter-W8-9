@@ -32,4 +32,17 @@ class CheckoutSuccessViewModel(private val stylishRepository: StylishRepository)
     fun onHomeNavigated() {
         _navigateToHome.value = null
     }
+
+    private val _navigateToHistory = MutableLiveData<Boolean>()
+
+    val navigateToHistory: LiveData<Boolean>
+        get() = _navigateToHistory
+
+    fun navigateToHistory() {
+        _navigateToHistory.value = true
+    }
+
+    fun onHistoryNavigated() {
+        _navigateToHistory.value = null
+    }
 }

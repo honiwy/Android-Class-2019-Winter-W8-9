@@ -78,33 +78,52 @@
                 app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_checkout_success_bottom"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/height_all_bottom_layout"
-                android:background="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+            android:id="@+id/layout_checkout_success_bottom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <Button
-                    android:id="@+id/button_checkout_success_shopping"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:letterSpacing="0.15"
-                    android:text="@string/goto_shopping"
-                    android:onClick="@{() -> viewModel.navigateToHome()}"
-                    style="@style/Base.Widget.AppCompat.Button.Borderless"
-                    android:background="@drawable/button_add2cart_black_ripple"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                android:id="@+id/button_checkout_success_shopping"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_add2cart_black_ripple"
+                android:letterSpacing="0.15"
+                android:onClick="@{() -> viewModel.navigateToHome()}"
+                android:text="@string/goto_shopping"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_go_history"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button_go_history"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/button_add2cart_black_ripple"
+                android:letterSpacing="0.15"
+                android:onClick="@{() -> viewModel.navigateToHistory()}"
+                android:text="@string/goto_history"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/button_checkout_success_shopping"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/button_checkout_success_shopping"
+                app:layout_constraintTop_toTopOf="@+id/button_checkout_success_shopping" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

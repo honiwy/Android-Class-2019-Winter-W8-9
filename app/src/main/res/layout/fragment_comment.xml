@@ -60,7 +60,7 @@
                 android:text="@={viewModel.comment}"
                 android:enabled="@{viewModel.hasCommented? false:true}"
                 android:gravity="start|top"
-                android:lines="6"
+                android:lines="7"
                 android:maxLength="100"
                 app:layout_constraintEnd_toEndOf="@+id/imageView"
                 app:layout_constraintStart_toStartOf="@+id/imageView"
@@ -86,8 +86,8 @@
                 android:fontFamily="@font/noto_sans"
                 android:letterSpacing="0.15"
                 android:textColor="@color/black_3f3a3a"
-                android:textSize="18sp"
-                android:text="@{viewModel.hasCommented? @string/commented :@string/wait_comment}"
+                android:textSize="18dp"
+                android:text="@{@string/send_comment}"
                 android:visibility="@{viewModel.hasCommented?  View.INVISIBLE : View.VISIBLE}"
                 android:enabled="@{viewModel.hasCommented? false:true}"
                 android:onClick="@{()->viewModel.uploadComment()}"
@@ -95,7 +95,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/imageView"
                 app:layout_constraintStart_toEndOf="@+id/ratingBar"
                 app:layout_constraintTop_toTopOf="@+id/ratingBar"
-                tools:text="@string/wait_comment" />
+                tools:text="@string/send_comment" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

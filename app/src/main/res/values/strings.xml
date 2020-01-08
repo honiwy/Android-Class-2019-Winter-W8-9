@@ -70,6 +70,7 @@
 
     <!-- History -->
     <string name="wait_comment">我要評價</string>
+    <string name="send_comment">送出評價</string>
     <string name="commented">已評價</string>
     <string name="no_history">目前沒有已購買的商品。</string>
     <string name="comment_hint">我有話要說...(上限100字)</string>
@@ -106,6 +107,7 @@
     <string name="checkout_success">結帳成功</string>
     <string name="checkout_success_content">我們收到您的訂單了！將以最快的速度為您安排出貨。</string>
     <string name="goto_shopping">再去逛逛</string>
+    <string name="goto_history">檢視訂購紀錄</string>
 
     <!-- General -->
     <string name="nt_dollars_">NT$%d</string>
