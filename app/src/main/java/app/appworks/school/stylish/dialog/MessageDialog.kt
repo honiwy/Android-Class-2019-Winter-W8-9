@@ -60,7 +60,7 @@ class MessageDialog : AppCompatDialogFragment() {
             }
 
             MessageType.TOTALPOINT -> {
-                iconRes = StylishApplication.instance.getDrawable(R.drawable.stamp1)
+                iconRes = StylishApplication.instance.getDrawable(R.drawable.stamp)
                 message = messageType.value.message
             }
 

@@ -179,7 +179,7 @@
                 android:layout_marginEnd="16dp"
                 android:drawableTop="@{viewModel.hasAttend? @drawable/stamp_stamped : @drawable/stamp1}"
                 android:text="@string/getPoint"
-                android:onClick="@{() -> viewModel.checkAttend()}"
+                android:onClick="@{() -> viewModel.checkPoint()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/button_profile_awaiting_review"

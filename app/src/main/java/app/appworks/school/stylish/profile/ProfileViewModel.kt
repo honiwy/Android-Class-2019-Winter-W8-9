@@ -45,13 +45,7 @@ class ProfileViewModel(
         get() = _user
 
 
-//  check TodayPoint than get TotalPoint
 
-    val totalPoint = MutableLiveData<ReceivePoint>()
-
-    val hasAttend: LiveData<Boolean> = Transformations.map(user) {
-        it.gotTodayPoint
-    }
 
     private val _navigateToAttended = MutableLiveData<Boolean>()
 
@@ -188,33 +182,40 @@ class ProfileViewModel(
         }
     }
 
-    fun checkAttend() {
-        user.value?.let {
-            if (user.value?.gotTodayPoint == true) {
-                _navigateToAttended.value = true
-            } else {
+    //  check TodayPoint than get TotalPoint
+
+    val totalPoint = MutableLiveData<ReceivePoint>()
+
+    val hasAttend: LiveData<Boolean> = Transformations.map(user) {
+        it.gotTodayPoint
+    }
+
+    fun checkPoint() {
+        user.value?.let {userHi->
+            if (!userHi.gotTodayPoint) {
                 getEverydayPoint()
             }
+            _navigateToAttended.value = true
         }
     }
 
+    fun onCheckPointCompleted() {
+        _navigateToAttended.value = null
+    }
 
     fun getEverydayPoint() {
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
-
             val getPoint = GetPoint(user.value?.id ?: -1, 1)
             val result = stylishRepository.getEverydayPoint(getPoint)
             totalPoint.value = when (result) {
                 is Result.Success -> {
                     _error.value = null
-
                     _user.value?.let {
                         val newUser = it.copy()
                         newUser.gotTodayPoint = true
                         _user.value = newUser
                     }
-//                    _navigateToAttended.value = true
                         result.data
                 }
                 else -> {

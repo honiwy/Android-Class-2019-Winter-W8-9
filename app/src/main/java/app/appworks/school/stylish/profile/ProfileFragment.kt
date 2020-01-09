@@ -67,19 +67,14 @@ class ProfileFragment : Fragment() {
         })
         viewModel.navigateToAttended.observe(this, Observer {
             it?.let {
-                val message =" 本日已簽到"
+                var message = "本日已簽到"
+                viewModel.totalPoint.value?.let {accumulatedPoint->
+                    message += "\n累計: $accumulatedPoint 點"
+                }
                 findNavController().navigate(NavigationDirections.navigateToMessageDialog(
                     MessageDialog.MessageType.TOTALPOINT.apply { value.message = message }
                 ))
-            }
-        })
-
-        viewModel.totalPoint.observe(this, Observer {
-            it?.let{
-                   val message =" 簽到成功\n累計: ${it.totalPoint} 點"
-                   findNavController().navigate(NavigationDirections.navigateToMessageDialog(
-                       MessageDialog.MessageType.TOTALPOINT.apply { value.message = message }
-                   ))
+                viewModel.onCheckPointCompleted()
             }
         })
 
