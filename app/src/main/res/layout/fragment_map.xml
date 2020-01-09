@@ -18,30 +18,33 @@
             android:layout_width="0dp"
             android:layout_height="394dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
+            android:prompt="@string/select_store_branch"
+            android:selectedItemPosition="@={viewModel.selectedStorePosition}"
+            android:spinnerMode="dialog"
             app:layout_constraintEnd_toEndOf="@+id/map_view"
             app:layout_constraintStart_toStartOf="@+id/map_view"
-            app:layout_constraintTop_toBottomOf="@+id/map_view" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/store_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="松山店"
-            android:textSize="24sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/map_view"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
+            app:layout_constraintTop_toBottomOf="@+id/map_view" />
 
         <TextView
             android:id="@+id/store_time"

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="branch_store_list">
+        <item>@string/taiwan</item>
+        <item>@string/australia</item>
+        <item>@string/finland</item>
+        <item>@string/morocco</item>
+    </string-array>
+</resources>

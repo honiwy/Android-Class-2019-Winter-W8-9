@@ -50,9 +50,26 @@
     <string name="system_feedback">系統回饋</string>
     <string name="register_phone">手機綁定</string>
     <string name="settings">設定</string>
+
+
+    <!-- Store -->
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDtNsmMJCOanyBohCm-mV-wvDRhQ_nNxuo</string>
-
-
+    <string name="australia">澳洲</string>
+    <string name="australia_phone">+61 7 3807-2555</string>
+    <string name="australia_address">1 Lloyds Ln, Yatala QLD 4207, Australia</string>
+    <string name="taiwan">臺灣</string>
+    <string name="taiwan_phone">+886 2 2765-0757</string>
+    <string name="taiwan_address">臺北市信義區基隆路一段178號, 臺灣</string>
+    <string name="phone_prefix">連絡電話: </string>
+    <string name="time_prefix">營業時間: </string>
+    <string name="address_prefix">店鋪地址: </string>
+    <string name="finland">芬蘭</string>
+    <string name="finland_phone">+358 40 4804604</string>
+    <string name="finland_address">Katajanokanlaituri 2, 00160 Helsinki, Finland</string>
+    <string name="morocco">摩洛哥</string>
+    <string name="morocco_phone">+212 5372-93794</string>
+    <string name="morocco_address">Annexe 23eme, (Ceinture verte), Cité Yacoub El Mansour,, Rabat, Morocco</string>
+    <string name="select_store_branch">選擇分店</string>
 
     <!-- Detail -->
     <string name="color">顏色</string>

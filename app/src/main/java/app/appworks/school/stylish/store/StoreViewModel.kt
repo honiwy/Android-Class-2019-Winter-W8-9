@@ -4,6 +4,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import app.appworks.school.stylish.StylishApplication
 import app.appworks.school.stylish.data.Product
@@ -17,25 +18,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
+enum class Branch(val positionOnSpinner: Int) {
+    TAIWAN(0),
+    AUSTRALIA(1),
+    FINLAND(2),
+    MOROCCO(3)
+}
 class StoreViewModel(private val stylishRepository: StylishRepository) : ViewModel() {
 
-    //val products: LiveData<List<ProductCollected>> = stylishRepository.getProductsCollected()
 
-    private var viewModelJob = Job()
-
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
-    // Handle navigation to map
-    private val _navigateToMap = MutableLiveData<Map>()
-
-    val navigateToMap: LiveData<Map>
-        get() = _navigateToMap
-
-
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
+    val selectedStorePosition = MutableLiveData<Int>()
+    val branchName: LiveData<Branch> = Transformations.map(selectedStorePosition) {
+        Branch.values()[it]
     }
+
 
     init {
         Logger.i("------------------------------------")
@@ -43,16 +39,4 @@ class StoreViewModel(private val stylishRepository: StylishRepository) : ViewMod
         Logger.i("------------------------------------")
     }
 
-    fun changeStore(storeIndex: Int) {
-
-    }
-
-    fun navigateToMap(mapInfo:Map) {
-       //map method
-        _navigateToMap.value = mapInfo
-    }
-
-    fun onMapNavigated() {
-        _navigateToMap.value = null
-    }
 }
