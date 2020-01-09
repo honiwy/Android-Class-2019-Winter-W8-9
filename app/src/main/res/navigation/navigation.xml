@@ -41,9 +41,6 @@
 
         <action android:id="@+id/navigate_to_collect_fragment"
             app:destination="@id/collectFragment"/>
-        <action
-            android:id="@+id/navigate_to_history_fragment"
-            app:destination="@id/historyFragment" />
     </fragment>
 
     <fragment
@@ -70,11 +67,7 @@
     <fragment android:id="@+id/checkoutSuccessFragment"
               android:name="app.appworks.school.stylish.checkout.CheckoutSuccessFragment"
               android:label="CheckoutSuccessFragment"
-              tools:layout="@layout/fragment_checkout_success">
-        <action
-            android:id="@+id/navigate_to_historyFragment"
-            app:destination="@id/historyFragment" />
-    </fragment>
+              tools:layout="@layout/fragment_checkout_success"/>
 
     <dialog
             android:id="@+id/loginDialog"
@@ -123,6 +116,7 @@
     <action android:id="@+id/navigate_to_message_dialog" app:destination="@id/messageDialog"/>
     <action android:id="@+id/navigate_to_add2cart_dialog" app:destination="@id/add2cartDialog"/>
     <action android:id="@+id/navigate_to_comment_fragment" app:destination="@id/commentFragment"/>
+    <action android:id="@+id/navigate_to_history_fragment" app:destination="@id/historyFragment" />
     <dialog
         android:id="@+id/subscribeDialog"
         android:name="app.appworks.school.stylish.dialog.SubscribeDialog"
@@ -142,5 +136,6 @@
             android:name="productKey"
             app:argType="app.appworks.school.stylish.data.OrderResult" />
     </fragment>
+
 
 </navigation>

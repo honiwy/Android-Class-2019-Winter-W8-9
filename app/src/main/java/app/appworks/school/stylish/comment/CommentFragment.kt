@@ -43,7 +43,6 @@ class CommentFragment : Fragment() {
         binding.viewModel = viewModel
         binding.ratingBar.setOnRatingBarChangeListener { ratingBar, fl, b ->
             viewModel.star.value = fl.toInt()
-            Log.i("apple","You rank $fl which become ${fl.toInt()}")
         }
 
         viewModel.leaveComment.observe(this, Observer {

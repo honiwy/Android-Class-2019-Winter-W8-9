@@ -13,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import app.appworks.school.stylish.data.Result
+import app.appworks.school.stylish.network.HistoryFilter
 
 class HistoryViewModel(private val stylishRepository: StylishRepository) : ViewModel() {
 
@@ -50,17 +51,26 @@ class HistoryViewModel(private val stylishRepository: StylishRepository) : ViewM
         Logger.i("------------------------------------")
         Logger.i("[${this::class.simpleName}]${this}")
         Logger.i("------------------------------------")
-        getOrderResult()
+        getOrderResult(HistoryFilter.SHOW_ALL)
     }
 
-    private fun getOrderResult() {
+    private fun getOrderResult(filter: HistoryFilter) {
 
         coroutineScope.launch {
             // It will return Result object after Deferred flow
             val result = stylishRepository.getOrderList(UserManager.userId)
             _orderResults.value = when (result) {
                 is Result.Success -> {
-                    result.data.orderProducts
+                    when(filter){
+                        HistoryFilter.SHOW_COMMENT_YET->result.data.orderProducts!!.filter {
+                            !it.hasComment
+                        }
+                        HistoryFilter.SHOW_COMMENTED->result.data.orderProducts!!.filter {
+                            it.hasComment
+                        }
+                        HistoryFilter.SHOW_ALL->result.data.orderProducts
+                    }
+
                 }
                 is Result.Error -> {
                     null
@@ -81,5 +91,8 @@ class HistoryViewModel(private val stylishRepository: StylishRepository) : ViewM
         _navigateToComment.value = null
     }
 
+    fun updateFilter(filter: HistoryFilter) {
+        getOrderResult(filter)
+    }
 
 }

@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -34,6 +35,7 @@ import app.appworks.school.stylish.util.Logger
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.launch
 
 /**
@@ -88,6 +90,7 @@ class MainActivity : BaseActivity() {
             }
             false
         }
+
 
     // get the height of status bar from system
     private val statusBarHeight: Int
@@ -156,13 +159,6 @@ class MainActivity : BaseActivity() {
     }
 
     fun openDialog() {
-
-//                val successDialog = SubscribeDialog()
-//        val view = layoutInflater.inflate(R.layout.dialog_subsribe, null)
-// val builder = AlertDialog.Builder(this)
-//    builder.setView(view)
-//val dialog =builder.create()
-//        dialog.show()
         val subscribeDialog = SubscribeDialog()
         subscribeDialog.show(supportFragmentManager, "subscribeDialog")
     }
@@ -248,7 +244,15 @@ class MainActivity : BaseActivity() {
      * Set up [androidx.drawerlayout.widget.DrawerLayout] with [androidx.appcompat.widget.Toolbar]
      */
     private fun setupDrawer() {
-
+        binding.drawerNavView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.nav_awaiting_review -> {
+                    findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToHistoryFragment())
+                    return@setNavigationItemSelectedListener true
+                }
+            }
+            false
+        }
         // set up toolbar
         val navController = this.findNavController(R.id.myNavHostFragment)
         setSupportActionBar(binding.toolbar)
@@ -281,7 +285,6 @@ class MainActivity : BaseActivity() {
                         }
                     }
                 }
-
             }
         }.apply {
             binding.drawerLayout.addDrawerListener(this)

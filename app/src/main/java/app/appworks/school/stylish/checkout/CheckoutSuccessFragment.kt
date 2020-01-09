@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import app.appworks.school.stylish.MainViewModel
+import app.appworks.school.stylish.NavigationDirections
 import app.appworks.school.stylish.databinding.FragmentCheckoutSuccessBinding
 import app.appworks.school.stylish.ext.getVmFactory
 import app.appworks.school.stylish.history.HistoryFragmentDirections
@@ -42,7 +43,7 @@ class CheckoutSuccessFragment : Fragment() {
 
         viewModel.navigateToHistory.observe(this, Observer {
             it?.let {
-                findNavController().navigate(CheckoutSuccessFragmentDirections.navigateToHistoryFragment())
+                findNavController().navigate(NavigationDirections.navigateToHistoryFragment())
                 viewModel.onHistoryNavigated()
             }
         })

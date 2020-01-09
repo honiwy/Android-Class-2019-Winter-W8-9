@@ -1,14 +1,13 @@
 package app.appworks.school.stylish.catalog.item
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import app.appworks.school.stylish.NavigationDirections
+import app.appworks.school.stylish.R
 import app.appworks.school.stylish.catalog.CatalogTypeFilter
 import app.appworks.school.stylish.databinding.FragmentCatalogItemBinding
 import app.appworks.school.stylish.ext.getVmFactory
@@ -57,7 +56,7 @@ class CatalogItemFragment(private val catalogType: CatalogTypeFilter) : Fragment
                     binding.layoutSwipeRefreshCatalogItem.isRefreshing = false
             }
         })
-
         return binding.root
     }
+
 }

@@ -13,7 +13,11 @@
     <string name="subscribe_title">訂閱電子報</string>
     <string name="subscribe_hint">***@gmail.com</string>
     <string name="confirm">確認</string>
-    <string name="cancel">取消</string>
+    <string name="cancel">錯失良機</string>
+    <string name="unknown_email">無法辨認的信箱</string>
+    <string name="subscribe_success">訂閱成功</string>
+
+
     <!-- Login Dialog -->
     <string name="login_title">請先登入會員</string>
     <string name="login_description">登入會員後即可使用個人功能。</string>
@@ -22,6 +26,8 @@
     <!-- IMessage Dialog -->
     <string name="login_success">登入成功</string>
     <string name="addto_success">加入成功</string>
+
+
 
     <!-- Profile -->
     <string name="profile_default_name">Loading…</string>
@@ -72,8 +78,10 @@
     <string name="wait_comment">我要評價</string>
     <string name="send_comment">送出評價</string>
     <string name="commented">已評價</string>
+    <string name="comment_yet">未評價</string>
+    <string name="show_all">顯示全部</string>
     <string name="no_history">目前沒有已購買的商品。</string>
-    <string name="comment_hint">我有話要說...(上限100字)</string>
+    <string name="comment_hint">我想分享&#8230;(上限100字)</string>
     <string name="_order_number">訂單編號: %s</string>
 
     <!-- Payment -->
@@ -85,8 +93,8 @@
     <string name="recipient_phone">手機號碼</string>
     <string name="recipient_address">地址</string>
     <string name="shipping_time">配送時間</string>
-    <string name="shipping_morning">08:00-12:00</string>
-    <string name="shipping_afternoon">14:00-18:00</string>
+    <string name="shipping_morning">08:00&#8211;12:00</string>
+    <string name="shipping_afternoon">14:00&#8211;18:00</string>
     <string name="shipping_anytime">不指定</string>
     <string name="payment_detail">付款詳情</string>
     <string name="cash_on_delivery">貨到付款</string>
@@ -117,8 +125,8 @@
     <string name="profile">個人</string>
     <string name="payment">結帳</string>
     <string name="collect">收藏</string>
-    <string name="history">購買紀錄</string>
-    <string name="comment">分享評價</string>
+    <string name="history">訂購紀錄</string>
+    <string name="comment">商品評價</string>
     <string name="stock_">庫存：</string>
     <string name="aka">AKA 小安老師</string>
     <string name="internet_not_connected">您尚未連接 Internet</string>

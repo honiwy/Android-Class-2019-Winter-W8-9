@@ -87,4 +87,5 @@ class CatalogItemViewModel(
     fun onDetailNavigated() {
         _navigateToDetail.value = null
     }
+
 }

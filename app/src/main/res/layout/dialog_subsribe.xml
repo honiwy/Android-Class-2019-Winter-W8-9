@@ -31,7 +31,7 @@
                 android:fontFamily="@font/noto_sans"
                 android:letterSpacing="0.15"
                 android:text="@string/subscribe_title"
-                android:textSize="24sp"
+                android:textSize="28sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,11 +58,10 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
                 android:background="@color/gray_f5f5f5"
-                android:enabled="@{viewModel.isValidEmail ? true : false}"
+                android:clickable="@{viewModel.status == LoadApiStatus.LOADING ? false : true}"
                 android:fontFamily="@font/noto_sans"
                 android:gravity="center"
                 android:letterSpacing="0.15"
-                android:clickable="@{viewModel.status == LoadApiStatus.LOADING ? false : true}"
                 android:onClick="@{() -> viewModel.subscribeNews()}"
                 android:text="@string/confirm"
                 android:textSize="16sp"
@@ -73,7 +72,7 @@
 
             <Button
                 android:id="@+id/button_close"
-                android:layout_width="0dp"
+                android:layout_width="78dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="24dp"
@@ -87,6 +86,16 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/email"
                 app:layout_constraintTop_toBottomOf="@+id/email" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/subscribe_title"
+                app:layout_constraintEnd_toStartOf="@+id/subscribe_title"
+                app:layout_constraintTop_toTopOf="@+id/subscribe_title"
+                app:srcCompat="@drawable/news" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

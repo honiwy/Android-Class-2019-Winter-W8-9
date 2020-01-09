@@ -54,7 +54,7 @@ class ProfileFragment : Fragment() {
 
         viewModel.navigateToHistory.observe(this, Observer {
             it?.let {
-                findNavController().navigate(ProfileFragmentDirections.navigateToHistoryFragment())
+                findNavController().navigate(NavigationDirections.navigateToHistoryFragment())
                 viewModel.onHistoryNavigated()
             }
         })

@@ -8,23 +8,23 @@
             <item
                 android:id="@+id/nav_awaiting_payment"
                 android:icon="@drawable/ic_awaiting_payment"
-                android:title="待出款" />
+                android:title="@string/awaiting_payment" />
             <item
                 android:id="@+id/nav_awaiting_shipment"
                 android:icon="@drawable/ic_awaiting_shipment"
-                android:title="待出貨" />
+                android:title="@string/awaiting_shipment" />
             <item
                 android:id="@+id/nav_shipped"
                 android:icon="@drawable/ic_shipped"
-                android:title="待簽收" />
+                android:title="@string/shipped" />
             <item
                 android:id="@+id/nav_awaiting_review"
                 android:icon="@drawable/awaiting_review"
-                android:title="待評價" />
+                android:title="@string/awaiting_review" />
             <item
                 android:id="@+id/nav_exchange"
                 android:icon="@drawable/exchange"
-                android:title="待退貨" />
+                android:title="@string/exchange" />
         </menu>
     </item>
 </menu>

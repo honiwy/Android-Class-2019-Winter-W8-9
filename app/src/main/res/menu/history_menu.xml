@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/show_comment_yet_menu"
+        android:title="@string/comment_yet" />
+    <item
+        android:id="@+id/show_commented_menu"
+        android:title="@string/commented" />
+    <item
+        android:id="@+id/show_all_menu"
+        android:title="@string/show_all" />
+</menu>

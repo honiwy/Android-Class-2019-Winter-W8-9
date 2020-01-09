@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import app.appworks.school.stylish.R
 import app.appworks.school.stylish.StylishApplication
 import app.appworks.school.stylish.data.source.StylishRepository
 import app.appworks.school.stylish.data.subscribe.Email
@@ -51,14 +52,19 @@ class SubscribeViewModel(private val stylishRepository: StylishRepository) : Vie
     }
 
     fun subscribeNews(){
-        coroutineScope.launch {
-            status.value = LoadApiStatus.LOADING
-            // It will return Result object after Deferred flow
-            val result = stylishRepository.subscribeNews(Email(emailTyped.value!!))
-            status.value = LoadApiStatus.DONE
-            Toast.makeText(StylishApplication.instance,"訂閱成功", Toast.LENGTH_SHORT).show()
-            leave()
+        if(isValidEmail.value==true){
+            coroutineScope.launch {
+                status.value = LoadApiStatus.LOADING
+                Toast.makeText(StylishApplication.instance,StylishApplication.instance.getString(R.string.subscribe_success), Toast.LENGTH_SHORT).show()
+                stylishRepository.subscribeNews(Email(emailTyped.value!!))
+                status.value = LoadApiStatus.DONE
+                leave()
+            }
         }
+        else{
+            Toast.makeText(StylishApplication.instance,StylishApplication.instance.getString(R.string.unknown_email), Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     fun leave() {

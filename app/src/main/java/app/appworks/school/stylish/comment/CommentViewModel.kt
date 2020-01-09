@@ -61,25 +61,14 @@ class CommentViewModel(
                     comment.value!!
                 )
             )
-            Log.i("apple", "result: $result")
-
-            hasCommented.value = when (result) {
+            when (result){
                 is Result.Success -> {
-                    true
-                }
-                else -> {
-                    false
+                    arguments.hasComment = true
+                    hasCommented.value = true
+                    _leaveComment.value = true
                 }
             }
 
-            arguments.hasComment = hasCommented.value ?: false
         }
-
-
-        Log.i(
-            "apple",
-            "star: ${star.value}; comment: ${comment.value}; commentId: ${orderResult.value!!.commentId};" +
-                    "userId: ${UserManager.userId}"
-        )
     }
 }
