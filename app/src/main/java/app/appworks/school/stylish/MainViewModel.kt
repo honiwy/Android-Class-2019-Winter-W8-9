@@ -50,6 +50,7 @@ class MainViewModel(private val stylishRepository: StylishRepository) : ViewMode
             CurrentFragmentType.COLLECT -> DrawerToggleType.BACK
             CurrentFragmentType.HISTORY -> DrawerToggleType.BACK
             CurrentFragmentType.COMMENT -> DrawerToggleType.BACK
+            CurrentFragmentType.STORE -> DrawerToggleType.BACK
             else -> DrawerToggleType.NORMAL
         }
     }

@@ -195,6 +195,7 @@ class MainActivity : BaseActivity() {
                 R.id.collectFragment -> CurrentFragmentType.COLLECT
                 R.id.historyFragment -> CurrentFragmentType.HISTORY
                 R.id.commentFragment -> CurrentFragmentType.COMMENT
+                R.id.storeFragment -> CurrentFragmentType.STORE
                 R.id.checkoutSuccessFragment -> CurrentFragmentType.CHECKOUT_SUCCESS
                 else -> viewModel.currentFragmentType.value
             }

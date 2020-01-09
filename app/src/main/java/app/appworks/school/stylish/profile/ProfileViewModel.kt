@@ -58,8 +58,20 @@ class ProfileViewModel(
     val navigateToAttended: LiveData<Boolean>
         get() = _navigateToAttended
 
-    private val _navigateToCollection = MutableLiveData<Boolean>()
+    private val _navigateToStore = MutableLiveData<Boolean>()
 
+    val navigateToStore: LiveData<Boolean>
+        get() = _navigateToStore
+
+    fun navigateToStore() {
+        _navigateToStore.value = true
+    }
+
+    fun onStoreNavigated() {
+        _navigateToStore.value = null
+    }
+
+    private val _navigateToCollection = MutableLiveData<Boolean>()
 
     val navigateToCollection: LiveData<Boolean>
         get() = _navigateToCollection

@@ -12,6 +12,7 @@ import app.appworks.school.stylish.history.HistoryViewModel
 import app.appworks.school.stylish.home.HomeViewModel
 import app.appworks.school.stylish.login.LoginViewModel
 import app.appworks.school.stylish.payment.PaymentViewModel
+import app.appworks.school.stylish.store.StoreViewModel
 
 /**
  * Created by Wayne Chen in Jul. 2019.
@@ -34,6 +35,9 @@ class ViewModelFactory constructor(
 
                 isAssignableFrom(CartViewModel::class.java) ->
                     CartViewModel(stylishRepository)
+
+                isAssignableFrom(StoreViewModel::class.java) ->
+                    StoreViewModel(stylishRepository)
 
                 isAssignableFrom(PaymentViewModel::class.java) ->
                     PaymentViewModel(stylishRepository)

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="viewModel" type="app.appworks.school.stylish.store.StoreViewModel"/>
+    </data>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/map_view"
+            android:layout_width="0dp"
+            android:layout_height="394dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/map_view"
+            app:layout_constraintStart_toStartOf="@+id/map_view"
+            app:layout_constraintTop_toBottomOf="@+id/map_view" />
+
+        <TextView
+            android:id="@+id/store_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="松山店"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/map_view"
+            app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+        <TextView
+            android:id="@+id/store_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="營業時間: 10:00-15:00"
+            app:layout_constraintStart_toStartOf="@+id/map_view"
+            app:layout_constraintTop_toBottomOf="@+id/store_title" />
+
+        <TextView
+            android:id="@+id/store_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="營業地址: 臺北市松山區市府路123號45樓"
+            app:layout_constraintStart_toStartOf="@+id/map_view"
+            app:layout_constraintTop_toBottomOf="@+id/store_phone" />
+
+        <TextView
+            android:id="@+id/store_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="連絡電話: 0911234567"
+            app:layout_constraintStart_toStartOf="@+id/map_view"
+            app:layout_constraintTop_toBottomOf="@+id/store_time" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

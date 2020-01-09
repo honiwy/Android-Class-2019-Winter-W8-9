@@ -12,6 +12,7 @@ enum class CurrentFragmentType(val value: String) {
     COLLECT(getString(R.string.collect)),
     HISTORY(getString(R.string.history)),
     COMMENT(getString(R.string.comment)),
+    STORE(getString(R.string.store)),
     DETAIL(""),
     CHECKOUT_SUCCESS(getString(R.string.checkout_success_title))
 }

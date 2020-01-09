@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import app.appworks.school.stylish.R
 import app.appworks.school.stylish.StylishApplication
 import app.appworks.school.stylish.data.Product
 import app.appworks.school.stylish.data.collected.Collect
@@ -44,10 +45,9 @@ class CollectViewModel(private val stylishRepository: StylishRepository) : ViewM
     }
 
     fun removeProduct(productCollected: ProductCollected) {
-        Log.i("apple","Remove product collected")
         coroutineScope.launch {
             stylishRepository.removeProductCollected(productCollected.id)
-            Toast.makeText(StylishApplication.instance,"取消收藏", Toast.LENGTH_SHORT).show()
+            Toast.makeText(StylishApplication.instance,StylishApplication.instance.getString(R.string.remove_from_collection), Toast.LENGTH_SHORT).show()
             stylishRepository.deleteUserCollected(Collect(UserManager.userId!!,productCollected.id))
         }
     }

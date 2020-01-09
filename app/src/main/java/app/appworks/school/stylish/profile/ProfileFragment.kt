@@ -45,6 +45,13 @@ class ProfileFragment : Fragment() {
             })
         }
 
+        viewModel.navigateToStore.observe(this, Observer {
+            it?.let {
+                findNavController().navigate(ProfileFragmentDirections.navigateToStoreFragment())
+                viewModel.onStoreNavigated()
+            }
+        })
+
         viewModel.navigateToCollection.observe(this, Observer {
             it?.let {
                 findNavController().navigate(ProfileFragmentDirections.navigateToCollectFragment())
@@ -59,9 +66,8 @@ class ProfileFragment : Fragment() {
             }
         })
         viewModel.navigateToAttended.observe(this, Observer {
-            Log.i("TAG","viewModel.navigateToAttended.observe, it=${it}")
             it?.let {
-                val message =" 今天已經簽到囉"
+                val message =" 本日已簽到"
                 findNavController().navigate(NavigationDirections.navigateToMessageDialog(
                     MessageDialog.MessageType.TOTALPOINT.apply { value.message = message }
                 ))
@@ -69,7 +75,6 @@ class ProfileFragment : Fragment() {
         })
 
         viewModel.totalPoint.observe(this, Observer {
-            Log.i("TAG","${it}")
             it?.let{
                    val message =" 簽到成功\n累計: ${it.totalPoint} 點"
                    findNavController().navigate(NavigationDirections.navigateToMessageDialog(

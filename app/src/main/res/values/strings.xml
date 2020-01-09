@@ -50,6 +50,9 @@
     <string name="system_feedback">系統回饋</string>
     <string name="register_phone">手機綁定</string>
     <string name="settings">設定</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDtNsmMJCOanyBohCm-mV-wvDRhQ_nNxuo</string>
+
+
 
     <!-- Detail -->
     <string name="color">顏色</string>
@@ -77,7 +80,7 @@
     <string name="no_collects">目前沒有收藏的商品。</string>
 
     <!-- History -->
-    <string name="wait_comment">我要評價</string>
+    <string name="wait_comment">去評價</string>
     <string name="send_comment">送出評價</string>
     <string name="commented">已評價</string>
     <string name="comment_yet">未評價</string>
@@ -129,6 +132,7 @@
     <string name="collect">收藏</string>
     <string name="history">訂購紀錄</string>
     <string name="comment">商品評價</string>
+    <string name="store">店鋪資訊</string>
     <string name="stock_">庫存：</string>
     <string name="aka">AKA 小安老師</string>
     <string name="internet_not_connected">您尚未連接 Internet</string>

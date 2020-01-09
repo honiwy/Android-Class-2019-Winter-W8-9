@@ -41,6 +41,9 @@
 
         <action android:id="@+id/navigate_to_collect_fragment"
             app:destination="@id/collectFragment"/>
+        <action
+            android:id="@+id/navigate_to_store_Fragment"
+            app:destination="@id/storeFragment" />
     </fragment>
 
     <fragment
@@ -136,6 +139,11 @@
             android:name="productKey"
             app:argType="app.appworks.school.stylish.data.OrderResult" />
     </fragment>
+    <fragment
+        android:id="@+id/storeFragment"
+        android:name="app.appworks.school.stylish.store.StoreFragment"
+        android:label="StoreFragment"
+        tools:layout="@layout/fragment_map"/>
 
 
 </navigation>

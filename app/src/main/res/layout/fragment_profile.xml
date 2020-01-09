@@ -167,7 +167,6 @@
                 style="@style/ProfileOrderButton"
                 android:drawableTop="@drawable/awaiting_review"
                 android:text="@string/awaiting_review"
-
                 android:onClick="@{() -> viewModel.navigateToHistory()}"
                 app:layout_constraintEnd_toStartOf="@+id/button_profile_getPoint"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -238,6 +237,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="16dp"
                 android:drawableTop="@drawable/ic_address"
+                android:onClick="@{() -> viewModel.navigateToStore()}"
                 android:text="@string/address"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
