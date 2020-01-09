@@ -33,7 +33,7 @@
     <dimen name="height_login">202dp</dimen>
 
     <!-- IMessage Dialog -->
-    <dimen name="size_message">123dp</dimen>
+    <dimen name="size_message">150dp</dimen>
 
     <!-- Add2Cart Dialog -->
     <dimen name="height_add2cart">532dp</dimen>

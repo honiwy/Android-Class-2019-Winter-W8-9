@@ -136,6 +136,11 @@
             android:name="productKey"
             app:argType="app.appworks.school.stylish.data.OrderResult" />
     </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="app.appworks.school.stylish.chat.ChatFragment"
+        android:label="ChatFragment" />
+    <action android:id="@+id/action_global_chatFragment" app:destination="@id/chatFragment"/>
 
 
 </navigation>

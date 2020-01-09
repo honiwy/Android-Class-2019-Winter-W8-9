@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import app.appworks.school.stylish.MainViewModel
 import app.appworks.school.stylish.NavigationDirections
 import app.appworks.school.stylish.R
+import app.appworks.school.stylish.data.ReceivePoint
 import app.appworks.school.stylish.databinding.FragmentProfileBinding
 import app.appworks.school.stylish.dialog.MessageDialog
 import app.appworks.school.stylish.ext.getVmFactory
@@ -61,7 +62,8 @@ class ProfileFragment : Fragment() {
         viewModel.navigateToAttended.observe(this, Observer {
             Log.i("TAG","viewModel.navigateToAttended.observe, it=${it}")
             it?.let {
-                val message =" 今天已經簽到囉"
+
+                val message =" 今天簽到囉 !"
                 findNavController().navigate(NavigationDirections.navigateToMessageDialog(
                     MessageDialog.MessageType.TOTALPOINT.apply { value.message = message }
                 ))
@@ -77,6 +79,11 @@ class ProfileFragment : Fragment() {
                    ))
             }
         })
+
+        binding.buttonProfileCustomerService.setOnClickListener {
+            findNavController().navigate(NavigationDirections.actionGlobalChatFragment())
+        }
+
 
         return binding.root
     }
