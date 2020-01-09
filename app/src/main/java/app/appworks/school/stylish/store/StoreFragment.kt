@@ -1,8 +1,6 @@
 package app.appworks.school.stylish.store
 
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,21 +10,18 @@ import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
-import app.appworks.school.stylish.NavigationDirections
 import app.appworks.school.stylish.R
 import app.appworks.school.stylish.StylishApplication
-import app.appworks.school.stylish.collect.CollectViewModel
 import app.appworks.school.stylish.databinding.FragmentMapBinding
-import app.appworks.school.stylish.dialog.MessageDialog
 import app.appworks.school.stylish.ext.getVmFactory
-import app.appworks.school.stylish.payment.PaymentSpinnerAdapter
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+
 
 class StoreFragment : Fragment(), OnMapReadyCallback {
     val MAPVIEW_BUNDLE_KEY: String? = "MapViewBundleKey"
@@ -55,23 +50,27 @@ class StoreFragment : Fragment(), OnMapReadyCallback {
                         binding.storeTime.text=StylishApplication.instance.getString(R.string.time_prefix).plus("11:00-17:00")
                         binding.storeAddress.text=StylishApplication.instance.getString(R.string.address_prefix).plus(StylishApplication.instance.getString(R.string.taiwan_address))
                         binding.storePhone.text= StylishApplication.instance.getString(R.string.phone_prefix).plus(StylishApplication.instance.getString(R.string.taiwan_phone))
+                        moveLocation(25.0424801,121.5627567,"You smile, I smile")
                     }
                     Branch.AUSTRALIA->{
                         binding.storeTitle.text="澳洲分店"
                         binding.storeTime.text = StylishApplication.instance.getString(R.string.time_prefix).plus("10:00-13:30")
                         binding.storeAddress.text=StylishApplication.instance.getString(R.string.address_prefix).plus(StylishApplication.instance.getString(R.string.australia_address))
+                        moveLocation(-27.736946,153.225838,"Be part of Us")
                     }
                     Branch.MOROCCO->{
                         binding.storeTitle.text="摩洛哥分店"
                         binding.storeTime.text=StylishApplication.instance.getString(R.string.time_prefix).plus("09:00-14:00")
                         binding.storeAddress.text=StylishApplication.instance.getString(R.string.address_prefix).plus(StylishApplication.instance.getString(R.string.morocco_address))
                         binding.storePhone.text=StylishApplication.instance.getString(R.string.phone_prefix).plus(StylishApplication.instance.getString(R.string.morocco_phone))
+                        moveLocation(33.955304,-6.8965387,"Everything is on sale!")
                     }
                     Branch.FINLAND->{
                         binding.storeTitle.text="芬蘭分店"
                         binding.storeTime.text=StylishApplication.instance.getString(R.string.time_prefix).plus("12:00-18:30")
                         binding.storeAddress.text=StylishApplication.instance.getString(R.string.address_prefix).plus(StylishApplication.instance.getString(R.string.finland_address))
                         binding.storePhone.text=StylishApplication.instance.getString(R.string.phone_prefix).plus(StylishApplication.instance.getString(R.string.finland_phone))
+                        moveLocation(60.167014,24.9568524,"We are hiring!")
                     }
                 }
             }
@@ -82,6 +81,21 @@ class StoreFragment : Fragment(), OnMapReadyCallback {
         initGoogleMap(savedInstanceState)
 
         return binding.root
+    }
+
+    fun moveLocation(positionX:Double,positionY:Double,info:String){
+        val restoredCamera = CameraPosition.Builder()
+            .target(
+                LatLng(
+                    positionX,positionY
+                )
+            )
+            .zoom(15f)
+            .bearing(0f) // Face north
+            .tilt(0f) // reset tilt (directly facing the Earth)
+            .build()
+        mMap.addMarker(MarkerOptions().position(LatLng(positionX,positionY)).title(info))
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(restoredCamera))
     }
 
     private fun initGoogleMap(savedInstanceState: Bundle?) { // *** IMPORTANT ***
@@ -124,14 +138,11 @@ class StoreFragment : Fragment(), OnMapReadyCallback {
         mMap = googleMap
 
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        val sydney2 = LatLng(25.0424488,121.562731)
-        val zoom = CameraUpdateFactory.zoomTo(15f)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.addMarker(MarkerOptions().position(sydney2).title("We are hiring"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney2))
-        mMap.animateCamera(zoom)
+       // val sydney = LatLng(-34.0, 151.0)
+       // val zoom = CameraUpdateFactory.zoomTo(15f)
+
+       // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+       // mMap.animateCamera(zoom)
     }
 
     override fun onPause() {
