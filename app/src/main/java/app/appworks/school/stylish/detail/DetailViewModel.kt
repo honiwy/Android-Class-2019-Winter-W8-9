@@ -141,7 +141,7 @@ class DetailViewModel(
         product.value?.let {
             coroutineScope.launch {
                 if (_collectProduct.value == true) {
-                    Toast.makeText(StylishApplication.instance,"加入收藏",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(StylishApplication.instance,StylishApplication.instance.getString(R.string.add_to_collection),Toast.LENGTH_SHORT).show()
                     stylishRepository.insertProductCollected(
                         ProductCollected( it.id, it.title, it.description, it.price,
                             it.texture, it.wash,it.place,it.note,it.story,
@@ -150,7 +150,7 @@ class DetailViewModel(
                     )
                 }
                 else {
-                    Toast.makeText(StylishApplication.instance,"取消收藏",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(StylishApplication.instance,StylishApplication.instance.getString(R.string.remove_from_collection),Toast.LENGTH_SHORT).show()
                     stylishRepository.removeProductCollected(it.id)
                 }
             }
@@ -159,11 +159,9 @@ class DetailViewModel(
     fun updateServerCollection(){
         coroutineScope.launch {
             if (_collectProduct.value == true) {
-                Log.i("apple","update server collection")
                 stylishRepository.insertUserCollected(Collect(UserManager.userId!!,product.value!!.id))
             }
             else {
-                Log.i("apple","delete server collection")
                 stylishRepository.deleteUserCollected(Collect(UserManager.userId!!,product.value!!.id))
             }
         }

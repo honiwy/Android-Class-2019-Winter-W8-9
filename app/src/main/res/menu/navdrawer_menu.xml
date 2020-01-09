@@ -18,7 +18,7 @@
                 android:icon="@drawable/ic_shipped"
                 android:title="@string/shipped" />
             <item
-                android:id="@+id/nav_awaiting_review"
+                android:id="@+id/historyFragment"
                 android:icon="@drawable/awaiting_review"
                 android:title="@string/awaiting_review" />
             <item

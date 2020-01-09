@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -244,15 +245,7 @@ class MainActivity : BaseActivity() {
      * Set up [androidx.drawerlayout.widget.DrawerLayout] with [androidx.appcompat.widget.Toolbar]
      */
     private fun setupDrawer() {
-        binding.drawerNavView.setNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.nav_awaiting_review -> {
-                    findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToHistoryFragment())
-                    return@setNavigationItemSelectedListener true
-                }
-            }
-            false
-        }
+
         // set up toolbar
         val navController = this.findNavController(R.id.myNavHostFragment)
         setSupportActionBar(binding.toolbar)
@@ -295,6 +288,7 @@ class MainActivity : BaseActivity() {
         val bindingNavHeader = NavHeaderDrawerBinding.inflate(
             LayoutInflater.from(this), binding.drawerNavView, false
         )
+
 
         bindingNavHeader.lifecycleOwner = this
         bindingNavHeader.viewModel = viewModel

@@ -86,7 +86,7 @@
                 android:fontFamily="@font/noto_sans"
                 android:letterSpacing="0.15"
                 android:textColor="@color/black_3f3a3a"
-                android:textSize="18dp"
+                android:textSize="14sp"
                 android:text="@{@string/send_comment}"
                 android:visibility="@{viewModel.hasCommented?  View.INVISIBLE : View.VISIBLE}"
                 android:enabled="@{viewModel.hasCommented? false:true}"
