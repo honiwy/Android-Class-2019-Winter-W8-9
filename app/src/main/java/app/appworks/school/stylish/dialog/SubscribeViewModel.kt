@@ -20,9 +20,6 @@ class SubscribeViewModel(private val stylishRepository: StylishRepository) : Vie
 
     val emailTyped = MutableLiveData<String>()
 
-    val isValidEmail = Transformations.map(emailTyped) {
-        checkEmailAvailable()
-    }
 
     private var viewModelJob = Job()
 
@@ -33,8 +30,8 @@ class SubscribeViewModel(private val stylishRepository: StylishRepository) : Vie
         viewModelJob.cancel()
     }
 
-    // status: The internal MutableLiveData that stores the status of the most recent request
 
+    // status: The internal MutableLiveData that stores the status of the most recent request
     val status = MutableLiveData<LoadApiStatus>()
 
     // Handle leave add2cart
@@ -52,7 +49,7 @@ class SubscribeViewModel(private val stylishRepository: StylishRepository) : Vie
     }
 
     fun subscribeNews(){
-        if(isValidEmail.value==true){
+        if(checkEmailAvailable()){
             coroutineScope.launch {
                 status.value = LoadApiStatus.LOADING
                 Toast.makeText(StylishApplication.instance,StylishApplication.instance.getString(R.string.subscribe_success), Toast.LENGTH_SHORT).show()

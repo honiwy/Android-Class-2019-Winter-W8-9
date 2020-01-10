@@ -44,9 +44,6 @@ class ProfileViewModel(
     val user: LiveData<User>
         get() = _user
 
-
-
-
     private val _navigateToAttended = MutableLiveData<Boolean>()
 
     val navigateToAttended: LiveData<Boolean>
@@ -191,8 +188,8 @@ class ProfileViewModel(
     }
 
     fun checkPoint() {
-        user.value?.let {userHi->
-            if (!userHi.gotTodayPoint) {
+        user.value?.let {
+            if (!it.gotTodayPoint) {
                 getEverydayPoint()
             }
             _navigateToAttended.value = true

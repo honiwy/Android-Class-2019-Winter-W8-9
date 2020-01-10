@@ -50,13 +50,13 @@ class StoreFragment : Fragment(), OnMapReadyCallback {
                         binding.storeTime.text=StylishApplication.instance.getString(R.string.time_prefix).plus("11:00-17:00")
                         binding.storeAddress.text=StylishApplication.instance.getString(R.string.address_prefix).plus(StylishApplication.instance.getString(R.string.taiwan_address))
                         binding.storePhone.text= StylishApplication.instance.getString(R.string.phone_prefix).plus(StylishApplication.instance.getString(R.string.taiwan_phone))
-                        moveLocation(25.0424801,121.5627567,"You smile, I smile")
+                        moveLocation(25.0424801,121.5627567,"Rachel is here.")
                     }
                     Branch.AUSTRALIA->{
                         binding.storeTitle.text="澳洲分店"
                         binding.storeTime.text = StylishApplication.instance.getString(R.string.time_prefix).plus("10:00-13:30")
                         binding.storeAddress.text=StylishApplication.instance.getString(R.string.address_prefix).plus(StylishApplication.instance.getString(R.string.australia_address))
-                        moveLocation(-27.736946,153.225838,"Be part of Us")
+                        moveLocation(-27.736946,153.225838,"You smile, I smile")
                     }
                     Branch.MOROCCO->{
                         binding.storeTitle.text="摩洛哥分店"
@@ -70,7 +70,7 @@ class StoreFragment : Fragment(), OnMapReadyCallback {
                         binding.storeTime.text=StylishApplication.instance.getString(R.string.time_prefix).plus("12:00-18:30")
                         binding.storeAddress.text=StylishApplication.instance.getString(R.string.address_prefix).plus(StylishApplication.instance.getString(R.string.finland_address))
                         binding.storePhone.text=StylishApplication.instance.getString(R.string.phone_prefix).plus(StylishApplication.instance.getString(R.string.finland_phone))
-                        moveLocation(60.167014,24.9568524,"We are hiring!")
+                        moveLocation(60.167014,24.9568524,"Wayne is looking at you!")
                     }
                 }
             }
